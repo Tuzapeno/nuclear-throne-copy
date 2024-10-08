@@ -7,8 +7,8 @@ const SPEED: float = 300.0
 func _physics_process(_delta: float) -> void:
 	
   var movement: Vector2 = Vector2()
-  movement.x = Input.get_axis("ui_left", "ui_right")
-  movement.y = Input.get_axis("ui_up", "ui_down")
+  movement.x = Input.get_axis("move_left", "move_right")
+  movement.y = Input.get_axis("move_up", "move_down")
 
   movement = movement.normalized()
 
