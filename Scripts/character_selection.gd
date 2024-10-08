@@ -1,6 +1,7 @@
 extends Control
 
 @onready var worldScene: PackedScene = preload("res://Scenes/world.tscn")
+@onready var level: PackedScene = preload("res://Scenes/level.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,4 +15,4 @@ func _process(_delta: float) -> void:
 
 func _on_fish_button_pressed() -> void:
 	print("Fish was selected!!")
-	SceneManager.change_scene(worldScene, "World Scene")
+	SceneManager.change_scene(level, "Level Scene")

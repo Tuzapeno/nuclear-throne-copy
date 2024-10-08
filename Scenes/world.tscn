@@ -4,6 +4,8 @@
 
 [node name="World" type="Node"]
 
+[node name="Walls" type="Node" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("1_dl60n")]
 
 [node name="Camera2D" type="Camera2D" parent="."]

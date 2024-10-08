@@ -8,3 +8,4 @@ func change_scene(scene: PackedScene, scene_name: String = "no name") -> void:
 			print("Can't create scene ", scene_name)
 		ERR_INVALID_PARAMETER:
 			print("Scene ", scene_name, " is invalid!")
+
