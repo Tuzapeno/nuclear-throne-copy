@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://birpcumdpahyo"]
 
 [ext_resource type="Script" path="res://Scripts/character_selection.gd" id="1_l6afl"]
-[ext_resource type="Texture2D" uid="uid://b2w60oedcchqe" path="res://Assets/fish_portrait.png" id="1_o1pey"]
+[ext_resource type="Texture2D" uid="uid://b2w60oedcchqe" path="res://Assets/Fish/fish_portrait.png" id="1_o1pey"]
 
 [node name="CharacterSelection" type="Control"]
 layout_mode = 3
