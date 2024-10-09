@@ -1,13 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxc4obm1hlbjo"]
+[gd_scene load_steps=5 format=3 uid="uid://cxc4obm1hlbjo"]
 
 [ext_resource type="PackedScene" uid="uid://c3aj8ax6x1vqi" path="res://Scenes/player.tscn" id="1_u310x"]
 [ext_resource type="PackedScene" uid="uid://smke6f443svt" path="res://Scenes/pistol_drop.tscn" id="2_6mdam"]
+[ext_resource type="PackedScene" uid="uid://c8u63dpkkwfh8" path="res://Scenes/shotgun_drop.tscn" id="3_x168h"]
+[ext_resource type="PackedScene" uid="uid://bofsf20odlx1" path="res://Scenes/machinegun_drop.tscn" id="4_s3dnt"]
 
 [node name="WeaponDropTest" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_u310x")]
-position = Vector2(38, 32)
-speed = 150.0
 
 [node name="PistolDrop" parent="." instance=ExtResource("2_6mdam")]
-position = Vector2(88, 54)
+position = Vector2(79, 42)
+
+[node name="ShotgunDrop" parent="." instance=ExtResource("3_x168h")]
+position = Vector2(183, 38)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(138, 63)
+zoom = Vector2(2, 2)
+
+[node name="MachinegunDrop" parent="." instance=ExtResource("4_s3dnt")]
+position = Vector2(264, 52)

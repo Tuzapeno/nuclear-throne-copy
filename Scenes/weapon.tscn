@@ -1,20 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgyf2hr4uat1u"]
 
-[sub_resource type="GDScript" id="GDScript_fehyl"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
+[ext_resource type="Script" path="res://Scripts/weapon.gd" id="1_xp7ta"]
 
 [node name="Weapon" type="Node2D"]
-script = SubResource("GDScript_fehyl")
+script = ExtResource("1_xp7ta")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

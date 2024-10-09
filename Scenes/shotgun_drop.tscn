@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8u63dpkkwfh8"]
+
+[ext_resource type="PackedScene" uid="uid://bjmkjen74gsh5" path="res://Scenes/weapon_drop.tscn" id="1_0sses"]
+[ext_resource type="PackedScene" uid="uid://dlxkcd7qavvl2" path="res://Scenes/shotgun.tscn" id="2_7f2pk"]
+[ext_resource type="Texture2D" uid="uid://cs5doivi84t5e" path="res://Assets/Guns/shotgun.png" id="2_q3aru"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50knv"]
+size = Vector2(20, 14)
+
+[node name="ShotgunDrop" instance=ExtResource("1_0sses")]
+weapon_scene = ExtResource("2_7f2pk")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_q3aru")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_50knv")

@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bgyf2hr4uat1u" path="res://Scenes/weapon.tscn" id="1_nx7sq"]
 [ext_resource type="Texture2D" uid="uid://404u25g5gy8f" path="res://Assets/Guns/pistol.png" id="2_84gul"]
-[ext_resource type="Script" path="res://Scripts/weapon.gd" id="2_dqnfg"]
+[ext_resource type="Script" path="res://Scripts/Weapons/pistol.gd" id="2_absel"]
 
 [node name="Pistol" instance=ExtResource("1_nx7sq")]
-script = ExtResource("2_dqnfg")
+script = ExtResource("2_absel")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_84gul")
