@@ -1,10 +1,8 @@
 extends Node
 
-# TODO: Project folder organization
+var starting_weapon_scene = preload("res://Scenes/Weapons/pistol.tscn")
 
-
-var weaponScenePath: String = "res://Scenes/Weapons/Drops/"
-
+var starting_weapon: Weapon = starting_weapon_scene.instantiate()
 
 var player: CharacterBody2D = null
 var tile_size: int = 32

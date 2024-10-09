@@ -16,6 +16,7 @@ var ammo: Ammo = Ammo.new()  # Initialize ammo and inventory
 # Constructor: Set global reference to this player
 func _init() -> void:
   Globals.player = self
+  pickup_weapon(Globals.starting_weapon)
 
 # Physics process: Handle movement and physics
 func _physics_process(_delta: float) -> void:
@@ -72,6 +73,11 @@ func handle_weapon() -> void:
 # Pick up a new weapon
 func pickup_weapon(weapon: Weapon) -> void:
   add_child(weapon)
+
+
+  # TODO: Remove from here, add so when the player aims upwards the weapon is shown in the back
+  weapon.z_index = 1
+  z_index = 0
 
   if weapon_primary == null:
     weapon_primary = weapon

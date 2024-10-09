@@ -14,8 +14,6 @@ enum AMMO { BULLET, SHELL }
 var shoot_cooldown: float = 0.0
 var can_shoot: bool = true
 
-# TODO: rearrange order of fire() and its overrides to prevent shooting when can_shoot is false
-
 func fire() -> void:
 	pass
 
