@@ -3,7 +3,7 @@ extends Node
 # TODO: Project folder organization
 
 
-var weaponScenePath: String = "res://Scenes/"
+var weaponScenePath: String = "res://Scenes/Weapons/Drops/"
 
 
 var player: CharacterBody2D = null

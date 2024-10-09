@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxc4obm1hlbjo"]
 
 [ext_resource type="PackedScene" uid="uid://c3aj8ax6x1vqi" path="res://Scenes/player.tscn" id="1_u310x"]
-[ext_resource type="PackedScene" uid="uid://smke6f443svt" path="res://Scenes/pistol_drop.tscn" id="2_6mdam"]
-[ext_resource type="PackedScene" uid="uid://c8u63dpkkwfh8" path="res://Scenes/shotgun_drop.tscn" id="3_x168h"]
-[ext_resource type="PackedScene" uid="uid://bofsf20odlx1" path="res://Scenes/machinegun_drop.tscn" id="4_s3dnt"]
+[ext_resource type="PackedScene" uid="uid://smke6f443svt" path="res://Scenes/Weapons/Drops/pistol_drop.tscn" id="2_6mdam"]
+[ext_resource type="PackedScene" uid="uid://c8u63dpkkwfh8" path="res://Scenes/Weapons/Drops/shotgun_drop.tscn" id="3_x168h"]
+[ext_resource type="PackedScene" uid="uid://bofsf20odlx1" path="res://Scenes/Weapons/Drops/machinegun_drop.tscn" id="4_s3dnt"]
 
 [node name="WeaponDropTest" type="Node"]
 

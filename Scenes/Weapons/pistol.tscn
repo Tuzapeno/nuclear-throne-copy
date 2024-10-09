@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b86rrbg3igik5"]
 
-[ext_resource type="PackedScene" uid="uid://bgyf2hr4uat1u" path="res://Scenes/weapon.tscn" id="1_nx7sq"]
+[ext_resource type="PackedScene" uid="uid://bgyf2hr4uat1u" path="res://Scenes/Weapons/weapon.tscn" id="1_nx7sq"]
 [ext_resource type="Texture2D" uid="uid://404u25g5gy8f" path="res://Assets/Guns/pistol.png" id="2_84gul"]
 [ext_resource type="Script" path="res://Scripts/Weapons/pistol.gd" id="2_absel"]
 

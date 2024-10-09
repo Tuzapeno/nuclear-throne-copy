@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bofsf20odlx1"]
 
-[ext_resource type="PackedScene" uid="uid://bjmkjen74gsh5" path="res://Scenes/weapon_drop.tscn" id="1_ycc5t"]
-[ext_resource type="PackedScene" uid="uid://df0p1pn5oftjw" path="res://Scenes/machinegun.tscn" id="2_na5ee"]
+[ext_resource type="PackedScene" uid="uid://bjmkjen74gsh5" path="res://Scenes/Weapons/Drops/weapon_drop.tscn" id="1_ycc5t"]
+[ext_resource type="PackedScene" uid="uid://df0p1pn5oftjw" path="res://Scenes/Weapons/machinegun.tscn" id="2_na5ee"]
 [ext_resource type="Texture2D" uid="uid://b1icknk38pcns" path="res://Assets/Guns/machinegun.png" id="3_jmoyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qc406"]
