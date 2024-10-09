@@ -1,8 +1,18 @@
 extends CharacterBody2D
 
 @onready var animsprite2D = $AnimatedSprite2D
+@onready var label: Label = $Label
 
-const SPEED: float = 250.0
+@export var speed: float = 150.0
+
+var myName: String = ""
+
+func _init() -> void:
+  var names: Array = ["Rodolf", "Marco", "Joaquim"]
+  myName = names[randi() % names.size()]
+
+func _ready() -> void:
+  label.text = myName
 
 func _physics_process(_delta: float) -> void:
   handle_movement()
@@ -28,4 +38,4 @@ func handle_movement() -> void:
 
   movement = movement.normalized()
 
-  velocity = movement * SPEED
+  velocity = movement * speed

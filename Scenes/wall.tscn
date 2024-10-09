@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://candtqva6nc6g"]
 
-[ext_resource type="Texture2D" uid="uid://b47re86baafw2" path="res://Assets/desert_tile.png" id="1_glemo"]
+[ext_resource type="Texture2D" uid="uid://c1777yiaacs5w" path="res://Assets/desert_tile.png" id="1_glemo"]
 
 [node name="Wall" type="Node2D"]
 

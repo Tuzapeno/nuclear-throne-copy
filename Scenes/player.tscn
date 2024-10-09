@@ -89,9 +89,14 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_armlr")
+speed = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_s1frk")
 animation = &"walk"
 frame = 3
 frame_progress = 0.667524
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
