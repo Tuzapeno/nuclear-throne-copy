@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxc4obm1hlbjo"]
+
+[ext_resource type="PackedScene" uid="uid://c3aj8ax6x1vqi" path="res://Scenes/player.tscn" id="1_u310x"]
+[ext_resource type="PackedScene" uid="uid://smke6f443svt" path="res://Scenes/pistol_drop.tscn" id="2_6mdam"]
+
+[node name="WeaponDropTest" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_u310x")]
+position = Vector2(38, 32)
+speed = 150.0
+
+[node name="PistolDrop" parent="." instance=ExtResource("2_6mdam")]
+position = Vector2(88, 54)

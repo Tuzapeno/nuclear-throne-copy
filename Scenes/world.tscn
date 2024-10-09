@@ -7,7 +7,7 @@
 [node name="Walls" type="Node" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_dl60n")]
-speed = null
+speed = 150.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.525, 2.525)
