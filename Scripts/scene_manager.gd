@@ -4,7 +4,7 @@ extends Node
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.keycode == KEY_U:
+		if event.keycode == KEY_U and event.pressed:
 			change_scene(level_scene, "Level")
 
 

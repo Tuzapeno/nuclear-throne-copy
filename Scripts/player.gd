@@ -1,18 +1,8 @@
 extends CharacterBody2D
 
-@onready var animsprite2D = $AnimatedSprite2D
-@onready var label: Label = $Label
-
 @export var speed: float = 150.0
 
-var myName: String = ""
-
-func _init() -> void:
-  var names: Array = ["Rodolf", "Marco", "Joaquim"]
-  myName = names[randi() % names.size()]
-
-func _ready() -> void:
-  label.text = myName
+@onready var animsprite2D = $AnimatedSprite2D
 
 func _physics_process(_delta: float) -> void:
   handle_movement()

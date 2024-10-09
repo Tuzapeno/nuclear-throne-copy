@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c3aj8ax6x1vqi"]
+[gd_scene load_steps=16 format=3 uid="uid://c3aj8ax6x1vqi"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_armlr"]
 [ext_resource type="Texture2D" uid="uid://cvbji1g5m7w87" path="res://Assets/Fish/fish_spritesheet_idle.png" id="2_yci6p"]
@@ -87,6 +87,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a01bv"]
+size = Vector2(15, 17)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_armlr")
 speed = null
@@ -97,6 +100,6 @@ animation = &"walk"
 frame = 3
 frame_progress = 0.667524
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_a01bv")
