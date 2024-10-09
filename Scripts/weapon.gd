@@ -13,11 +13,13 @@ var fire_rate: float = 1.0
 var shoot_cooldown: float = 0.0
 var can_shoot: bool = true
 
+# TODO: rearrange order of fire() and its overrides to prevent shooting when can_shoot is false
+
 func fire() -> void:
     if not can_shoot:
         return
 
-    # Shooting logic here
+    print("~" + my_name + " FIRES~")
 
     shoot_cooldown = fire_rate
     can_shoot = false

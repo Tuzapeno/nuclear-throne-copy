@@ -8,7 +8,6 @@ func _ready() -> void:
 
 func fire():
 	super()
-	print("~PISTOL FIRED!~")
 
 func _process(delta: float) -> void:
 	super(delta)
