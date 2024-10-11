@@ -8,6 +8,7 @@ func _init(start_position) -> void:
     self.position = start_position
 
 func move(grid_size: int) -> Vector2:
+
     var direction: int = randi() % 4
     match direction:
         Direction.UP:

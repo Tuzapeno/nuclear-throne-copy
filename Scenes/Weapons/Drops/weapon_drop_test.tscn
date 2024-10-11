@@ -21,3 +21,10 @@ zoom = Vector2(2, 2)
 position = Vector2(264, 52)
 
 [node name="Player" parent="." instance=ExtResource("1_u310x")]
+
+[connection signal="body_entered" from="PistolDrop" to="PistolDrop" method="_on_body_entered"]
+[connection signal="body_exited" from="PistolDrop" to="PistolDrop" method="_on_body_exited"]
+[connection signal="body_entered" from="ShotgunDrop" to="ShotgunDrop" method="_on_body_entered"]
+[connection signal="body_exited" from="ShotgunDrop" to="ShotgunDrop" method="_on_body_exited"]
+[connection signal="body_entered" from="MachinegunDrop" to="MachinegunDrop" method="_on_body_entered"]
+[connection signal="body_exited" from="MachinegunDrop" to="MachinegunDrop" method="_on_body_exited"]

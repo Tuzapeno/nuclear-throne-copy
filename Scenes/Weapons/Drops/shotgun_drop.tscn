@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cs5doivi84t5e" path="res://Assets/Guns/shotgun.png" id="2_q3aru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_50knv"]
-size = Vector2(20, 14)
+size = Vector2(20, 8)
 
 [node name="ShotgunDrop" instance=ExtResource("1_0sses")]
 weapon_scene = ExtResource("2_7f2pk")
