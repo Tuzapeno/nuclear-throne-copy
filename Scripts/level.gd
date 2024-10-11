@@ -1,5 +1,7 @@
 extends Node
 
+signal level_loaded
+
 @export var grid_size: int = 30
 @export var drunkward_iterations: int = 500
 
@@ -10,6 +12,7 @@ var grid: PackedInt32Array = PackedInt32Array()
 
 func _ready() -> void:
 	generate_level()
+	level_loaded.emit()
 
 
 func matrix_index(x: int, y: int) -> int:
@@ -25,16 +28,10 @@ func generate_level() -> void:
 	for i in range(drunkward_iterations):
 		var position: Vector2i = drunkman.move(grid_size)
 		grid[matrix_index(position.x, position.y)] = 0
-
-	# Instantiate player if is the first time else move player to the new position
-	if Globals.player == null:
-		print("Player doesn't exist, creating a new one")
-		player_scene.instantiate()
-	else:
-		if Globals.player.get_parent() != self:
-			add_child(Globals.player)
-
+	
+	# Instantiate player
 	add_child(Globals.player)
+
 	Globals.player.position = Vector2(drunkman.position.x * Globals.tile_size, drunkman.position.y * Globals.tile_size)
 	Globals.player.position += Vector2(Globals.half_tile, Globals.half_tile) # Adjust player position to the center of the tile
 

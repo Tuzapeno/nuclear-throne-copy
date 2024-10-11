@@ -1,7 +1,7 @@
 class_name Weapon
 extends Node2D
 
-# TODO: Full auto has no cooldown on shooting, need to fix
+# TODO: Use RESOURCES for storing weapon data.
 
 enum TYPE { SEMI_AUTO, FULL_AUTO, BURST }
 enum AMMO { BULLET, SHELL }

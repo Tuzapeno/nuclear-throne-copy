@@ -5,17 +5,12 @@ extends Node
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_U and event.pressed:
-			change_scene(level_scene, "Level")
+			change_level()
 
 
 
 func change_scene(scene: PackedScene, scene_name: String = "no name") -> void:
-	
-	# Save player to ensure persistance
-	if Globals.player != null:
-		Globals.player = Utils.clone_node(Globals.player) as CharacterBody2D
-	
-	
+
 	match get_tree().change_scene_to_packed(scene):
 		OK:
 			print("Scene changed successfully to ", scene_name)
@@ -24,6 +19,32 @@ func change_scene(scene: PackedScene, scene_name: String = "no name") -> void:
 		ERR_INVALID_PARAMETER:
 			print("Scene ", scene_name, " is invalid!")
 
+
+
+func change_level() -> void: # TODO: Adicionar parâmetros
+
+	# TODO: Criar tela de loading
+
+	var tree_root: Window = get_tree().root
+	var old_level: Node = tree_root.get_node("Level")
+	var new_level: Node = level_scene.instantiate() # TODO: Adicionar parâmetros
+	new_level.name = "Level"
+
+	if old_level != null:
+		# Desacoplar o player da cena atual
+		old_level.remove_child(Globals.player)
+
+		# Apagar a cena atual
+		old_level.free()
+
+	# Adicionar parametros aqui...
+	# Adicionar novo level na cena raiz
+	tree_root.add_child(new_level, true)
+
+ 	# Exibir a nova cena após a cena rodar sua função _ready
+	await new_level.level_loaded
+
+	# TODO: Remover tela de loading
 	
 
-
+	
