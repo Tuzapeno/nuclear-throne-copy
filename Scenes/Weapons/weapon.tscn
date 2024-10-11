@@ -6,3 +6,5 @@
 script = ExtResource("1_xp7ta")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="GripMarker" type="Marker2D" parent="."]

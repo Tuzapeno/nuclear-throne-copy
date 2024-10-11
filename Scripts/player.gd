@@ -10,8 +10,25 @@ class Ammo:
 @onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D  # Reference to AnimatedSprite2D node
 @onready var base_sprite: Sprite2D = $Sprite2D  # Reference to BaseSprite node
 
-var weapon_primary: Weapon = null
-var weapon_extra: Weapon = null
+var weapon_primary: Weapon = null :
+    set(weapon):
+        weapon_primary = weapon
+        weapon_primary.sprite.offset.x = weapon_primary.sprite.texture.get_width() * 0.5
+        weapon_primary.is_primary = true
+        weapon_primary.z_index = z_index + 1
+
+
+var weapon_extra: Weapon = null :
+    set(weapon):
+        weapon_extra = weapon
+        weapon_extra.global_position = global_position
+        weapon_extra.unset_offset()
+        weapon_extra.is_primary = false
+        weapon_extra.z_index = z_index - 1
+
+
+
+
 var ammo: Ammo = Ammo.new()  # Initialize ammo and inventory
 
 var is_first_spawn: bool = true
@@ -26,6 +43,7 @@ func _ready() -> void:
     if is_first_spawn:
         is_first_spawn = false
         pickup_weapon(Globals.starting_weapon)
+
 
 # Physics process: Handle movement and physics
 func _physics_process(_delta: float) -> void:
@@ -94,21 +112,15 @@ func pickup_weapon(weapon: Weapon) -> void:
     
     add_child(weapon)
 
-    weapon.global_position = Globals.player.global_position + Vector2(0, 5)
-    weapon.sprite.offset.x = weapon.sprite.texture.get_width() * 0.5
-
     # TODO: Add so overlaying weapons pickup doesn`t break the game
 
     if weapon_primary == null:
         weapon_primary = weapon
-        weapon_primary.show()
     elif weapon_extra == null:
         weapon_extra = weapon
-        weapon_extra.hide()
     else:
         drop_primary_weapon()
         weapon_primary = weapon
-        weapon_primary.show()
 
     # TODO: show the extra weapon in character's back
 
@@ -128,5 +140,3 @@ func swap_weapons() -> void:
     var temp = weapon_primary
     weapon_primary = weapon_extra
     weapon_extra = temp
-    weapon_primary.show()
-    weapon_extra.hide()
