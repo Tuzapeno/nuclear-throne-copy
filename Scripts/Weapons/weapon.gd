@@ -11,6 +11,8 @@ enum AMMO { BULLET, SHELL }
 @export var ammo_type: AMMO = AMMO.BULLET
 @export var fire_rate: float = 1.0
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 var shoot_cooldown: float = 0.0
 var can_shoot: bool = true
 
@@ -23,6 +25,14 @@ func _process(delta: float) -> void:
 
 	if shoot_cooldown <= 0:
 		can_shoot = true
+
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	
+	# Rotate weapon towards mouse
+	rotation = (mouse_pos - global_position).angle()
+
+	# Flip weapon sprite
+	sprite.flip_v = mouse_pos.x < global_position.x
 
 
 func trigger():

@@ -1,6 +1,9 @@
 {
     "godotTools.editorPath.godot4": "/home/tuzapeno/Documents/Dev/Godot/godot.x86_64",
     "conventionalCommits.scopes": [
-        "Level"
+        "Level",
+        "Player",
+        "Enemy",
+        "Boss",
     ]
 }

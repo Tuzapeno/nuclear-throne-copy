@@ -7,17 +7,25 @@ class Ammo:
 # Variables
 @export var speed: float = 150.0  # Player speed
 
-@onready var animsprite2D = $AnimatedSprite2D  # Reference to AnimatedSprite2D node
+@onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D  # Reference to AnimatedSprite2D node
+@onready var base_sprite: Sprite2D = $Sprite2D  # Reference to BaseSprite node
 
 var weapon_primary: Weapon = null
 var weapon_extra: Weapon = null
 var ammo: Ammo = Ammo.new()  # Initialize ammo and inventory
 
+var is_first_spawn: bool = true
+
 # Constructor: Set global reference to this player
 func _init() -> void:
     print("Estou sendo iniciado!!!")
     Globals.player = self
-    pickup_weapon(Globals.starting_weapon)
+    
+
+func _ready() -> void:
+    if is_first_spawn:
+        is_first_spawn = false
+        pickup_weapon(Globals.starting_weapon)
 
 # Physics process: Handle movement and physics
 func _physics_process(_delta: float) -> void:
@@ -44,8 +52,18 @@ func handle_animations() -> void:
     else:
         animsprite2D.play("idle")
 
+    # Flip character
     var direction: Vector2 = get_global_mouse_position() - global_position
     animsprite2D.flip_h = direction.x < 0
+
+    # Make gun go behind the player when aiming upwards
+    if direction.y < 0:
+        weapon_primary.z_index = z_index - 1
+    else:
+        weapon_primary.z_index = z_index + 1
+
+
+
 
 # Handle weapon actions (firing, swapping)
 func handle_weapon() -> void:
@@ -62,6 +80,7 @@ func handle_weapon() -> void:
         if weapon_extra != null:
             print("Extra Weapon: ", weapon_extra.my_name)
 
+
     # Handle weapon firing based on weapon type
     match weapon_primary.type:
         Weapon.TYPE.SEMI_AUTO:
@@ -75,16 +94,10 @@ func pickup_weapon(weapon: Weapon) -> void:
     
     add_child(weapon)
 
-    # TODO: Remove from here, add so when the player aims upwards the weapon is shown in the back
+    weapon.global_position = Globals.player.global_position + Vector2(0, 5)
+    weapon.sprite.offset.x = weapon.sprite.texture.get_width() * 0.5
 
-    # TODO: See how to manage all Z-indexes
-
-    # TODO: Starting weapon breaks the game if scene is changed using U
-
-    # TODO: Machinegun is crashing when picked up
-
-    weapon.z_index = 1
-    z_index = 0
+    # TODO: Add so overlaying weapons pickup doesn`t break the game
 
     if weapon_primary == null:
         weapon_primary = weapon
