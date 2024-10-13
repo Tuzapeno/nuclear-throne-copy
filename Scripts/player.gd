@@ -8,23 +8,18 @@ class Ammo:
 @export var speed: float = 150.0  # Player speed
 
 @onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D  # Reference to AnimatedSprite2D node
-@onready var base_sprite: Sprite2D = $Sprite2D  # Reference to BaseSprite node
+@onready var sprite: Sprite2D = $Sprite2D  # Reference to Sprite2D node
 
 var weapon_primary: Weapon = null :
     set(weapon):
         weapon_primary = weapon
-        weapon_primary.sprite.offset.x = weapon_primary.sprite.texture.get_width() * 0.5
-        weapon_primary.is_primary = true
-        weapon_primary.z_index = z_index + 1
+        weapon_primary.make_primary()
 
 
 var weapon_extra: Weapon = null :
     set(weapon):
         weapon_extra = weapon
-        weapon_extra.global_position = global_position
-        weapon_extra.unset_offset()
-        weapon_extra.is_primary = false
-        weapon_extra.z_index = z_index - 1
+        weapon_extra.make_extra()
 
 
 
@@ -37,7 +32,7 @@ var is_first_spawn: bool = true
 func _init() -> void:
     print("Estou sendo iniciado!!!")
     Globals.player = self
-    
+
 
 func _ready() -> void:
     if is_first_spawn:
@@ -72,7 +67,12 @@ func handle_animations() -> void:
 
     # Flip character
     var direction: Vector2 = get_global_mouse_position() - global_position
-    animsprite2D.flip_h = direction.x < 0
+
+    var flip: bool = direction.x < 0
+
+    animsprite2D.flip_h = flip
+    #weapon.flip_h = flip
+
 
     # Make gun go behind the player when aiming upwards
     if direction.y < 0 and weapon_primary != null:
@@ -109,7 +109,7 @@ func handle_weapon() -> void:
                 weapon_primary.fire()
 
 func pickup_weapon(weapon: Weapon) -> void:
-    
+
     # TODO: Add so overlaying weapons pickup doesn`t break the game
     add_child(weapon)
 

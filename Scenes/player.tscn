@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_armlr"]
 [ext_resource type="Texture2D" uid="uid://cvbji1g5m7w87" path="res://Assets/Fish/fish_spritesheet_idle.png" id="2_yci6p"]
 [ext_resource type="Texture2D" uid="uid://dgfmp2lrysnba" path="res://Assets/Fish/fish_spritesheet_walk.png" id="3_qrwpj"]
-[ext_resource type="Texture2D" uid="uid://d3ykiqi64d8ww" path="res://Assets/Fish/fish_base_sprite.png" id="4_35n4n"]
+[ext_resource type="Texture2D" uid="uid://d3ykiqi64d8ww" path="res://Assets/Fish/fish_base_sprite.png" id="4_lc4hs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yhv6"]
 atlas = ExtResource("2_yci6p")
@@ -97,13 +97,12 @@ script = ExtResource("1_armlr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_s1frk")
 animation = &"walk"
-frame = 3
-frame_progress = 0.667524
+frame = 1
+frame_progress = 0.993104
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_a01bv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("4_35n4n")
+texture = ExtResource("4_lc4hs")

@@ -6,6 +6,7 @@
 
 [node name="Shotgun" instance=ExtResource("1_limom")]
 script = ExtResource("2_f4agf")
+my_name = "Shotgun"
 ammo_type = 1
 
 [node name="Sprite2D" parent="." index="0"]

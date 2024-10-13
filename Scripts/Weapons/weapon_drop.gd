@@ -13,7 +13,7 @@ var can_pickup: bool = false
 func _ready() -> void:
 	weapon = weapon_scene.instantiate()
 	print("Weapon created at ready: ", weapon)
-	label.text = "Pick up (E)"
+	label.text = weapon.my_name + " (E)"
 	label.hide()
 
 func _process(_delta: float) -> void:
