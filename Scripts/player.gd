@@ -9,6 +9,7 @@ class Ammo:
 
 @onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D  # Reference to AnimatedSprite2D node
 @onready var sprite: Sprite2D = $Sprite2D  # Reference to Sprite2D node
+@onready var camera: Camera2D = $Camera2D  # Reference to Camera2D node
 
 var weapon_primary: Weapon = null :
     set(weapon):
@@ -49,6 +50,7 @@ func _physics_process(_delta: float) -> void:
 func _process(_delta: float) -> void:
     handle_animations()
     handle_weapon()
+    handle_camera()
 
 # Handle player movement
 func handle_movement() -> void:
@@ -107,6 +109,22 @@ func handle_weapon() -> void:
         Weapon.TYPE.FULL_AUTO:
             if Input.is_action_pressed("fire"):
                 weapon_primary.fire()
+
+
+func handle_camera() -> void:
+
+    # TODO: Move all of this to camera node code.
+
+    var MAX_ZOOM := 50
+
+    var mouse_position := get_local_mouse_position()
+
+    mouse_position = Utils.clamp_vector(mouse_position, -MAX_ZOOM, MAX_ZOOM)
+
+    var camera_pos = lerp(camera.position, mouse_position/2, 0.2)
+
+    camera.position = camera_pos
+
 
 func pickup_weapon(weapon: Weapon) -> void:
 

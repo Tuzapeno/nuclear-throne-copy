@@ -13,3 +13,17 @@ func clone_node(node: Node) -> Node:
 		cloned_node.set(property.name, node.get(property.name))
 
 	return cloned_node
+
+
+func mean(values: Array) -> float:
+	var sum = 0
+	for value in values:
+		sum += value
+	return sum / values.size()
+
+
+func clamp_vector(vector, min_value, max_value) -> Vector2:
+	return Vector2(
+		clamp(vector.x, min_value, max_value),
+		clamp(vector.y, min_value, max_value)
+	)

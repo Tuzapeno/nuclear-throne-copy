@@ -26,6 +26,10 @@ Utils="*res://Scripts/Singletons/utils.gd"
 gdscript/warnings/unused_variable=0
 gdscript/warnings/integer_division=0
 
+[display]
+
+window/size/mode=3
+
 [input]
 
 move_right={
