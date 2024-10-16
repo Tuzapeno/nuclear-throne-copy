@@ -4,12 +4,12 @@ extends Node2D
 # TODO: Use RESOURCES for storing weapon data.
 
 enum TYPE { SEMI_AUTO, FULL_AUTO, BURST }
-enum AMMO { BULLET, SHELL }
 
 @export var my_name: String = "Weapon"
-@export var type: TYPE = TYPE.SEMI_AUTO
-@export var ammo_type: AMMO = AMMO.BULLET
+@export var type: int = TYPE.SEMI_AUTO
+@export var ammo_type: int = AmmoManager.BULLET
 @export var fire_rate: float = 1.0
+@export var fire_cost: int = 1
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -20,7 +20,17 @@ var facing_right: bool = true
 var base_z_index = z_index
 
 func fire() -> void:
-    pass
+    if not can_shoot:
+        return
+
+    if AmmoManager.ammo[ammo_type] < fire_cost:
+        print(my_name + " is out of ammo!")
+        return
+
+    AmmoManager.ammo[ammo_type] -= fire_cost
+
+    trigger()
+
 
 func _process(delta: float) -> void:
     # Update shoot cooldown

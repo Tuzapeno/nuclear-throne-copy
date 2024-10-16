@@ -21,6 +21,7 @@ config/icon="res://Assets/icon.svg"
 SceneManager="*res://Scripts/Singletons/scene_manager.gd"
 Globals="*res://Scripts/Singletons/globals.gd"
 Utils="*res://Scripts/Singletons/utils.gd"
+AmmoManager="*res://ammo_manager.gd"
 
 [debug]
 

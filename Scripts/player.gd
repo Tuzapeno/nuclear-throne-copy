@@ -1,9 +1,5 @@
 extends CharacterBody2D
 
-# Ammo class to manage bullet count
-class Ammo:
-    var bullet: int = 0
-
 # Variables
 @export var speed: float = 150.0  # Player speed
 
@@ -24,11 +20,6 @@ var weapon_extra: Weapon = null :
     set(weapon):
         weapon_extra = weapon
         weapon_extra.make_extra()
-
-
-
-
-var ammo: Ammo = Ammo.new()  # Initialize ammo and inventory
 
 var is_first_spawn: bool = true
 
