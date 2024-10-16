@@ -42,8 +42,6 @@ func generate_level() -> void:
 			if check_solo_wall(x, y):
 				grid[matrix_index(x, y)] = FLOOR
 
-
-
 	# Instantiate player
 	add_child(Globals.player)
 
@@ -57,16 +55,6 @@ func generate_level() -> void:
 				var wall: Node2D = wall_scene.instantiate()
 				wall.position = Vector2(x * 32, y * 32)
 				add_child(wall)
-
-	# Instantiate and center camera
-	var camera: Camera2D = Globals.player.camera
-
-	# Set camera properties
-	camera.zoom = Vector2(2, 2)
-	camera.limit_bottom = grid_size * Globals.tile_size
-	camera.limit_right = grid_size * Globals.tile_size
-	camera.limit_left = 0
-	camera.limit_top = 0
 
 
 func check_solo_wall(_x, _y):

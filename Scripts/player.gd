@@ -7,9 +7,12 @@ class Ammo:
 # Variables
 @export var speed: float = 150.0  # Player speed
 
-@onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D  # Reference to AnimatedSprite2D node
-@onready var sprite: Sprite2D = $Sprite2D  # Reference to Sprite2D node
-@onready var camera: Camera2D = $Camera2D  # Reference to Camera2D node
+# Nodes
+@onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: Sprite2D = $Sprite2D 
+@onready var camera: Camera2D = $Camera2D  
+
+
 
 var weapon_primary: Weapon = null :
     set(weapon):
@@ -50,7 +53,6 @@ func _physics_process(_delta: float) -> void:
 func _process(_delta: float) -> void:
     handle_animations()
     handle_weapon()
-    handle_camera()
 
 # Handle player movement
 func handle_movement() -> void:
@@ -110,26 +112,14 @@ func handle_weapon() -> void:
             if Input.is_action_pressed("fire"):
                 weapon_primary.fire()
 
-
-func handle_camera() -> void:
-
-    # TODO: Move all of this to camera node code.
-
-    var MAX_ZOOM := 50
-
-    var mouse_position := get_local_mouse_position()
-
-    mouse_position = Utils.clamp_vector(mouse_position, -MAX_ZOOM, MAX_ZOOM)
-
-    var camera_pos = lerp(camera.position, mouse_position/2, 0.2)
-
-    camera.position = camera_pos
-
-
 func pickup_weapon(weapon: Weapon) -> void:
 
-    # TODO: Add so overlaying weapons pickup doesn`t break the game
+    # TODO: Add so the player only picks up one weapon if two weapons are overlapped.
     add_child(weapon)
+
+    # Add a little y offset to look like the weapon is in the player hand
+    # TODO: need to move this elsewhere
+    weapon.position.y += 3
 
     if weapon_primary == null:
         weapon_primary = weapon
@@ -138,9 +128,6 @@ func pickup_weapon(weapon: Weapon) -> void:
     else:
         drop_primary_weapon()
         weapon_primary = weapon
-
-
-    # TODO: show the extra weapon in character's back
 
 # Drop the primary weapon and set the new one
 func drop_primary_weapon() -> void:

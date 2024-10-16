@@ -11,7 +11,7 @@
 position = Vector2(79, 42)
 
 [node name="ShotgunDrop" parent="." instance=ExtResource("3_x168h")]
-position = Vector2(183, 38)
+position = Vector2(83, 45)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(138, 63)

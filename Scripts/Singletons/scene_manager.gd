@@ -43,8 +43,6 @@ func change_level() -> void: # TODO: Adicionar parâmetros
 
  	# Exibir a nova cena após a cena rodar sua função _ready
 	await new_level.level_loaded
-
-	# TODO: Remover tela de loading
 	
 
 	
