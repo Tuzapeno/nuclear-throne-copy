@@ -10,7 +10,6 @@ func _ready() -> void:
 	AmmoManager.ammo_changed.connect(_on_ammo_changed)
 	hide()
 
-
 func _on_game_start() -> void:
 	print("Signal reached")
 	show()

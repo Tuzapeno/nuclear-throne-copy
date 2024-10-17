@@ -44,8 +44,8 @@ func change_level() -> void: # TODO: Adicionar parâmetros
 
 	# TODO: Criar tela de loading
 
-	var tree_root: Window = get_tree().root
-	var old_level: Node = tree_root.get_node("Level")
+	var main_scene := get_tree().root.get_node("Main")
+	var old_level: Node = main_scene.get_node("Level")
 	var new_level: Node = level_scene.instantiate() # TODO: Adicionar parâmetros
 	new_level.name = "Level"
 
@@ -58,7 +58,7 @@ func change_level() -> void: # TODO: Adicionar parâmetros
 
 	# Adicionar parametros aqui...
 	# Adicionar novo level na cena raiz
-	tree_root.add_child(new_level, true)
+	main_scene.add_child(new_level, true)
 
  	# Exibir a nova cena após a cena rodar sua função _ready
 	await new_level.level_loaded
