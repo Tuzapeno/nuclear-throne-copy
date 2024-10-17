@@ -8,20 +8,21 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ae333")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="AmmoContainer" type="HBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BulletProgressBar" type="TextureProgressBar" parent="HBoxContainer"]
+[node name="BulletProgressBar" type="TextureProgressBar" parent="AmmoContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-step = 10.0
+max_value = 255.0
+step = 25.0
 fill_mode = 3
 texture_under = ExtResource("1_6im55")
 texture_progress = ExtResource("2_x6lwo")
 
-[node name="BulletCount" type="Label" parent="HBoxContainer"]
+[node name="BulletCount" type="Label" parent="AmmoContainer"]
 layout_mode = 2
 text = "99"
 label_settings = ExtResource("3_lgvqa")

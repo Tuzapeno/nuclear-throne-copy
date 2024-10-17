@@ -23,11 +23,11 @@ func fire() -> void:
     if not can_shoot:
         return
 
-    if AmmoManager.ammo[ammo_type] < fire_cost:
+    if not AmmoManager.has_ammo(ammo_type, fire_cost):
         print(my_name + " is out of ammo!")
         return
 
-    AmmoManager.ammo[ammo_type] -= fire_cost
+    AmmoManager.spend_ammo(ammo_type, fire_cost)
 
     trigger()
 
