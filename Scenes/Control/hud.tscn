@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt0lj6fc7xm3w"]
+
+[ext_resource type="Texture2D" uid="uid://dij0qmcqqei21" path="res://Assets/Guns/Ammo/bullet_icon_empty.png" id="1_6im55"]
+[ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="1_ae333"]
+[ext_resource type="Texture2D" uid="uid://ccsc7mpfq5etr" path="res://Assets/Guns/Ammo/bullet_icon_fill.png" id="2_x6lwo"]
+[ext_resource type="LabelSettings" uid="uid://bvgrvw27pk0o1" path="res://Assets/ammo_font.tres" id="3_lgvqa"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_ae333")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BulletProgressBar" type="TextureProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+step = 10.0
+fill_mode = 3
+texture_under = ExtResource("1_6im55")
+texture_progress = ExtResource("2_x6lwo")
+
+[node name="BulletCount" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "99"
+label_settings = ExtResource("3_lgvqa")

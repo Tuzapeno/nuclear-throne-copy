@@ -5,8 +5,8 @@ extends CharacterBody2D
 
 # Nodes
 @onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D
-@onready var sprite: Sprite2D = $Sprite2D 
-@onready var camera: Camera2D = $Camera2D  
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var camera: Camera2D = $Camera2D
 
 
 

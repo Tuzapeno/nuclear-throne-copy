@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Nuclear Throne Copy"
-run/main_scene="res://Scenes/main_menu.tscn"
+run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=30
 config/icon="res://Assets/icon.svg"
@@ -21,16 +21,25 @@ config/icon="res://Assets/icon.svg"
 SceneManager="*res://Scripts/Singletons/scene_manager.gd"
 Globals="*res://Scripts/Singletons/globals.gd"
 Utils="*res://Scripts/Singletons/utils.gd"
-AmmoManager="*res://ammo_manager.gd"
+AmmoManager="*res://Scripts/Singletons/ammo_manager.gd"
 
 [debug]
 
 gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_signal=0
 gdscript/warnings/integer_division=0
 
 [display]
 
 window/size/mode=3
+
+[file_customization]
+
+folder_colors={
+"res://Assets/": "orange",
+"res://Scenes/": "pink",
+"res://Scripts/": "purple"
+}
 
 [input]
 
