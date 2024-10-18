@@ -6,8 +6,8 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Globals.game_started.connect(_on_game_start)
-	AmmoManager.ammo_changed.connect(_on_ammo_changed)
+	SignalBus.game_started.connect(_on_game_start)
+	SignalBus.ammo_changed.connect(_on_ammo_changed)
 	hide()
 
 func _on_game_start() -> void:

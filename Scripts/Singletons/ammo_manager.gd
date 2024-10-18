@@ -1,7 +1,5 @@
 extends Node
 
-signal ammo_changed(type: int, amount: int)
-
 const MAX_AMMO = {
     AmmoTypes.BULLET_TYPE: 255,
     AmmoTypes.ENERGY_TYPE: 55,
@@ -21,7 +19,7 @@ func has_ammo(type: int, fire_cost: int) -> bool:
 
 func add_ammo(type: int, amount: int) -> void:
     ammo[type] = int(clamp(ammo[type] + amount, 0, MAX_AMMO[type]))
-    emit_signal("ammo_changed", type, ammo[type])
+    SignalBus.ammo_changed.emit(type, ammo[type])
 
 func spend_ammo(type: int, amount: int) -> void:
     add_ammo(type, -amount)
