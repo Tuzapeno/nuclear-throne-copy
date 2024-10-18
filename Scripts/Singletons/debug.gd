@@ -8,3 +8,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Goto next level
 		if event.keycode == KEY_F2 and event.pressed:
 			SceneManager.change_level()
+		# Show current player weapons
+		if event.keycode == KEY_F3 and event.pressed:
+			Globals.player.show_weapons()
+
+        

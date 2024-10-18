@@ -18,5 +18,4 @@ func start() -> void:
 	Globals.game_started.emit()
 
 func _on_fish_button_pressed() -> void:
-	print("Fish was selected!!") # Fish Parameters
 	start()

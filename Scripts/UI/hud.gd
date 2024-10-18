@@ -11,7 +11,6 @@ func _ready() -> void:
 	hide()
 
 func _on_game_start() -> void:
-	print("Signal reached")
 	show()
 
 func _on_ammo_changed(type: int, value: int) -> void:

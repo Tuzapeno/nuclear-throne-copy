@@ -24,7 +24,7 @@ var weapon_extra: Weapon = null :
 var is_first_spawn: bool = true
 
 func _init() -> void:
-    print("Estou sendo iniciado!!!")
+    print("Player initialized")
     Globals.player = self
 
 
@@ -32,10 +32,6 @@ func _ready() -> void:
     if is_first_spawn:
         is_first_spawn = false
         var weapon := Globals.starting_weapon_scene.instantiate()
-
-        print("SCENE: ", Globals.starting_weapon_scene)
-        print("WEAPON: ", weapon)
-        print(is_instance_valid(weapon))
         pickup_weapon(weapon)
 
 
@@ -90,14 +86,6 @@ func handle_weapon() -> void:
     if Input.is_action_just_pressed("swap_weapons"):
         swap_weapons()
 
-    if Input.is_action_just_pressed("use"):
-        # Debug print of current weapons
-        if weapon_primary != null:
-            print("Weapon: ", weapon_primary.my_name)
-        if weapon_extra != null:
-            print("Extra Weapon: ", weapon_extra.my_name)
-
-
     # Handle weapon firing based on weapon type
     match weapon_primary.type:
         Weapon.TYPE.SEMI_AUTO:
@@ -141,3 +129,11 @@ func swap_weapons() -> void:
     var temp = weapon_primary
     weapon_primary = weapon_extra
     weapon_extra = temp
+
+
+func show_weapons() -> void:
+    # Debug print of current weapons
+    if weapon_primary != null:
+        print("Weapon: ", weapon_primary.my_name)
+    if weapon_extra != null:
+        print("Extra Weapon: ", weapon_extra.my_name)
