@@ -1,8 +1,8 @@
-extends Weapon
+extends ShellWeapon
 
 func _process(delta: float) -> void:
 	super(delta)
 
 
 func fire():
-	super()
+	create_shell(shell_scn)

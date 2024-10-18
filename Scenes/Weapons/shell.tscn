@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://10hd1cgacj4j"]
+
+[ext_resource type="Texture2D" uid="uid://cr4pfro5xv6om" path="res://Assets/Guns/Ammo/shell_shot.png" id="1_imloe"]
+[ext_resource type="Script" path="res://Scripts/Weapons/shell.gd" id="1_oqiem"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4q2m"]
+size = Vector2(20, 10)
+
+[node name="Shell" type="Area2D"]
+script = ExtResource("1_oqiem")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_imloe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i4q2m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
