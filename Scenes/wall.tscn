@@ -6,6 +6,7 @@
 size = Vector2(32, 23)
 
 [node name="Wall" type="StaticBody2D"]
+y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_glemo")

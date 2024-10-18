@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://10hd1cgacj4j"]
+[gd_scene load_steps=4 format=3 uid="uid://deeprcg4nk56c"]
 
 [ext_resource type="Texture2D" uid="uid://cr4pfro5xv6om" path="res://Assets/Guns/Ammo/shell_shot.png" id="1_imloe"]
 [ext_resource type="Script" path="res://Scripts/Weapons/shell.gd" id="1_oqiem"]
