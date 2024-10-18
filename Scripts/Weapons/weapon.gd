@@ -3,13 +3,9 @@ extends Node2D
 
 # TODO: Use RESOURCES for storing weapon data.
 
-enum TYPE { SEMI_AUTO, FULL_AUTO, BURST }
+enum TYPE { SINGLE, AUTO, BURST }
 
-@export var my_name: String = "Weapon"
-@export var type: int = TYPE.SEMI_AUTO
-@export var ammo_type: int = AmmoTypes.BULLET_TYPE
-@export var fire_rate: float = 1.0
-@export var fire_cost: int = 1
+@export var weapon_resource: Resource = null
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -20,15 +16,15 @@ var facing_right: bool = true
 var base_z_index = z_index
 
 func fire() -> void:
-    AmmoManager.spend_ammo(ammo_type, fire_cost)
+    AmmoManager.spend_ammo(weapon_resource.ammo_type, weapon_resource.fire_cost)
     trigger()
 
 func can_fire() -> bool:
     if not can_shoot:
         return false
 
-    if not AmmoManager.has_ammo(ammo_type, fire_cost):
-        print(my_name + " is out of ammo!")
+    if not AmmoManager.has_ammo(weapon_resource.ammo_type, weapon_resource.fire_cost):
+        print(weapon_resource.my_name + " is out of ammo!")
         return false
 
     return true
@@ -58,7 +54,7 @@ func _process(delta: float) -> void:
 # TODO: add functions so instead of player modifying the weapon,
 # the player only calls the weapon functions
 func trigger() -> void:
-    shoot_cooldown = fire_rate
+    shoot_cooldown = weapon_resource.fire_rate
     can_shoot = false
 
 func unset_offset() -> void:

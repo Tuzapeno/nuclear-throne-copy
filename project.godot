@@ -39,6 +39,7 @@ window/size/mode=3
 
 folder_colors={
 "res://Assets/": "orange",
+"res://Resources/": "red",
 "res://Scenes/": "pink",
 "res://Scripts/": "purple"
 }

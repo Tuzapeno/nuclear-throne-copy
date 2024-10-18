@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlxkcd7qavvl2"]
+[gd_scene load_steps=5 format=3 uid="uid://dlxkcd7qavvl2"]
 
 [ext_resource type="PackedScene" uid="uid://bgyf2hr4uat1u" path="res://Scenes/Weapons/weapon.tscn" id="1_limom"]
 [ext_resource type="Script" path="res://Scripts/Weapons/shotgun.gd" id="2_f4agf"]
+[ext_resource type="Resource" uid="uid://xf1ao1jgt75i" path="res://Resources/Weapons/shotgun_resource.tres" id="3_3lbpn"]
 [ext_resource type="Texture2D" uid="uid://cs5doivi84t5e" path="res://Assets/Guns/shotgun.png" id="3_7nat1"]
 
 [node name="Shotgun" instance=ExtResource("1_limom")]
 script = ExtResource("2_f4agf")
-my_name = "Shotgun"
-ammo_type = 1
+weapon_resource = ExtResource("3_3lbpn")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_7nat1")

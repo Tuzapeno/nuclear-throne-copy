@@ -2,13 +2,6 @@ extends Weapon
 
 var small_bullet_scene := preload("res://Scenes/Weapons/small_bullet.tscn")
 
-
-func _ready() -> void:
-    my_name = "Pistol"
-    type = TYPE.SEMI_AUTO
-    ammo_type = AmmoTypes.BULLET_TYPE
-    fire_rate = 0.1
-
 func fire() -> void:
     if not can_fire():
         return

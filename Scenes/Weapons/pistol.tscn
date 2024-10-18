@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b86rrbg3igik5"]
+[gd_scene load_steps=5 format=3 uid="uid://b86rrbg3igik5"]
 
 [ext_resource type="PackedScene" uid="uid://bgyf2hr4uat1u" path="res://Scenes/Weapons/weapon.tscn" id="1_nx7sq"]
 [ext_resource type="Texture2D" uid="uid://404u25g5gy8f" path="res://Assets/Guns/pistol.png" id="2_84gul"]
 [ext_resource type="Script" path="res://Scripts/Weapons/pistol.gd" id="2_absel"]
+[ext_resource type="Resource" uid="uid://cgug8r8xvs5eo" path="res://Resources/Weapons/pistol_resource.tres" id="3_4fhbi"]
 
 [node name="Pistol" instance=ExtResource("1_nx7sq")]
 script = ExtResource("2_absel")
-my_name = "Pistol"
+weapon_resource = ExtResource("3_4fhbi")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_84gul")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://cgug8r8xvs5eo"]
+
+[ext_resource type="Script" path="res://Resources/Weapons/weapon_resource.gd" id="1_o6xr5"]
+
+[resource]
+script = ExtResource("1_o6xr5")
+my_name = "Pistol"
+type = 0
+ammo_type = 0
+fire_rate = 0.2
+fire_cost = 1

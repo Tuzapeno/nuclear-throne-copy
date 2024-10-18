@@ -86,12 +86,13 @@ func handle_weapon() -> void:
     if Input.is_action_just_pressed("swap_weapons"):
         swap_weapons()
 
+    # TODO: Move this to weapon script
     # Handle weapon firing based on weapon type
-    match weapon_primary.type:
-        Weapon.TYPE.SEMI_AUTO:
+    match weapon_primary.weapon_resource.type:
+        Weapon.TYPE.SINGLE:
             if Input.is_action_just_pressed("fire"):
                 weapon_primary.fire()
-        Weapon.TYPE.FULL_AUTO:
+        Weapon.TYPE.AUTO:
             if Input.is_action_pressed("fire"):
                 weapon_primary.fire()
 
