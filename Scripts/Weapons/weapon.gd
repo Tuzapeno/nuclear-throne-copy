@@ -16,8 +16,7 @@ var facing_right: bool = true
 var base_z_index = z_index
 
 func fire() -> void:
-    AmmoManager.spend_ammo(weapon_resource.ammo_type, weapon_resource.fire_cost)
-    trigger()
+    pass
 
 func can_fire() -> bool:
     if not can_shoot:
@@ -54,8 +53,14 @@ func _process(delta: float) -> void:
 # TODO: add functions so instead of player modifying the weapon,
 # the player only calls the weapon functions
 func trigger() -> void:
+    if not can_fire():
+        return
+
     shoot_cooldown = weapon_resource.fire_rate
     can_shoot = false
+    AmmoManager.spend_ammo(weapon_resource.ammo_type, weapon_resource.fire_cost)
+
+    fire()
 
 func unset_offset() -> void:
     sprite.offset = Vector2()
@@ -75,4 +80,4 @@ func make_extra() -> void:
 
 
 func get_tip_position() -> Vector2:
-    return global_position + sprite.offset.rotated(sprite.rotation)
+    return global_position + (sprite.texture.get_width() * Vector2(1, 0)).rotated(sprite.rotation)

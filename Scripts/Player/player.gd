@@ -91,10 +91,10 @@ func handle_weapon() -> void:
     match weapon_primary.weapon_resource.type:
         Weapon.TYPE.SINGLE:
             if Input.is_action_just_pressed("fire"):
-                weapon_primary.fire()
+                weapon_primary.trigger()
         Weapon.TYPE.AUTO:
             if Input.is_action_pressed("fire"):
-                weapon_primary.fire()
+                weapon_primary.trigger()
 
 func pickup_weapon(weapon: Weapon) -> void:
 
