@@ -7,7 +7,7 @@ enum TYPE { SEMI_AUTO, FULL_AUTO, BURST }
 
 @export var my_name: String = "Weapon"
 @export var type: int = TYPE.SEMI_AUTO
-@export var ammo_type: int = AmmoManager.BULLET
+@export var ammo_type: int = AmmoTypes.BULLET_TYPE
 @export var fire_rate: float = 1.0
 @export var fire_cost: int = 1
 

@@ -16,6 +16,6 @@ func _on_game_start() -> void:
 
 func _on_ammo_changed(type: int, value: int) -> void:
 	match type:
-		AmmoManager.BULLET:
+		AmmoTypes.BULLET_TYPE:
 			bullet_count.text = str(value)
 			bullet_bar.value = value
