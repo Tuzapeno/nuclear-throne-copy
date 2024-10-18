@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
 				can_pickup = false
 				label.hide()
 
-func _input(_event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("use") and can_pickup:
 		pick_up()
 		
