@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
     else:
         sprite.flip_v = not facing_right
 
-    
+
 
 # TODO: add functions so instead of player modifying the weapon,
 # the player only calls the weapon functions
@@ -80,4 +80,3 @@ func make_extra() -> void:
 
 func get_tip_position() -> Vector2:
     return global_position + sprite.offset.rotated(sprite.rotation)
-
