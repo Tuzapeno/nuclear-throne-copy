@@ -1,7 +1,7 @@
 class_name SmallBullet
 extends Area2D
 
-const SPEED = 50
+const SPEED = 500
 
 var direction := Vector2.RIGHT
 
@@ -18,4 +18,4 @@ func _on_body_entered(body: Node2D) -> void:
 	if body == Globals.player: # Player ignores its own bullets
 		return
 
-	#queue_free()
+	queue_free()
