@@ -20,16 +20,18 @@ var facing_right: bool = true
 var base_z_index = z_index
 
 func fire() -> void:
+    AmmoManager.spend_ammo(ammo_type, fire_cost)
+    trigger()
+
+func can_fire() -> bool:
     if not can_shoot:
-        return
+        return false
 
     if not AmmoManager.has_ammo(ammo_type, fire_cost):
         print(my_name + " is out of ammo!")
-        return
+        return false
 
-    AmmoManager.spend_ammo(ammo_type, fire_cost)
-
-    trigger()
+    return true
 
 
 func _process(delta: float) -> void:

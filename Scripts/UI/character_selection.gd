@@ -13,11 +13,10 @@ func _process(_delta: float) -> void:
 	pass
 
 func start() -> void:
-	Globals.player = player_scene.instantiate() 
+	Globals.player = player_scene.instantiate()
 	SceneManager.change_scene(level, "Level")
 	Globals.game_started.emit()
 
 func _on_fish_button_pressed() -> void:
 	print("Fish was selected!!") # Fish Parameters
 	start()
-	

@@ -9,7 +9,6 @@ extends CharacterBody2D
 @onready var camera: Camera2D = $Camera2D
 
 
-
 var weapon_primary: Weapon = null :
     set(weapon):
         weapon_primary = weapon
@@ -21,9 +20,9 @@ var weapon_extra: Weapon = null :
         weapon_extra = weapon
         weapon_extra.make_extra()
 
+
 var is_first_spawn: bool = true
 
-# Constructor: Set global reference to this player
 func _init() -> void:
     print("Estou sendo iniciado!!!")
     Globals.player = self
@@ -32,7 +31,12 @@ func _init() -> void:
 func _ready() -> void:
     if is_first_spawn:
         is_first_spawn = false
-        pickup_weapon(Globals.starting_weapon)
+        var weapon := Globals.starting_weapon_scene.instantiate()
+
+        print("SCENE: ", Globals.starting_weapon_scene)
+        print("WEAPON: ", weapon)
+        print(is_instance_valid(weapon))
+        pickup_weapon(weapon)
 
 
 # Physics process: Handle movement and physics

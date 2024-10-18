@@ -1,12 +1,9 @@
 extends Node
 
-signal level_loaded
-
 @export var grid_size: int = 30
 @export var drunkward_iterations: int = 500
 
 @onready var wall_scene: PackedScene = preload("res://Scenes/wall.tscn")
-@onready var player_scene: PackedScene = preload("res://Scenes/player.tscn")
 
 const WALL := Globals.MapTile.WALL
 const FLOOR := Globals.MapTile.FLOOR
@@ -19,7 +16,6 @@ var grid: PackedInt32Array = PackedInt32Array()
 
 func _ready() -> void:
 	generate_level()
-	level_loaded.emit()
 
 
 func matrix_index(x: int, y: int) -> int:
@@ -42,9 +38,10 @@ func generate_level() -> void:
 			if check_solo_wall(x, y):
 				grid[matrix_index(x, y)] = FLOOR
 
-	# Instantiate player
+	# Add player
 	add_child(Globals.player)
 
+	# Set player position and adjust to the center of the tile
 	Globals.player.position = Vector2(drunkman.position.x * Globals.tile_size, drunkman.position.y * Globals.tile_size)
 	Globals.player.position += Vector2(Globals.half_tile, Globals.half_tile) # Adjust player position to the center of the tile
 
