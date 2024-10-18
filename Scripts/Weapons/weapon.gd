@@ -78,3 +78,6 @@ func make_extra() -> void:
     z_index = base_z_index - 1  # Render behind the player
 
 
+func get_tip_position() -> Vector2:
+    return global_position + sprite.offset.rotated(sprite.rotation)
+
