@@ -23,6 +23,7 @@ Globals="*res://Scripts/Singletons/globals.gd"
 Utils="*res://Scripts/Singletons/utils.gd"
 AmmoManager="*res://Scripts/Singletons/ammo_manager.gd"
 Debug="*res://Scripts/Singletons/debug.gd"
+SignalBus="*res://Scripts/Singletons/signal_bus.gd"
 
 [debug]
 

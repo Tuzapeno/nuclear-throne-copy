@@ -1,7 +1,5 @@
 extends Node
 
-signal game_started
-
 enum MapTile { WALL, FLOOR, WEAPON_CHEST, AMMO_CHEST }
 
 const weapon_drop_scene_path: String = "res://Scenes/Weapons/Drops/"
