@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjmkjen74gsh5"]
 
-[ext_resource type="Script" path="res://Scripts/Weapons/weapon_drop.gd" id="1_btmks"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Abstract Classes/weapon_drop.gd" id="1_btmks"]
 
 [node name="WeaponDrop" type="Area2D"]
 script = ExtResource("1_btmks")
