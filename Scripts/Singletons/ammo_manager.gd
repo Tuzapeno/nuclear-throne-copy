@@ -16,13 +16,6 @@ func _ready() -> void:
     for type in MAX_AMMO.keys():
         ammo[type] = MAX_AMMO[type] / 2 
 
-# TODO: Add a debug class to handle debug inputs
-
-# func _input(event: InputEvent) -> void:
-#     if event.is_action_pressed("debug_add_ammo"):
-#         for type in MAX_AMMO.keys():
-#             add_ammo(type, 10)
-
 func has_ammo(type: int, fire_cost: int) -> bool:
     return ammo[type] >= fire_cost
 
@@ -32,3 +25,7 @@ func add_ammo(type: int, amount: int) -> void:
 
 func spend_ammo(type: int, amount: int) -> void:
     add_ammo(type, -amount)
+
+func add_ammo_all(amount: int) -> void:
+    for type in MAX_AMMO.keys():
+        add_ammo(type, amount)

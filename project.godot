@@ -22,6 +22,7 @@ SceneManager="*res://Scripts/Singletons/scene_manager.gd"
 Globals="*res://Scripts/Singletons/globals.gd"
 Utils="*res://Scripts/Singletons/utils.gd"
 AmmoManager="*res://Scripts/Singletons/ammo_manager.gd"
+Debug="*res://Scripts/Singletons/debug.gd"
 
 [debug]
 
