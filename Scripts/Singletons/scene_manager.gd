@@ -4,10 +4,13 @@ extends Node
 
 var current_scene: String = "MainMenu"
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.keycode == KEY_U and event.pressed:
-			change_level()
+
+# TODO: Add to debug class
+
+# func _input(event: InputEvent) -> void:
+# 	if event is InputEventKey:
+# 		if event.keycode == KEY_U and event.pressed:
+# 			change_level()
 
 
 
