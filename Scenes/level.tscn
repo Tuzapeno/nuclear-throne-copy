@@ -4,3 +4,5 @@
 
 [node name="Level" type="Node"]
 script = ExtResource("1_tn5o7")
+grid_size = null
+drunkward_iterations = null

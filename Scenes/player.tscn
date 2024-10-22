@@ -90,7 +90,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a01bv"]
-size = Vector2(15, 17)
+size = Vector2(12, 15.5)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_armlr")
@@ -98,8 +98,8 @@ script = ExtResource("1_armlr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_s1frk")
 animation = &"walk"
-frame = 1
-frame_progress = 0.993104
+frame = 3
+frame_progress = 0.2797
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_a01bv")

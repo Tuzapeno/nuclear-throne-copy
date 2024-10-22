@@ -1,8 +1,6 @@
 class_name Weapon
 extends Node2D
 
-# TODO: Use RESOURCES for storing weapon data.
-
 enum TYPE { SINGLE, AUTO, BURST }
 
 @export var weapon_resource: Resource = null

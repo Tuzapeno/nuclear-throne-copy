@@ -1,7 +1,7 @@
 extends Node
 
-@export var grid_size: int = 30
-@export var drunkward_iterations: int = 500
+@export var grid_size: int = 200
+@export var drunkward_iterations: int = 1000
 
 @onready var wall_scene: PackedScene = preload("res://Scenes/wall.tscn")
 
@@ -10,7 +10,8 @@ const FLOOR := Globals.MapTile.FLOOR
 const WEAPON_CHEST := Globals.MapTile.WEAPON_CHEST
 const AMMO_CHEST := Globals.MapTile.AMMO_CHEST
 
-
+# TODO: Otimizar para que as paredes que estão encobertas por outras não chequem por colisões.
+# TODO: Paralelismo para não demorar na geração do mapa
 
 var grid: PackedInt32Array = PackedInt32Array()
 
@@ -46,12 +47,27 @@ func generate_level() -> void:
 	Globals.player.position += Vector2(Globals.half_tile, Globals.half_tile) # Adjust player position to the center of the tile
 
 	# Instantiate walls
+
+	var bottom_wall_shape: RectangleShape2D = load("res://Resources/Walls/bottom_wall.tres")
+
 	for x in range(grid_size):
 		for y in range(grid_size):
 			if grid[matrix_index(x, y)] == WALL:
 				var wall: Node2D = wall_scene.instantiate()
-				wall.position = Vector2(x * 32, y * 32)
+				wall.position = Vector2(x * Globals.tile_size, y * Globals.tile_size)
 				add_child(wall)
+				if is_floor_on_top(x, y):
+					wall.get_node("CollisionShape2D").shape = bottom_wall_shape
+
+
+func is_floor_on_top(_x, _y) -> bool:
+	if _y == 0:
+		return false
+
+	if grid[matrix_index(_x, _y - 1)] == FLOOR:
+		return true
+
+	return false
 
 
 func check_solo_wall(_x, _y):
