@@ -73,7 +73,7 @@ func handle_animations() -> void:
     if direction.y < 0 and weapon_primary != null:
         weapon_primary.z_index = z_index - 1
     else:
-        weapon_primary.z_index = z_index + 1
+        weapon_primary.z_index = z_index
 
 
 

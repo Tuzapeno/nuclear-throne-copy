@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if raycast.is_colliding():
-		if raycast.get_collider() is StaticBody2D:
+		if raycast.get_collider():
 			ricochet(direction, raycast.get_collision_normal())
 	global_position += direction * speed * delta
 

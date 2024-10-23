@@ -79,3 +79,4 @@ func make_extra() -> void:
 
 func get_tip_position() -> Vector2:
     return global_position + (sprite.texture.get_width() * Vector2(1, 0)).rotated(sprite.rotation)
+    #eturn global_position

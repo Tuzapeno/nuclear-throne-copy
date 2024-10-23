@@ -1,43 +1,43 @@
 extends Node
 
+
+
 @export var grid_size: int = 200
 @export var drunkward_iterations: int = 1000
 
-@onready var wall_scene: PackedScene = preload("res://Scenes/wall.tscn")
+#@onready var wall_scene: PackedScene = preload("res:#Scenes/wall.tscn")
+
+@onready var tm_layer = $TileMapLayer
 
 const WALL := Globals.MapTile.WALL
 const FLOOR := Globals.MapTile.FLOOR
 const WEAPON_CHEST := Globals.MapTile.WEAPON_CHEST
 const AMMO_CHEST := Globals.MapTile.AMMO_CHEST
 
+
+const ATLAS_WIDTH = 12
+const DESERT_TILESET_ID = 0
+
 # TODO: Otimizar para que as paredes que estão encobertas por outras não chequem por colisões.
 # TODO: Paralelismo para não demorar na geração do mapa
 
-var grid: PackedInt32Array = PackedInt32Array()
+var grid: Array = []
 
 func _ready() -> void:
 	generate_level()
 
-
-func matrix_index(x: int, y: int) -> int:
-	return x * grid_size + y
-
 func generate_level() -> void:
 	# Initialize grid
-	grid.resize(grid_size * grid_size)
-	grid.fill(WALL)
+	for x in range(grid_size):
+		grid.append([])
+		for y in range(grid_size):
+			grid[x].append(WALL)
 
 	# Drunkard walk
 	var drunkman: DrunkardWalk = DrunkardWalk.new(Vector2i(grid_size / 2, grid_size / 2))
 	for i in range(drunkward_iterations):
 		var position: Vector2i = drunkman.move(grid_size)
-		grid[matrix_index(position.x, position.y)] = FLOOR
-
-	# Clear alone walls
-	for x in range(grid_size):
-		for y in range(grid_size):
-			if check_solo_wall(x, y):
-				grid[matrix_index(x, y)] = FLOOR
+		grid[position.x][position.y] = FLOOR
 
 	# Add player
 	add_child(Globals.player)
@@ -47,60 +47,53 @@ func generate_level() -> void:
 	Globals.player.position += Vector2(Globals.half_tile, Globals.half_tile) # Adjust player position to the center of the tile
 
 	# Instantiate walls
-
-	var bottom_wall_shape: RectangleShape2D = load("res://Resources/Walls/bottom_wall.tres")
-
 	for x in range(grid_size):
 		for y in range(grid_size):
-			if grid[matrix_index(x, y)] == WALL:
-				var wall: Node2D = wall_scene.instantiate()
-				wall.position = Vector2(x * Globals.tile_size, y * Globals.tile_size)
-				add_child(wall)
-				if is_floor_on_top(x, y):
-					wall.get_node("CollisionShape2D").shape = bottom_wall_shape
+			if grid[x][y] == WALL:
+				var bitmask := get_bitmask(x, y)
+				var atlas_coord := get_atlas_coord_from_bitmask(bitmask)
+				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, atlas_coord)
+			elif grid[x][y] == FLOOR:
+				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
 
 
-func is_floor_on_top(_x, _y) -> bool:
-	if _y == 0:
-		return false
+				
 
-	if grid[matrix_index(_x, _y - 1)] == FLOOR:
-		return true
+func get_bitmask(x: int, y: int) -> int:
+	var bitmask := 0
+	# Only check cardinal directions
+	if is_wall(x, y - 1): bitmask |= 1  # North
+	if is_wall(x + 1, y): bitmask |= 2  # East
+	if is_wall(x, y + 1): bitmask |= 4  # South
+	if is_wall(x - 1, y): bitmask |= 8  # West
+	return bitmask
 
-	return false
+func get_atlas_coord_from_bitmask(bitmask: int) -> Vector2i:
+	# Convert 4-bit bitmask to tileset coordinates
+	# This mapping assumes a 47-tile autotile layout
+	match bitmask:
+		
+		0: return Vector2i(0, 0)  # Sem vizinhos
+		1: return Vector2i(2, 0)  # North
+		2: return Vector2i(0, 1)  # East
+		3: return Vector2i(1, 1)  # Northeast
+		4: return Vector2i(4, 1)  # South
+		5: return Vector2i(0, 2)  # North and South
+		6: return Vector2i(3, 2)  # East and South
+		7: return Vector2i(4, 2)  # North and East and South
+		8: return Vector2i(3, 0)  # West
+		9: return Vector2i(4, 0)  # Northwest
+		10: return Vector2i(2, 1)  # East and West
+		11: return Vector2i(3, 1)  # North and East and West
+		12: return Vector2i(1, 2)  # South and West
+		13: return Vector2i(2, 2)  # North and South and West
+		14: return Vector2i(0, 3)  # East and South and West
+		15: return Vector2i(1, 3)  # All
+		
+		# Default (shouldn't happen)
+		_: return Vector2i(1, 1)
 
-
-func check_solo_wall(_x, _y):
-	var count = 0
-
-	if _x == 0 or _x == grid_size - 1:
-		return false
-
-	if _y == 0 or _y == grid_size - 1:
-		return false
-
-	if grid[matrix_index(_x + 1, _y)] == WALL:
-		return false
-
-	if grid[matrix_index(_x - 1, _y)] == WALL:
-		return false
-
-	if grid[matrix_index(_x, _y + 1)] == WALL:
-		return false
-
-	if grid[matrix_index(_x, _y - 1)] == WALL:
-		return false
-
-	if grid[matrix_index(_x + 1, _y + 1)] == WALL:
-		return false
-
-	if grid[matrix_index(_x - 1, _y - 1)] == WALL:
-		return false
-
-	if grid[matrix_index(_x + 1, _y - 1)] == WALL:
-		return false
-
-	if grid[matrix_index(_x - 1, _y + 1)] == WALL:
-		return false
-
-	return true
+func is_wall(x: int, y: int) -> bool:
+	if x < 0 or x >= grid_size or y < 0 or y >= grid_size:
+		return true  # Treat out of bounds as walls
+	return grid[x][y] == WALL

@@ -1,6 +1,6 @@
 extends ShellWeapon
 
-const n_shells := 1
+const n_shells := 7
 
 func _process(delta: float) -> void:
 	super(delta)

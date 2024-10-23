@@ -6,5 +6,6 @@
 [node name="Main" type="Node"]
 
 [node name="MainMenu" parent="." instance=ExtResource("1_71u7s")]
+metadata/_edit_use_anchors_ = true
 
 [node name="HUD" parent="." instance=ExtResource("2_ohgek")]
