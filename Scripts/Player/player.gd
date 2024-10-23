@@ -73,7 +73,7 @@ func handle_animations() -> void:
     if direction.y < 0 and weapon_primary != null:
         weapon_primary.z_index = z_index - 1
     else:
-        weapon_primary.z_index = z_index
+        weapon_primary.z_index = z_index + 1
 
 
 
@@ -103,7 +103,7 @@ func pickup_weapon(weapon: Weapon) -> void:
 
     # Add a little y offset to look like the weapon is in the player hand
     # TODO: need to move this elsewhere
-    weapon.position.y += 3
+    weapon.position.y -= 1
 
     if weapon_primary == null:
         weapon_primary = weapon

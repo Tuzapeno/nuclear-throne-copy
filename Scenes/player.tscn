@@ -106,6 +106,8 @@ frame = 3
 frame_progress = 0.2797
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_a01bv")
 
