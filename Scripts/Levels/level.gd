@@ -36,8 +36,8 @@ func generate_level() -> void:
 	# Drunkard walk
 	var drunkman: DrunkardWalk = DrunkardWalk.new(Vector2i(grid_size / 2, grid_size / 2))
 	for i in range(drunkward_iterations):
-		var position: Vector2i = drunkman.move(grid_size)
-		grid[position.x][position.y] = FLOOR
+		var _position: Vector2i = drunkman.move(grid_size)
+		grid[_position.x][_position.y] = FLOOR
 
 	# Add player
 	add_child(Globals.player)
@@ -45,6 +45,9 @@ func generate_level() -> void:
 	# Set player position and adjust to the center of the tile
 	Globals.player.position = Vector2(drunkman.position.x * Globals.tile_size, drunkman.position.y * Globals.tile_size)
 	Globals.player.position += Vector2(Globals.half_tile, Globals.half_tile) # Adjust player position to the center of the tile
+
+	print("WALL: ", WALL)
+	print("FLOOR: ", FLOOR)
 
 	# Instantiate walls
 	for x in range(grid_size):
@@ -55,6 +58,9 @@ func generate_level() -> void:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, atlas_coord)
 			elif grid[x][y] == FLOOR:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
+
+			else:
+				print("TYPE OF TILE NOT RECOGNIZED: ", grid[x][y])
 
 
 				
