@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Weapons/small_bullet.gd" id="1_rfucf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0dcq7"]
-size = Vector2(20, 10)
+size = Vector2(17, 6)
 
 [node name="SmallBullet" type="Area2D"]
 script = ExtResource("1_rfucf")
@@ -14,7 +14,7 @@ position = Vector2(11, 0)
 texture = ExtResource("1_ckdxl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(11, 0)
+position = Vector2(10.5, 0)
 shape = SubResource("RectangleShape2D_0dcq7")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
