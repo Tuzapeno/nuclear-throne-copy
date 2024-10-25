@@ -115,7 +115,7 @@ func pickup_weapon(weapon: Weapon) -> void:
 
 # Drop the primary weapon and set the new one
 func drop_primary_weapon() -> void:
-    var drop_scene: PackedScene = load(Globals.weapon_drop_scene_path + weapon_primary.my_name.to_lower() + "_drop.tscn")
+    var drop_scene: PackedScene = load(Globals.weapon_drop_scene_path + weapon_primary.weapon_resource.my_name.to_lower() + "_drop.tscn")
     var drop: WeaponDrop = drop_scene.instantiate()
     drop.position = Globals.player.global_position
     remove_child(weapon_primary)

@@ -5,6 +5,9 @@ extends Node2D
 
 @onready var tm_layer = $TileMapLayer
 
+var weapon_chest_scene: PackedScene = preload("res://Scenes/gun_chest.tscn")
+var ammo_chest_scene: PackedScene = preload("res://Scenes/ammo_chest.tscn")
+
 const WALL := Globals.MapTile.WALL
 const FLOOR := Globals.MapTile.FLOOR
 const WEAPON_CHEST := Globals.MapTile.WEAPON_CHEST
@@ -33,6 +36,10 @@ func generate_level() -> void:
 	for i in range(drunkward_iterations):
 		var _position: Vector2i = drunkman.move(grid_size)
 		grid[_position.x][_position.y] = FLOOR
+		if randf() < 0.10:
+			grid[_position.x][_position.y] = WEAPON_CHEST
+		if randf() < 0.05:
+			grid[_position.x][_position.y] = AMMO_CHEST
 
 	# Add player
 	add_child(Globals.player)
@@ -44,19 +51,40 @@ func generate_level() -> void:
 	print("WALL: ", WALL)
 	print("FLOOR: ", FLOOR)
 
-	# Instantiate walls
+	# Set tilemap and instantiate chests
 	for x in range(grid_size):
 		for y in range(grid_size):
+
 			if grid[x][y] == WALL:
 				var bitmask := get_bitmask(x, y)
 				var atlas_coord := get_atlas_coord_from_bitmask(bitmask)
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, atlas_coord)
+
 			elif grid[x][y] == FLOOR:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
+			
+			elif grid[x][y] == WEAPON_CHEST:
+				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
+				var weapon_chest = weapon_chest_scene.instantiate()
+				weapon_chest.global_position = Vector2(x * Globals.tile_size, y * Globals.tile_size)
+				add_child(weapon_chest)
+
+			elif grid[x][y] == AMMO_CHEST:
+				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
+				var ammo_chest = ammo_chest_scene.instantiate()
+				ammo_chest.global_position = Vector2(x * Globals.tile_size, y * Globals.tile_size)
+				add_child(ammo_chest)
 
 			else:
 				print("TYPE OF TILE NOT RECOGNIZED: ", grid[x][y])
 
+	# Leave only one chest
+	var gun_chests = Utils.get_all_nodes(self, GunChest)
+	var ammo_chests = Utils.get_all_nodes(self, AmmoChest)
+	
+	remove_chests(ammo_chests)
+	remove_chests(gun_chests)
+	
 
 				
 
@@ -98,3 +126,8 @@ func is_wall(x: int, y: int) -> bool:
 	if x < 0 or x >= grid_size or y < 0 or y >= grid_size:
 		return true  # Treat out of bounds as walls
 	return grid[x][y] == WALL
+
+func remove_chests(chest_array: Array) -> void:
+	chest_array.pop_back()
+	for gun in chest_array:
+		gun.queue_free()

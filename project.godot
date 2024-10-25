@@ -47,6 +47,10 @@ folder_colors={
 "res://Scripts/": "purple"
 }
 
+[global_group]
+
+gun_chest=""
+
 [input]
 
 move_right={

@@ -1,6 +1,8 @@
+class_name GunChest
 extends Chest
 
 var weapon_scene: PackedScene = null
+@onready var spawn: Marker2D = $SpawnPoint
 
 func get_random_weapon() -> PackedScene:
 	var weapon_chest = randi() % 3
@@ -17,6 +19,6 @@ func get_random_weapon() -> PackedScene:
 
 func action() -> void:
 	var weapon = get_random_weapon().instantiate()
-	weapon.global_position = global_position
+	weapon.global_position = spawn.global_position
 	get_parent().add_child(weapon)
 	

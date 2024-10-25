@@ -11,8 +11,14 @@ size = Vector2(16, 10)
 [node name="GunChest" instance=ExtResource("1_d628n")]
 script = ExtResource("2_gw502")
 open_sprite = ExtResource("2_lws6s")
-closed_sprite = ExtResource("3_lfu1m")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_lfu1m")
+centered = false
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2(0, 3)
+position = Vector2(8, 10)
 shape = SubResource("RectangleShape2D_dc1f1")
+
+[node name="SpawnPoint" type="Marker2D" parent="." index="2" groups=["gun_chest"]]
+position = Vector2(8, 8)

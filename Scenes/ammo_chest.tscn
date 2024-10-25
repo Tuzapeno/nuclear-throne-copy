@@ -1,0 +1,21 @@
+[gd_scene load_steps=6 format=3 uid="uid://csgd5vamd2yma"]
+
+[ext_resource type="PackedScene" uid="uid://c540s7vy5j8g4" path="res://Scenes/chest.tscn" id="1_1o1ot"]
+[ext_resource type="Script" path="res://Scripts/Levels/ammo_chest.gd" id="2_0obr0"]
+[ext_resource type="Texture2D" uid="uid://c54ljld6bg7r2" path="res://Assets/Chests/chest_ammo_open.png" id="3_6agj1"]
+[ext_resource type="Texture2D" uid="uid://dtgmaadoapsa3" path="res://Assets/Chests/chest_ammo_closed.png" id="4_raatq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4dih"]
+size = Vector2(16, 11)
+
+[node name="AmmoChest" instance=ExtResource("1_1o1ot")]
+script = ExtResource("2_0obr0")
+open_sprite = ExtResource("3_6agj1")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("4_raatq")
+centered = false
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(8, 9.5)
+shape = SubResource("RectangleShape2D_i4dih")
