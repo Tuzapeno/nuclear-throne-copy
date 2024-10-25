@@ -1,11 +1,7 @@
 extends Node2D
 
-
-
 @export var grid_size: int = 200
 @export var drunkward_iterations: int = 1000
-
-#@onready var wall_scene: PackedScene = preload("res:#Scenes/wall.tscn")
 
 @onready var tm_layer = $TileMapLayer
 
@@ -13,13 +9,12 @@ const WALL := Globals.MapTile.WALL
 const FLOOR := Globals.MapTile.FLOOR
 const WEAPON_CHEST := Globals.MapTile.WEAPON_CHEST
 const AMMO_CHEST := Globals.MapTile.AMMO_CHEST
-
-
 const ATLAS_WIDTH = 12
 const DESERT_TILESET_ID = 0
 
 # TODO: Otimizar para que as paredes que estão encobertas por outras não chequem por colisões.
 # TODO: Paralelismo para não demorar na geração do mapa
+# TODO: Criar uma classe para cada drunkard walk diferente: deserto, junkyward etc.
 
 var grid: Array = []
 
