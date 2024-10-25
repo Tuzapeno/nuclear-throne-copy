@@ -8,4 +8,4 @@ my_name = "Shotgun"
 type = 1
 ammo_type = 2
 fire_rate = 0.5
-fire_cost = 0
+fire_cost = 4

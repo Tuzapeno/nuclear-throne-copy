@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt0lj6fc7xm3w"]
+[gd_scene load_steps=7 format=3 uid="uid://bt0lj6fc7xm3w"]
 
-[ext_resource type="Texture2D" uid="uid://dij0qmcqqei21" path="res://Assets/Guns/Ammo/bullet_icon_empty.png" id="1_6im55"]
 [ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="1_ae333"]
-[ext_resource type="Texture2D" uid="uid://ccsc7mpfq5etr" path="res://Assets/Guns/Ammo/bullet_icon_fill.png" id="2_x6lwo"]
+[ext_resource type="Texture2D" uid="uid://bfpddlhuviqar" path="res://Assets/Hud/bullet_empty.png" id="2_qjtlw"]
+[ext_resource type="Texture2D" uid="uid://2ow37m2urq24" path="res://Assets/Hud/bullet_filled.png" id="3_13has"]
 [ext_resource type="LabelSettings" uid="uid://bvgrvw27pk0o1" path="res://Assets/ammo_font.tres" id="3_lgvqa"]
+[ext_resource type="Texture2D" uid="uid://bvk7xjjknndbx" path="res://Assets/Hud/shell_empty.png" id="5_hs5uo"]
+[ext_resource type="Texture2D" uid="uid://b80ag7f8kp3ig" path="res://Assets/Hud/shell_filled.png" id="6_o6t5k"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ae333")
 
 [node name="AmmoContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 63.0
+offset_bottom = 16.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
 
 [node name="BulletProgressBar" type="TextureProgressBar" parent="AmmoContainer"]
 layout_mode = 2
@@ -19,10 +25,25 @@ size_flags_vertical = 4
 max_value = 255.0
 step = 50.0
 fill_mode = 3
-texture_under = ExtResource("1_6im55")
-texture_progress = ExtResource("2_x6lwo")
+texture_under = ExtResource("2_qjtlw")
+texture_progress = ExtResource("3_13has")
 
 [node name="BulletCount" type="Label" parent="AmmoContainer"]
+layout_mode = 2
+text = "99"
+label_settings = ExtResource("3_lgvqa")
+
+[node name="ShellProgressBar" type="TextureProgressBar" parent="AmmoContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 55.0
+step = 5.0
+fill_mode = 3
+texture_under = ExtResource("5_hs5uo")
+texture_progress = ExtResource("6_o6t5k")
+
+[node name="ShellCount" type="Label" parent="AmmoContainer"]
 layout_mode = 2
 text = "99"
 label_settings = ExtResource("3_lgvqa")
