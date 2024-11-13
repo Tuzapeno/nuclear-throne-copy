@@ -1,0 +1,106 @@
+[gd_scene load_steps=16 format=3 uid="uid://cw6skevtlriaf"]
+
+[ext_resource type="Script" path="res://Scripts/bandit.gd" id="1_ily0r"]
+[ext_resource type="Texture2D" uid="uid://bul60qm4avuyx" path="res://Assets/Bandit/bandit_idle.png" id="2_4axhj"]
+[ext_resource type="Texture2D" uid="uid://bkso60r68p4cv" path="res://Assets/Bandit/bandit_run.png" id="3_fpycw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unpxu"]
+atlas = ExtResource("2_4axhj")
+region = Rect2(0, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiio7"]
+atlas = ExtResource("2_4axhj")
+region = Rect2(25, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obrvx"]
+atlas = ExtResource("2_4axhj")
+region = Rect2(50, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whxf0"]
+atlas = ExtResource("2_4axhj")
+region = Rect2(75, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue6xo"]
+atlas = ExtResource("3_fpycw")
+region = Rect2(0, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7im3"]
+atlas = ExtResource("3_fpycw")
+region = Rect2(25, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swobd"]
+atlas = ExtResource("3_fpycw")
+region = Rect2(50, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wux4"]
+atlas = ExtResource("3_fpycw")
+region = Rect2(75, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gy7a"]
+atlas = ExtResource("3_fpycw")
+region = Rect2(100, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uai40"]
+atlas = ExtResource("3_fpycw")
+region = Rect2(125, 0, 25, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6y58l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unpxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiio7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obrvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whxf0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue6xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7im3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swobd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wux4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gy7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uai40")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6whl"]
+size = Vector2(13, 9)
+
+[node name="Bandit" type="CharacterBody2D"]
+script = ExtResource("1_ily0r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6y58l")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4.5)
+shape = SubResource("RectangleShape2D_c6whl")
+
+[node name="WalkTimer" type="Timer" parent="."]
+
+[node name="StopTimer" type="Timer" parent="."]

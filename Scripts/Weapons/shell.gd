@@ -18,15 +18,13 @@ func _ready() -> void:
 	rotation = direction.angle()
 	
 func _physics_process(delta: float) -> void:
-	if raycast.is_colliding():
-		if raycast.get_collider():
-			ricochet(direction, raycast.get_collision_normal())
+	if raycast.get_collider() is TileMapLayer:
+		ricochet(direction, raycast.get_collision_normal())
 	global_position += direction * speed * delta
 
 func _process(_delta: float) -> void:
 	speed -= air_resistance
 	rotation = direction.angle()
-
 	if speed <= 0:
 		queue_free()
 
@@ -34,11 +32,9 @@ func _process(_delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body == Globals.player: # Player ignores its own bullets
 		return
-
-	# if body is StaticBody2D: # Bounce if it hits a wall
-	# 	if raycast.is_colliding():
-	# 		ricochet(direction, raycast.get_collision_normal())
-
+	if body.has_method("get_damage"):
+		body.get_damage(0.5)
+		queue_free()
 
 func ricochet(_direction: Vector2, _normal: Vector2) -> void:
 	direction = -(2 * (_normal * _direction) * _normal - _direction)

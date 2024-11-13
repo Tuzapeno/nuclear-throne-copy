@@ -54,6 +54,10 @@ func trigger() -> void:
     if not can_fire():
         return
 
+    var dir = (get_tip_position() - global_position).normalized()
+    Globals.player.camera.offset.x = -dir.x * 10
+    Globals.player.camera.offset.y = -dir.y * 10
+
     shoot_cooldown = weapon_resource.fire_rate
     can_shoot = false
     AmmoManager.spend_ammo(weapon_resource.ammo_type, weapon_resource.fire_cost)

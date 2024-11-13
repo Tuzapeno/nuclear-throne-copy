@@ -20,5 +20,7 @@ func get_random_weapon() -> PackedScene:
 func action() -> void:
 	var weapon = get_random_weapon().instantiate()
 	weapon.global_position = spawn.global_position
+	call_deferred("add_weapon_to_parent", weapon)
+
+func add_weapon_to_parent(weapon: Node) -> void:
 	get_parent().add_child(weapon)
-	

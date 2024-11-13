@@ -15,4 +15,6 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body == Globals.player: # Player ignores its own bullets
 		return
+	if body.has_method("get_damage"):
+		body.get_damage(1)
 	queue_free()

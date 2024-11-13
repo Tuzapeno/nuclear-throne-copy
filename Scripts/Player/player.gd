@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var camera: Camera2D = $Camera2D
 
+enum state {FREE, PORTAL}
+var current_state: state = state.FREE
 
 var weapon_primary: Weapon = null :
     set(weapon):
@@ -29,15 +31,20 @@ func _init() -> void:
 
 
 func _ready() -> void:
+    current_state = state.FREE
+    animsprite2D.rotation = 0
     if is_first_spawn:
         is_first_spawn = false
         var weapon := Globals.starting_weapon_scene.instantiate()
         pickup_weapon(weapon)
 
-
 # Physics process: Handle movement and physics
 func _physics_process(_delta: float) -> void:
-    handle_movement()
+    match current_state:
+        state.FREE:
+            handle_movement()
+        state.PORTAL:
+            animsprite2D.rotation += 25
     move_and_slide()
 
 # Process: Handle animations, facing direction, and weapon logic

@@ -1,5 +1,7 @@
 extends Node
 
+var portal_scene = preload("res://Scenes/portal.tscn")
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		# Add ammo for all weapons
@@ -11,5 +13,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Show current player weapons
 		if event.keycode == KEY_F3 and event.pressed:
 			Globals.player.show_weapons()
+			
 
         
