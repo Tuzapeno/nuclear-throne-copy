@@ -8,6 +8,7 @@ extends Node2D
 
 var weapon_chest_scene: PackedScene = preload("res://Scenes/gun_chest.tscn")
 var ammo_chest_scene: PackedScene = preload("res://Scenes/ammo_chest.tscn")
+var camera_scene: PackedScene = preload("res://Scenes/camera_controller.tscn")
 
 const WALL := Globals.MapTile.WALL
 const FLOOR := Globals.MapTile.FLOOR
@@ -26,9 +27,7 @@ var portal_position = Vector2.ZERO
 var level_enemy_count = 0 :
 	set(value):
 		level_enemy_count = value
-		print("Valor mudou para: ", level_enemy_count)
 		if level_enemy_count <= 0:
-			print("Portal spawnado")
 			portal_spawn_timer.start(randf_range(1.5, 2))
 			portal_position = Globals.player.global_position
 
@@ -37,7 +36,6 @@ func _ready() -> void:
 	generate_level()
 
 func _on_portal_spawn_timer_timeout() -> void:
-	print("Spawnando o portal agora")
 	spawn_portal_around_player()
 
 func _on_enemy_death():
@@ -67,9 +65,6 @@ func generate_level() -> void:
 	Globals.player.position = Vector2(drunkman.position.x * Globals.tile_size, drunkman.position.y * Globals.tile_size)
 	Globals.player.position += Vector2(Globals.half_tile, Globals.half_tile) # Adjust player position to the center of the tile
 	Globals.player.request_ready()
-
-	print("WALL: ", WALL)
-	print("FLOOR: ", FLOOR)
 
 	# Set tilemap and instantiate chests
 	for x in range(grid_size):
@@ -110,6 +105,14 @@ func generate_level() -> void:
 	
 	remove_chests(ammo_chests)
 	remove_chests(gun_chests)
+
+	# Spawn camera
+	var camera: Camera2D = camera_scene.instantiate()
+	Globals.camera = camera
+	camera.set_target(Globals.player)
+	add_child(camera)
+
+
 	
 
 				

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfpddlhuviqar"
-path="res://.godot/imported/bullet_empty.png-62fcca01fa75a7a66c31405fd1d0c989.ctex"
+uid="uid://b65gkodw0oou8"
+path="res://.godot/imported/bandit_gun.png-b1a968219cdfbf3191fead1a08f04ecf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hud/bullet_empty.png"
-dest_files=["res://.godot/imported/bullet_empty.png-62fcca01fa75a7a66c31405fd1d0c989.ctex"]
+source_file="res://Assets/Bandit/bandit_gun.png"
+dest_files=["res://.godot/imported/bandit_gun.png-b1a968219cdfbf3191fead1a08f04ecf.ctex"]
 
 [params]
 

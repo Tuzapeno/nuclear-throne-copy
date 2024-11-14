@@ -21,7 +21,6 @@ func can_fire() -> bool:
         return false
 
     if not AmmoManager.has_ammo(weapon_resource.ammo_type, weapon_resource.fire_cost):
-        print(weapon_resource.my_name + " is out of ammo!")
         return false
 
     return true
@@ -55,8 +54,8 @@ func trigger() -> void:
         return
 
     var dir = (get_tip_position() - global_position).normalized()
-    Globals.player.camera.offset.x = -dir.x * 10
-    Globals.player.camera.offset.y = -dir.y * 10
+    Globals.camera.offset.x = -dir.x * 10
+    Globals.camera.offset.y = -dir.y * 10
 
     shoot_cooldown = weapon_resource.fire_rate
     can_shoot = false

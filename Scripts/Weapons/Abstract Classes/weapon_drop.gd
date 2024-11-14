@@ -12,7 +12,6 @@ var can_pickup: bool = false
 
 func _ready() -> void:
 	weapon = weapon_scene.instantiate()
-	print("Weapon created at ready: ", weapon)
 	label.text = weapon.weapon_resource.my_name + " (E)"
 	label.hide()
 
@@ -39,7 +38,6 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 func pick_up() -> void:
 	assert(Globals.player != null, "Attempting to pick up weapon but player is null with weapon: " + weapon.name)
-	print("Picking up weapon ", weapon.name)
 	can_pickup = false
 	Globals.player.pickup_weapon(weapon)
 	queue_free()

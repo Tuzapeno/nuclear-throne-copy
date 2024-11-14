@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cw6skevtlriaf"]
+[gd_scene load_steps=17 format=3 uid="uid://cw6skevtlriaf"]
 
 [ext_resource type="Script" path="res://Scripts/bandit.gd" id="1_ily0r"]
 [ext_resource type="Texture2D" uid="uid://bul60qm4avuyx" path="res://Assets/Bandit/bandit_idle.png" id="2_4axhj"]
+[ext_resource type="PackedScene" uid="uid://cucyaj8kiq3k8" path="res://Scenes/bandit_gun.tscn" id="2_gkv6p"]
 [ext_resource type="Texture2D" uid="uid://bkso60r68p4cv" path="res://Assets/Bandit/bandit_run.png" id="3_fpycw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_unpxu"]
@@ -93,14 +94,24 @@ size = Vector2(13, 9)
 [node name="Bandit" type="CharacterBody2D"]
 script = ExtResource("1_ily0r")
 
+[node name="BanditGun" parent="." instance=ExtResource("2_gkv6p")]
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6y58l")
-animation = &"idle"
+animation = &"run"
+frame = 1
+frame_progress = 0.469679
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 4.5)
 shape = SubResource("RectangleShape2D_c6whl")
 
 [node name="WalkTimer" type="Timer" parent="."]
+autostart = true
 
 [node name="StopTimer" type="Timer" parent="."]
+
+[node name="AimTimer" type="Timer" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 2.0

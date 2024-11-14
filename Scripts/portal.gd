@@ -6,16 +6,18 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Globals.player.camera.apply_shake(30)
+	Globals.camera.apply_shake(30)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	portal_sprite.rotation_degrees += 25
 	if not Globals.player:
 		return
-	if Globals.player.global_position.distance_to(global_position) < 50:
+	if Globals.player.global_position.distance_to(global_position) < 70:
 		Globals.player.current_state = Globals.player.state.PORTAL
-	Globals.player.velocity = ((global_position + Vector2(0, 5)) - Globals.player.global_position).normalized() * 100
+		Globals.player.velocity = ((global_position + Vector2(0, 5)) - Globals.player.global_position).normalized() * 175
+	else:
+		Globals.player.current_state = Globals.player.state.FREE
 
 func _on_body_entered(body: Node2D) -> void:
 	if not body == Globals.player:

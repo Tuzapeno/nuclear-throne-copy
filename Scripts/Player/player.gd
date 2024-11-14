@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 # Variables
@@ -6,10 +7,10 @@ extends CharacterBody2D
 # Nodes
 @onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var camera: Camera2D = $Camera2D
 
 enum state {FREE, PORTAL}
 var current_state: state = state.FREE
+var max_health: int = 8
 
 var weapon_primary: Weapon = null :
     set(weapon):
@@ -22,6 +23,13 @@ var weapon_extra: Weapon = null :
         weapon_extra = weapon
         weapon_extra.make_extra()
 
+var health: int = 1 :
+    set(value):
+        health = value
+        SignalBus.health_changed.emit(health, max_health)
+        if health <= 0:
+            queue_free()
+
 
 var is_first_spawn: bool = true
 
@@ -31,6 +39,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+    SignalBus.player_creation.emit(health, max_health)
     current_state = state.FREE
     animsprite2D.rotation = 0
     if is_first_spawn:
@@ -42,10 +51,11 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
     match current_state:
         state.FREE:
-            handle_movement()
+            animsprite2D.rotation = 0
         state.PORTAL:
             animsprite2D.rotation += 25
     move_and_slide()
+    handle_movement()
 
 # Process: Handle animations, facing direction, and weapon logic
 func _process(_delta: float) -> void:
@@ -145,3 +155,9 @@ func show_weapons() -> void:
         print("Weapon: ", weapon_primary.my_name)
     if weapon_extra != null:
         print("Extra Weapon: ", weapon_extra.my_name)
+
+func get_damage(damage: int) -> bool:
+    health -= damage
+    if health <= 0:
+        return true
+    return false

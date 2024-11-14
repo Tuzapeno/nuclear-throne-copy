@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2ow37m2urq24"
-path="res://.godot/imported/bullet_filled.png-e8d944afa2e0c5f985df4e2fdbaefb51.ctex"
+uid="uid://ctmo5tifm3qu7"
+path="res://.godot/imported/health_bar_fill.png-fe010bc710ad38be474e41b9b1b18271.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Hud/bullet_filled.png"
-dest_files=["res://.godot/imported/bullet_filled.png-e8d944afa2e0c5f985df4e2fdbaefb51.ctex"]
+source_file="res://Assets/Hud/health_bar_fill.png"
+dest_files=["res://.godot/imported/health_bar_fill.png-fe010bc710ad38be474e41b9b1b18271.ctex"]
 
 [params]
 
