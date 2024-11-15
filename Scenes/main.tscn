@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_m7jpd"]
 [ext_resource type="PackedScene" uid="uid://bt0lj6fc7xm3w" path="res://Scenes/Control/hud.tscn" id="2_ohgek"]
 
-[node name="Main" type="Node" node_paths=PackedStringArray("hud_node")]
+[node name="Main" type="Node" node_paths=PackedStringArray("canvas_layer")]
 script = ExtResource("1_m7jpd")
-hud_node = NodePath("HUD")
+canvas_layer = NodePath("CanvasLayer")
 
 [node name="MainMenu" parent="." instance=ExtResource("1_71u7s")]
 metadata/_edit_use_anchors_ = true
 
-[node name="HUD" parent="." instance=ExtResource("2_ohgek")]
+[node name="CanvasLayer" parent="." instance=ExtResource("2_ohgek")]

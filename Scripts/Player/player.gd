@@ -10,7 +10,14 @@ extends CharacterBody2D
 
 enum state {FREE, PORTAL}
 var current_state: state = state.FREE
-var max_health: int = 8
+var max_health: int = 12
+
+var health: int = max_health :
+    set(value):
+        health = value
+        SignalBus.health_changed.emit(health, max_health)
+        if health <= 0:
+            queue_free()
 
 var weapon_primary: Weapon = null :
     set(weapon):
@@ -23,12 +30,6 @@ var weapon_extra: Weapon = null :
         weapon_extra = weapon
         weapon_extra.make_extra()
 
-var health: int = 1 :
-    set(value):
-        health = value
-        SignalBus.health_changed.emit(health, max_health)
-        if health <= 0:
-            queue_free()
 
 
 var is_first_spawn: bool = true
@@ -36,10 +37,10 @@ var is_first_spawn: bool = true
 func _init() -> void:
     print("Player initialized")
     Globals.player = self
-
+    SignalBus.health_changed.emit(health, max_health)
 
 func _ready() -> void:
-    SignalBus.player_creation.emit(health, max_health)
+    SignalBus.player_created.emit()
     current_state = state.FREE
     animsprite2D.rotation = 0
     if is_first_spawn:

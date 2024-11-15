@@ -11,8 +11,7 @@ const MAX_AMMO = {
 var ammo: Dictionary = {}
 
 func _ready() -> void:
-    for type in MAX_AMMO.keys():
-        ammo[type] = MAX_AMMO[type] / 2 
+    init_ammo()
 
 func has_ammo(type: int, fire_cost: int) -> bool:
     return ammo[type] >= fire_cost
@@ -27,3 +26,8 @@ func spend_ammo(type: int, amount: int) -> void:
 func add_ammo_all(amount: int) -> void:
     for type in MAX_AMMO.keys():
         add_ammo(type, amount)
+
+func init_ammo() -> void:
+    for type in MAX_AMMO.keys():
+        ammo[type] = MAX_AMMO[type] / 2
+        SignalBus.ammo_changed.emit(type, ammo[type])

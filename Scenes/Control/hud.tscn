@@ -10,41 +10,43 @@
 [ext_resource type="Texture2D" uid="uid://bvk7xjjknndbx" path="res://Assets/Guns/shell_empty.png" id="5_hs5uo"]
 [ext_resource type="Texture2D" uid="uid://b80ag7f8kp3ig" path="res://Assets/Guns/shell_filled.png" id="6_o6t5k"]
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("all", "health_bar", "health_label", "bullet_count", "bullet_bar", "shell_count", "shell_bar")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("hud", "health_bar", "health_label", "bullet_count", "bullet_bar", "shell_count", "shell_bar")]
 script = ExtResource("1_ae333")
-all = NodePath("All")
-health_bar = NodePath("All/HealthAmmo/HealthContainer/HealthBar")
-health_label = NodePath("All/HealthAmmo/HealthContainer/HealthBar/HealthLabel")
-bullet_count = NodePath("All/HealthAmmo/AmmoContainer/BulletCount")
-bullet_bar = NodePath("All/HealthAmmo/AmmoContainer/BulletProgressBar")
-shell_count = NodePath("All/HealthAmmo/AmmoContainer/ShellCount")
-shell_bar = NodePath("All/HealthAmmo/AmmoContainer/ShellProgressBar")
+hud = NodePath("HUD")
+health_bar = NodePath("HUD/HealthAmmo/HealthContainer/HealthBar")
+health_label = NodePath("HUD/HealthAmmo/HealthContainer/HealthBar/HealthLabel")
+bullet_count = NodePath("HUD/HealthAmmo/AmmoContainer/BulletCount")
+bullet_bar = NodePath("HUD/HealthAmmo/AmmoContainer/BulletProgressBar")
+shell_count = NodePath("HUD/HealthAmmo/AmmoContainer/ShellCount")
+shell_bar = NodePath("HUD/HealthAmmo/AmmoContainer/ShellProgressBar")
 
-[node name="All" type="Control" parent="."]
+[node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HealthAmmo" type="HBoxContainer" parent="All"]
+[node name="HealthAmmo" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
 offset_right = 150.0
 offset_bottom = 20.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="HealthContainer" type="HBoxContainer" parent="All/HealthAmmo"]
+[node name="HealthContainer" type="HBoxContainer" parent="HUD/HealthAmmo"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="HealthBar" type="TextureProgressBar" parent="All/HealthAmmo/HealthContainer"]
+[node name="HealthBar" type="TextureProgressBar" parent="HUD/HealthAmmo/HealthContainer"]
 layout_mode = 2
 max_value = 8.0
 value = 8.0
 texture_under = ExtResource("2_tilcn")
 texture_progress = ExtResource("3_7an87")
 
-[node name="HealthLabel" type="Label" parent="All/HealthAmmo/HealthContainer/HealthBar"]
+[node name="HealthLabel" type="Label" parent="HUD/HealthAmmo/HealthContainer/HealthBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -60,12 +62,12 @@ grow_vertical = 2
 text = "8/8"
 label_settings = ExtResource("4_rl1jh")
 
-[node name="AmmoContainer" type="HBoxContainer" parent="All/HealthAmmo"]
+[node name="AmmoContainer" type="HBoxContainer" parent="HUD/HealthAmmo"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="BulletProgressBar" type="TextureProgressBar" parent="All/HealthAmmo/AmmoContainer"]
+[node name="BulletProgressBar" type="TextureProgressBar" parent="HUD/HealthAmmo/AmmoContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -75,12 +77,12 @@ fill_mode = 3
 texture_under = ExtResource("2_qjtlw")
 texture_progress = ExtResource("3_13has")
 
-[node name="BulletCount" type="Label" parent="All/HealthAmmo/AmmoContainer"]
+[node name="BulletCount" type="Label" parent="HUD/HealthAmmo/AmmoContainer"]
 layout_mode = 2
 text = "99"
 label_settings = ExtResource("3_lgvqa")
 
-[node name="ShellProgressBar" type="TextureProgressBar" parent="All/HealthAmmo/AmmoContainer"]
+[node name="ShellProgressBar" type="TextureProgressBar" parent="HUD/HealthAmmo/AmmoContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -90,7 +92,7 @@ fill_mode = 3
 texture_under = ExtResource("5_hs5uo")
 texture_progress = ExtResource("6_o6t5k")
 
-[node name="ShellCount" type="Label" parent="All/HealthAmmo/AmmoContainer"]
+[node name="ShellCount" type="Label" parent="HUD/HealthAmmo/AmmoContainer"]
 layout_mode = 2
 text = "99"
 label_settings = ExtResource("3_lgvqa")

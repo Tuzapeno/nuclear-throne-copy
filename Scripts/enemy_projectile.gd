@@ -19,5 +19,5 @@ func _ready() -> void:
 	# Rotate the bullet to face the direction it is moving
 	rotation = direction.angle()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	global_position += direction * SPEED * delta

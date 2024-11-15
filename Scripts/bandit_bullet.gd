@@ -6,5 +6,5 @@ func _ready() -> void:
 	super()
 	parent = get_parent()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)

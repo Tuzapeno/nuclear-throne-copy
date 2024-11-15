@@ -8,13 +8,14 @@ var direction: Vector2 = Vector2.RIGHT
 var damage: int = 1
 
 func aim(target: Vector2) -> void:
-	direction = target - global_position
+	direction = (target - global_position).normalized()
 	rotation = direction.angle()
 
 func fire() -> void:
 	var bullet: EnemyProjectile = bandit_bullet.instantiate()
 	bullet.direction = Vector2.RIGHT.rotated(direction.angle())
-	add_child(bullet)
+	bullet.parent = self
+	add_sibling(bullet)
 	bullet.global_position = get_tip_position()
 
 func get_tip_position() -> Vector2:
