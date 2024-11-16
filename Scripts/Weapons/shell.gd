@@ -45,6 +45,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if body.has_method("get_damage"):
 		body.get_damage(0.5)
+		speed = 0.0
 		destroy()
 
 func ricochet(_direction: Vector2, _normal: Vector2) -> void:

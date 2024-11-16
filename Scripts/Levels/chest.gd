@@ -9,7 +9,7 @@ var is_open: bool = false
 
 func _on_body_entered(body:Node2D) -> void:
 	if body != Globals.player:
-		return 
+		return
 	if is_open:
 		return
 	sprite.texture = open_sprite

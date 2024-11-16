@@ -64,7 +64,7 @@ func generate_level() -> void:
 	# Set player position and adjust to the center of the tile
 	Globals.player.position = Vector2(drunkman.position.x * Globals.tile_size, drunkman.position.y * Globals.tile_size)
 	Globals.player.position += Vector2(Globals.half_tile, Globals.half_tile) # Adjust player position to the center of the tile
-	Globals.player.request_ready()
+	SignalBus.player_entered_level.emit()
 
 	# Set tilemap and instantiate chests
 	for x in range(grid_size):

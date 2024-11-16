@@ -34,15 +34,18 @@ var weapon_extra: Weapon = null :
 
 var is_first_spawn: bool = true
 
+func _on_player_entered_level() -> void:
+    current_state = state.FREE
+    animsprite2D.rotation = 0
+
 func _init() -> void:
     print("Player initialized")
     Globals.player = self
     SignalBus.health_changed.emit(health, max_health)
+    SignalBus.player_entered_level.connect(_on_player_entered_level)
 
 func _ready() -> void:
     SignalBus.player_created.emit()
-    current_state = state.FREE
-    animsprite2D.rotation = 0
     if is_first_spawn:
         is_first_spawn = false
         var weapon := Globals.starting_weapon_scene.instantiate()

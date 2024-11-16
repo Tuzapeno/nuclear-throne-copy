@@ -85,3 +85,9 @@ func get_tip_position() -> Vector2:
 
 func get_type() -> TYPE:
     return resource.type
+
+func get_weapon_name() -> String:
+    return resource.my_name
+
+func get_ammo_type() -> int:
+    return resource.ammo_type

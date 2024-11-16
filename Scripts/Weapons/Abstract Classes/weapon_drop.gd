@@ -12,7 +12,7 @@ var can_pickup: bool = false
 
 func _ready() -> void:
 	weapon = weapon_scene.instantiate()
-	label.text = weapon.weapon_resource.my_name + " (E)"
+	label.text = weapon.get_weapon_name() + " (E)"
 	label.hide()
 
 func _process(_delta: float) -> void:
