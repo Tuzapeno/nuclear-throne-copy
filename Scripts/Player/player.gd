@@ -10,13 +10,14 @@ extends CharacterBody2D
 
 enum state {FREE, PORTAL}
 var current_state: state = state.FREE
-var max_health: int = 12
+var max_health: int = 2
 
 var health: int = max_health :
     set(value):
         health = value
         SignalBus.health_changed.emit(health, max_health)
         if health <= 0:
+            SignalBus.player_died.emit()
             queue_free()
 
 var weapon_primary: Weapon = null :

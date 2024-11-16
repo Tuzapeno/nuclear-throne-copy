@@ -23,7 +23,7 @@ func _on_walk_timer_timeout():
 	var direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	var distance = randi_range(25, 50)
 	target_position = global_position + direction * distance
-	velocity = (target_position - global_position).normalized() * speed
+	velocity = direction * speed
 
 func _on_stop_timer_timeout():
 	stop_moving()
@@ -49,24 +49,25 @@ func _process(_delta):
 	if Globals.player != null:
 		distante_to_player = global_position.distance_to(Globals.player.global_position)
 
+		if distante_to_player <= 150:
+			if shoot_timer.is_stopped():
+				shoot_timer.start(1)
+			if aim_timer.is_stopped():
+				aim_timer.start(0.5)
+		else:
+			shoot_timer.stop()
+			aim_timer.stop()
+
 	if health <= 0:
 		died.emit()
 		queue_free()
 
-	if position.distance_to(target_position) < stop_distance:
+	if global_position.distance_to(target_position) < stop_distance:
 		stop_moving()
 	elif stop_timer.is_stopped() and not moving_lock:
 		stop_timer.start(4)
 		moving_lock = true
 
-	if distante_to_player <= 150:
-		if shoot_timer.is_stopped():
-			shoot_timer.start(1)
-		if aim_timer.is_stopped():
-			aim_timer.start(0.5)
-	else:
-		shoot_timer.stop()
-		aim_timer.stop()
 
 
 func handle_animation():

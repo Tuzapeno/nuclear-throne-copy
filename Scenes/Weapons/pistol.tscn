@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://cgug8r8xvs5eo" path="res://Resources/Weapons/pistol_resource.tres" id="3_4fhbi"]
 
 [node name="Pistol" instance=ExtResource("1_nx7sq")]
+rotation = 0.00722955
 script = ExtResource("2_absel")
 resource = ExtResource("3_4fhbi")
 
