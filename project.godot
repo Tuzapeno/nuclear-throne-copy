@@ -44,7 +44,8 @@ folder_colors={
 "res://Assets/": "orange",
 "res://Resources/": "red",
 "res://Scenes/": "pink",
-"res://Scripts/": "purple"
+"res://Scripts/": "purple",
+"res://_debug/": "yellow"
 }
 
 [global_group]

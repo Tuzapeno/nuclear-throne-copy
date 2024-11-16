@@ -16,6 +16,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				Globals.camera.set_free()
 			else:
 				Globals.camera.set_locked()
+		# Summon portal
+		if event.keycode == KEY_F4 and event.pressed:
+			var portal = portal_scene.instantiate()
+			get_tree().root.add_child(portal)
+			portal.global_position = Globals.player.global_position
 		
 			
 

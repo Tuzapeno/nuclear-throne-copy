@@ -106,7 +106,7 @@ func handle_weapon() -> void:
 
     # TODO: Move this to weapon script
     # Handle weapon firing based on weapon type
-    match weapon_primary.weapon_resource.type:
+    match weapon_primary.get_type():
         Weapon.TYPE.SINGLE:
             if Input.is_action_just_pressed("fire"):
                 weapon_primary.trigger()

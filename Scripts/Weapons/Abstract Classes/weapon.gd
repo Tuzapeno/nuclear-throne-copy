@@ -3,7 +3,7 @@ extends Node2D
 
 enum TYPE { SINGLE, AUTO, BURST }
 
-@export var weapon_resource: Resource = null
+@export var resource: Resource = null
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -20,7 +20,7 @@ func can_fire() -> bool:
     if not can_shoot:
         return false
 
-    if not AmmoManager.has_ammo(weapon_resource.ammo_type, weapon_resource.fire_cost):
+    if not AmmoManager.has_ammo(resource.ammo_type, resource.fire_cost):
         return false
 
     return true
@@ -54,12 +54,11 @@ func trigger() -> void:
         return
 
     var dir = (get_tip_position() - global_position).normalized()
-    Globals.camera.offset.x = -dir.x * 10
-    Globals.camera.offset.y = -dir.y * 10
+    Globals.camera.shake_offset(-dir.x * resource.kickback, -dir.y * resource.kickback)
 
-    shoot_cooldown = weapon_resource.fire_rate
+    shoot_cooldown = resource.fire_rate
     can_shoot = false
-    AmmoManager.spend_ammo(weapon_resource.ammo_type, weapon_resource.fire_cost)
+    AmmoManager.spend_ammo(resource.ammo_type, resource.fire_cost)
 
     fire()
 
@@ -83,3 +82,6 @@ func make_extra() -> void:
 func get_tip_position() -> Vector2:
     return global_position + (sprite.texture.get_width() * Vector2(1, 0)).rotated(sprite.rotation)
     #eturn global_position
+
+func get_type() -> TYPE:
+    return resource.type

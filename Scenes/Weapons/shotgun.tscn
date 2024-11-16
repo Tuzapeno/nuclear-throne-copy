@@ -7,7 +7,7 @@
 
 [node name="Shotgun" instance=ExtResource("1_limom")]
 script = ExtResource("2_f4agf")
-weapon_resource = ExtResource("3_3lbpn")
+resource = ExtResource("3_3lbpn")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_7nat1")

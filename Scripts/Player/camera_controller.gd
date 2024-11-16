@@ -64,4 +64,8 @@ func set_free() -> void:
 
 func set_locked() -> void:
 	current_camera_state = CameraState.LOCKED
+
+func shake_offset(x: float, y: float) -> void:
+	offset.x = x
+	offset.y = y
 	

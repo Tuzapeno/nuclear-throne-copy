@@ -21,3 +21,4 @@ enum FireType {
 @export var ammo_type: AmmoType = AmmoType.BULLET_TYPE
 @export var fire_rate: float = 0.0
 @export var fire_cost: int = 0
+@export var kickback: int = 0
