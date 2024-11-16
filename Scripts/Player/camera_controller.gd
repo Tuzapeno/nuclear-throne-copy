@@ -50,10 +50,18 @@ func camera_free(delta) -> void:
 func camera_locked():
 	if target == null:
 		return
-
 	global_position = lerp(global_position, target.global_position, 0.2)
 
 func set_target(_target: Node2D):
 	target = _target
+	current_camera_state = CameraState.LOCKED
+
+func is_locked() -> bool:
+	return current_camera_state == CameraState.LOCKED
+
+func set_free() -> void:
+	current_camera_state = CameraState.FREE
+
+func set_locked() -> void:
 	current_camera_state = CameraState.LOCKED
 	

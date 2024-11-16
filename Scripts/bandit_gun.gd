@@ -15,7 +15,7 @@ func fire() -> void:
 	var bullet: EnemyProjectile = bandit_bullet.instantiate()
 	bullet.direction = Vector2.RIGHT.rotated(direction.angle())
 	bullet.parent = self
-	add_sibling(bullet)
+	get_parent().add_sibling(bullet) # Fixes bullets disappearing when bandit is killed (TEMPORARY FIX) switch to Globals.world.add_child
 	bullet.global_position = get_tip_position()
 
 func get_tip_position() -> Vector2:

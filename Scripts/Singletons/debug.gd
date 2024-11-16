@@ -6,13 +6,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		# Add ammo for all weapons
 		if event.keycode == KEY_F1 and event.pressed:
-			AmmoManager.add_ammo_all(10)
+			AmmoManager.add_ammo_all(999)
 		# Goto next level
 		if event.keycode == KEY_F2 and event.pressed:
 			SceneManager.change_level()
-		# Show current player weapons
+		# Switch camera mode
 		if event.keycode == KEY_F3 and event.pressed:
-			Globals.player.show_weapons()
+			if Globals.camera.is_locked():
+				Globals.camera.set_free()
+			else:
+				Globals.camera.set_locked()
+		
 			
 
         
