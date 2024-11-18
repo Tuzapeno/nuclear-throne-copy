@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3aj8ax6x1vqi"]
+[gd_scene load_steps=18 format=3 uid="uid://c3aj8ax6x1vqi"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_armlr"]
 [ext_resource type="Texture2D" uid="uid://cvbji1g5m7w87" path="res://Assets/Fish/fish_spritesheet_idle.png" id="2_yci6p"]
@@ -91,10 +91,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a01bv"]
 size = Vector2(12, 6.75)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_w24b8"]
+radius = 31.0161
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("pickup_area")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_armlr")
+pickup_area = NodePath("PickupArea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -113,3 +117,11 @@ shape = SubResource("RectangleShape2D_a01bv")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("4_lc4hs")
+
+[node name="PickupArea" type="Area2D" parent="."]
+position = Vector2(0, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_w24b8")
+
+[connection signal="area_entered" from="PickupArea" to="." method="_on_pickup_area_area_entered"]

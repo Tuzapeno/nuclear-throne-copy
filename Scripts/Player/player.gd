@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 # Variables
 @export var speed: float = 150.0  # Player speed
+@export var pickup_area: Area2D
 
 # Nodes
 @onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D
@@ -137,7 +138,7 @@ func pickup_weapon(weapon: Weapon) -> void:
 
 # Drop the primary weapon and set the new one
 func drop_primary_weapon() -> void:
-    var drop_scene: PackedScene = load(Globals.weapon_drop_scene_path + weapon_primary.weapon_resource.my_name.to_lower() + "_drop.tscn")
+    var drop_scene: PackedScene = load(Globals.weapon_drop_scene_path + weapon_primary.get_weapon_name().to_lower() + "_drop.tscn")
     var drop: WeaponDrop = drop_scene.instantiate()
     drop.position = Globals.player.global_position
     remove_child(weapon_primary)
@@ -166,3 +167,13 @@ func get_damage(damage: int) -> bool:
     if health <= 0:
         return true
     return false
+
+func get_primary_weapon() -> Weapon:
+    return weapon_primary
+
+func get_extra_weapon() -> Weapon:
+    return weapon_extra
+
+func _on_pickup_area_area_entered(area: Area2D) -> void:
+    if area is ItemDrop:
+        area.pull()

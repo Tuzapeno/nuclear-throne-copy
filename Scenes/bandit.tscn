@@ -109,11 +109,12 @@ shape = SubResource("RectangleShape2D_c6whl")
 [node name="WalkTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="StopTimer" type="Timer" parent="."]
-
 [node name="AimTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
+
+[connection signal="timeout" from="WalkTimer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="AimTimer" to="." method="_on_aim_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
