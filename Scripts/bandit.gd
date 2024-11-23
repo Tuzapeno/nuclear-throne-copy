@@ -25,6 +25,7 @@ var distance_to_walk: float = 0
 var distance_walked: float = 0
 
 var health: float = 2
+var is_dying: bool = false
 
 func _on_walk_timer_timeout():
 	var direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
@@ -43,8 +44,8 @@ func _ready():
 	walk_timer.start(randi_range(2, 3))
 
 func _process(_delta):
-	handle_animation()
 	move_and_slide()
+	handle_animation()
 
 	if Globals.player != null:
 		distante_to_player = global_position.distance_to(Globals.player.global_position)
@@ -60,6 +61,7 @@ func _process(_delta):
 
 	if health <= 0:
 		die()
+		set_process(false)
 
 	# Walk logic
 	if distance_walked >= distance_to_walk and moving:
@@ -68,7 +70,9 @@ func _process(_delta):
 		distance_walked += velocity.length() * _delta
 
 func handle_animation():
-	if velocity.length() > 0:
+	if animation_sprite.animation == "hit" and animation_sprite.is_playing():
+		return
+	elif velocity.length() > 0:
 		animation_sprite.play("run")
 	else:
 		animation_sprite.play("idle")
@@ -87,6 +91,15 @@ func stop_moving():
 
 # Returns if kills instance
 func get_damage(value: float) -> bool:
+	if health <= 0:
+		return false
+
+	if animation_sprite.animation == "hit" and animation_sprite.is_playing():
+		animation_sprite.stop()
+		animation_sprite.play("hit")
+	else:
+		animation_sprite.play("hit")
+
 	health -= value
 	if health <= 0:
 		return true
@@ -94,11 +107,26 @@ func get_damage(value: float) -> bool:
 
 func die() -> void:
 	died.emit()
+	animation_sprite.play("die")
 	drop_item()
-	queue_free()
+	disable_entity()
+
 
 func drop_item() -> void:
 	if AmmoManager.ammo_drop_chance():
 		var ammo_drop = ammo_drop_scene.instantiate()
 		ammo_drop.global_position = global_position
 		add_sibling(ammo_drop)
+
+func disable_entity() -> void:
+	set_process(false)
+	set_physics_process(false)
+	set_process_input(false)
+	set_process_internal(false)
+	set_process_unhandled_input(false)
+	set_process_unhandled_key_input(false)
+	shoot_timer.stop()
+	aim_timer.stop()
+	weapon.queue_free()
+	set_collision_layer_value(1, 0)
+	set_collision_mask_value(1, 0)

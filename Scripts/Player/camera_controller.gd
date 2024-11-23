@@ -68,4 +68,7 @@ func set_locked() -> void:
 func shake_offset(x: float, y: float) -> void:
 	offset.x = x
 	offset.y = y
-	
+
+# var mouse_pos = get_global_mouse_position()
+# offset_h = (mouse_pos.x - Globals.player.global_position.x) / (screenWidth / 2)
+# offset_v = (mouse_pos.y - Globals.player.global_position.y) / (screenHeight / 2)

@@ -90,7 +90,7 @@ func generate_level() -> void:
 	# Leave only one chest
 	var gun_chests = Utils.get_all_nodes(self, GunChest)
 	var ammo_chests = Utils.get_all_nodes(self, AmmoChest)
-	
+
 	remove_chests(ammo_chests)
 	remove_chests(gun_chests)
 
@@ -151,7 +151,7 @@ func spawn_portal_around_player() -> void:
 func destroy_tile(_position: Vector2i) -> void:
 	grid[_position.x][_position.y] = FLOOR
 	tm_layer.set_cell(_position, DESERT_TILESET_ID, Vector2i(2, 3))
-			
+
 func spawn_entity(scene: PackedScene, _global_position: Vector2) -> Object:
 	var entity = scene.instantiate()
 	entity.global_position = _global_position

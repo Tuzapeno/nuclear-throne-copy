@@ -15,13 +15,27 @@ func aim(target: Vector2) -> void:
 	direction = (target - global_position).normalized()
 	rotation = direction.angle()
 
-func fire() -> void:
-	var bullet: EnemyProjectile = bandit_bullet.instantiate()
-	bullet.direction = Vector2.RIGHT.rotated(direction.angle())
-	bullet.enemyEntity = parent
-	parent.add_sibling(bullet) # Fixes bullets disappearing when bandit is killed (TEMPORARY FIX) switch to Globals.world.add_child
-	bullet.global_position = get_tip_position()
+	if target.x < global_position.x:
+		sprite.flip_v = true
+	elif target.x > global_position.x:
+		sprite.flip_v = false
 
+	if target.y < global_position.y:
+		z_index = parent.z_index - 1
+	elif target.y > global_position.y:
+		z_index = parent.z_index + 1
+
+func fire() -> void:
+	var bullet: EnemyProjectile = create_bullet()
+	bullet.direction = Vector2.RIGHT.rotated(direction.angle())
+	
 func get_tip_position() -> Vector2:
 	return global_position + (sprite.texture.get_width()/2) * direction.normalized()
+
+func create_bullet() -> Object:
+	var bullet: EnemyProjectile = bandit_bullet.instantiate()
+	parent.add_sibling(bullet)
+	bullet.global_position = get_tip_position() # Fixes bullets disappearing when bandit is killed (TEMPORARY FIX) switch to Globals.world.add_child
+	bullet.enemyEntity = parent
+	return bullet
 
