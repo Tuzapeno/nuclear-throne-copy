@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsybi563sgebe"]
+
+[ext_resource type="PackedScene" uid="uid://bu4y5tdmb4v4y" path="res://Scenes/item_drop.tscn" id="1_v4ww7"]
+[ext_resource type="Script" path="res://Scripts/health_drop.gd" id="2_nmpiq"]
+[ext_resource type="Texture2D" uid="uid://d0n462jpcqkql" path="res://Assets/Drops/health_pickup.png" id="2_u2cpc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fgrf"]
+size = Vector2(8, 8)
+
+[node name="HealthDrop" instance=ExtResource("1_v4ww7")]
+script = ExtResource("2_nmpiq")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_u2cpc")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_8fgrf")

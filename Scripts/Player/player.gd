@@ -11,7 +11,7 @@ extends CharacterBody2D
 
 enum state {FREE, PORTAL}
 var current_state: state = state.FREE
-var max_health: int = 2
+var max_health: int = 8
 
 var health: int = max_health :
     set(value):
@@ -177,3 +177,6 @@ func get_extra_weapon() -> Weapon:
 func _on_pickup_area_area_entered(area: Area2D) -> void:
     if area is ItemDrop:
         area.pull()
+
+func heal(amount: int) -> void:
+    health = min(health + amount, max_health)

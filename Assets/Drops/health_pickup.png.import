@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj07b8mg6x06p"
-path="res://.godot/imported/bbandit_gun.png-46cbc588f9fb9106740e9eb1bd8f783e.ctex"
+uid="uid://d0n462jpcqkql"
+path="res://.godot/imported/health_pickup.png-548028397bbc00c8234178f754510365.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/bbandit_gun.png"
-dest_files=["res://.godot/imported/bbandit_gun.png-46cbc588f9fb9106740e9eb1bd8f783e.ctex"]
+source_file="res://Assets/Drops/health_pickup.png"
+dest_files=["res://.godot/imported/health_pickup.png-548028397bbc00c8234178f754510365.ctex"]
 
 [params]
 

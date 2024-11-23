@@ -1,11 +1,29 @@
 extends Node
 
+var ammo_drop_scene: PackedScene = preload("res://Scenes/ammo_drop.tscn")
+
 const MAX_AMMO = {
     AmmoTypes.BULLET_TYPE: 255,
     AmmoTypes.ENERGY_TYPE: 55,
     AmmoTypes.SHELL_TYPE: 55,
     AmmoTypes.EXPLOSIVE_TYPE: 55,
     AmmoTypes.BOLT_TYPE: 55
+}
+
+const PICKUP_VALUE = {
+    AmmoTypes.BULLET_TYPE: 32,
+    AmmoTypes.ENERGY_TYPE: 10,
+    AmmoTypes.SHELL_TYPE: 10,
+    AmmoTypes.EXPLOSIVE_TYPE: 10,
+    AmmoTypes.BOLT_TYPE: 10
+}
+
+const NAMES = {
+    AmmoTypes.BULLET_TYPE: "BULLET",
+    AmmoTypes.ENERGY_TYPE: "ENERGY",
+    AmmoTypes.SHELL_TYPE: "SHELL",
+    AmmoTypes.EXPLOSIVE_TYPE: "EXPLOSIVE",
+    AmmoTypes.BOLT_TYPE: "BOLT"
 }
 
 var ammo: Dictionary = {}
@@ -20,18 +38,15 @@ func add_ammo(type: int, amount: int) -> void:
     ammo[type] = int(clamp(ammo[type] + amount, 0, MAX_AMMO[type]))
     SignalBus.ammo_changed.emit(type, ammo[type])
 
-func add_ammo_pickup(type: int) -> void:
-    match type:
-        AmmoTypes.BULLET_TYPE:
-            add_ammo(type, 32)
-        AmmoTypes.ENERGY_TYPE:
-            add_ammo(type, 10)
-        AmmoTypes.SHELL_TYPE:
-            add_ammo(type, 10)
-        AmmoTypes.EXPLOSIVE_TYPE:
-            add_ammo(type, 10)
-        AmmoTypes.BOLT_TYPE:
-            add_ammo(type, 10)
+func add_ammo_pickup(type: int, chest: bool = false) -> void:
+    if chest:
+        add_ammo(type, PICKUP_VALUE[type] * 2)
+        Globals.create_floating_text(NAMES[type] + " " + str(PICKUP_VALUE[type] * 2), Globals.player.global_position)
+    else:
+        add_ammo(type, PICKUP_VALUE[type])
+        Globals.create_floating_text(NAMES[type] + " " + str(PICKUP_VALUE[type]), Globals.player.global_position)
+   
+    
 
 func spend_ammo(type: int, amount: int) -> void:
     add_ammo(type, -amount)
@@ -39,6 +54,7 @@ func spend_ammo(type: int, amount: int) -> void:
 func add_ammo_all(amount: int) -> void:
     for type in MAX_AMMO.keys():
         add_ammo(type, amount)
+        Globals.create_floating_text(str(type) + " " + str(amount), Globals.player.global_position)
 
 func init_ammo() -> void:
     for type in MAX_AMMO.keys():

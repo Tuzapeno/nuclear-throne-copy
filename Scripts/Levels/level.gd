@@ -160,5 +160,11 @@ func spawn_entity(scene: PackedScene, _global_position: Vector2) -> Object:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
+		# Spawn big bandit
 		if event.keycode == KEY_P and event.pressed:
 			spawn_entity(Globals.big_bandit_scene, get_global_mouse_position())
+		# Spawn ammo
+		if event.keycode == KEY_F5 and event.pressed:
+			var ammo_drop = AmmoManager.ammo_drop_scene.instantiate()
+			ammo_drop.global_position = get_global_mouse_position()
+			get_tree().root.add_child(ammo_drop)

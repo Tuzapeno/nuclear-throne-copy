@@ -118,6 +118,11 @@ func drop_item() -> void:
 		ammo_drop.global_position = global_position
 		add_sibling(ammo_drop)
 
+	if randf() < (1 - (Globals.player.health / Globals.player.max_health)) * 0.25:
+		var health_drop = Globals.health_drop_scene.instantiate()
+		health_drop.global_position = global_position
+		add_sibling(health_drop)
+
 func disable_entity() -> void:
 	set_process(false)
 	set_physics_process(false)

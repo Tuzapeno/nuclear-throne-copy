@@ -7,12 +7,11 @@ extends CharacterBody2D
 	# Senão
 		# dasha em direção ao player quebrando as paredes que entrarem em contato com ele
 
-enum STATE { IDLE, SHOOTING, DASHING }
+enum STATE { IDLE, SHOOTING, DASHING, DEAD }
 
 @export var speed: float = 100
-@export var health: float = 50
+@export var health: float = 25
 @export var sight: RayCast2D
-@export var state_label: Label
 @export var gun: BanditGun
 @export var animation: AnimatedSprite2D
 
@@ -24,13 +23,10 @@ var current_state: STATE = STATE.IDLE :
 		if state == STATE.IDLE:
 			is_idling = false
 			animation.play("idle")
-			state_label.text = "IDLE"
 		if state == STATE.SHOOTING:
 			is_shooting = false
-			state_label.text = "SHOOTING"
 			animation.play("shooting")
 		if state == STATE.DASHING:
-			state_label.text = "DASHING"
 			animation.play("dashing")
 
 var player_in_sight: bool = false
@@ -39,8 +35,12 @@ var target_position: Vector2
 var level: Node2D
 var is_idling: bool = false
 var is_shooting: bool = false
+var dead: bool = false
 
 func _on_action_timer_timeout() -> void:
+	if dead:
+		return
+
 	check_for_player()
 
 	target_position = Globals.player.global_position
@@ -86,6 +86,9 @@ func check_for_player() -> void:
 			player_in_sight = false
 
 func idle() -> void:
+	if dead:
+		return
+
 	if not is_idling:
 		is_idling = true
 		var timer = get_tree().create_timer(WAIT_TIME)
@@ -128,6 +131,9 @@ func dash_stop() -> void:
 	current_state = STATE.IDLE
 
 func get_damage(damage: float) -> void:
+	if health <= 0:
+		return
+
 	if animation.animation == "hit" and animation.is_playing():
 		animation.stop()
 		animation.play("hit")
@@ -136,5 +142,37 @@ func get_damage(damage: float) -> void:
 		
 	health -= damage
 	if health <= 0:
-		queue_free()
+		die()
 
+func die() -> void:
+	if not dead:
+		current_state = STATE.DEAD
+		animation.play("die")
+		dead = true
+		disable_entity()
+		drop_item()
+
+func disable_entity() -> void:
+	set_process(false)
+	set_physics_process(false)
+	set_process_input(false)
+	set_process_internal(false)
+	set_process_unhandled_input(false)
+	set_process_unhandled_key_input(false)
+	set_collision_layer_value(1, 0)
+	set_collision_mask_value(1, 0)
+	gun.queue_free()
+
+
+func drop_item() -> void:
+	for i in range(2):
+		var ammo_drop = AmmoManager.ammo_drop_scene.instantiate()
+		ammo_drop.global_position = global_position
+		add_sibling(ammo_drop)
+		ammo_drop.z_index = z_index + 1
+
+	for i in range(2):
+		var health_drop = Globals.health_drop_scene.instantiate()
+		health_drop.global_position = global_position
+		add_sibling(health_drop)
+		health_drop.z_index = z_index + 1

@@ -22,6 +22,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_tree().root.add_child(portal)
 			portal.global_position = Globals.player.global_position
 		
+		
 			
 
         

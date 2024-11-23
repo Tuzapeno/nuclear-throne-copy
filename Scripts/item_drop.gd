@@ -5,6 +5,10 @@ var pulling: bool = false
 var pull_speed: float = 200
 var distance_threshold: float = 10
 
+func _ready() -> void:
+	var direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	global_position += direction * 5
+
 func pickup_action() -> void:
 	pass
 

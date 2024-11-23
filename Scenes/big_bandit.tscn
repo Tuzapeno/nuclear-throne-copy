@@ -1,11 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://df2fb75cc578f"]
+[gd_scene load_steps=35 format=3 uid="uid://df2fb75cc578f"]
 
 [ext_resource type="Script" path="res://Scripts/big_bandit.gd" id="1_ut1sf"]
 [ext_resource type="Texture2D" uid="uid://dv0xxwrdqfixr" path="res://Assets/Big Bandit/bbandit_idle.png" id="2_is7tb"]
-[ext_resource type="LabelSettings" uid="uid://dh7u2762phcnl" path="res://Assets/ingame_font.tres" id="2_p1mpk"]
 [ext_resource type="Texture2D" uid="uid://dfv43m6t5xjyr" path="res://Assets/Big Bandit/bbandit_dash.png" id="3_lk023"]
 [ext_resource type="Texture2D" uid="uid://bu3fhai3bu8bc" path="res://Assets/Big Bandit/bbandit_dash_stop.png" id="3_s0m40"]
 [ext_resource type="PackedScene" uid="uid://cpmhyw100pebj" path="res://Scenes/big_bandit_gun.tscn" id="4_nkr8x"]
+[ext_resource type="Texture2D" uid="uid://c01s67re8oscw" path="res://Assets/Big Bandit/bbandit_die.png" id="5_6h5qa"]
 [ext_resource type="Texture2D" uid="uid://dvpqrrrplkhvq" path="res://Assets/Big Bandit/bbandit_firing.png" id="5_bmwvs"]
 [ext_resource type="Texture2D" uid="uid://ck44b3fvysrxm" path="res://Assets/Big Bandit/bbandit_hit.png" id="5_ige86"]
 
@@ -24,6 +24,42 @@ region = Rect2(0, 0, 30, 26)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ujy0h"]
 atlas = ExtResource("3_lk023")
 region = Rect2(30, 0, 30, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5b0d"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(0, 0, 31, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo4hm"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(31, 0, 31, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbl6b"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(62, 0, 31, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avv1f"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(93, 0, 31, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2wba"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(124, 0, 31, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wx0n"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(155, 0, 31, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvxo8"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(186, 0, 31, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1epk1"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(217, 0, 31, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u2rl"]
+atlas = ExtResource("5_6h5qa")
+region = Rect2(248, 0, 31, 29)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a6ni4"]
 atlas = ExtResource("5_ige86")
@@ -95,6 +131,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_r5b0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo4hm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbl6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avv1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2wba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wx0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvxo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1epk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u2rl")
+}],
+"loop": false,
+"name": &"die",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_a6ni4")
 }, {
 "duration": 1.0,
@@ -145,31 +213,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6arwu"]
 size = Vector2(15, 15)
 
-[node name="BigBandit" type="CharacterBody2D" node_paths=PackedStringArray("sight", "state_label", "gun", "animation")]
+[node name="BigBandit" type="CharacterBody2D" node_paths=PackedStringArray("sight", "gun", "animation")]
 script = ExtResource("1_ut1sf")
 sight = NodePath("Sight")
-state_label = NodePath("StateLabel")
 gun = NodePath("BigBanditGun")
 animation = NodePath("AnimatedSprite2D")
 
-[node name="SightLabel" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -32.0
-offset_right = 21.0
-offset_bottom = -9.0
-label_settings = ExtResource("2_p1mpk")
-
-[node name="StateLabel" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -23.0
-offset_right = 21.0
-label_settings = ExtResource("2_p1mpk")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_46e4k")
-animation = &"hit"
-frame = 2
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 1.5)
