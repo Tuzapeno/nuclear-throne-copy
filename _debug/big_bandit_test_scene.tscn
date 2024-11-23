@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw56n7cwq5fdt"]
+
+[ext_resource type="PackedScene" uid="uid://df2fb75cc578f" path="res://Scenes/big_bandit.tscn" id="1_rr1a6"]
+[ext_resource type="PackedScene" uid="uid://c3aj8ax6x1vqi" path="res://Scenes/player.tscn" id="2_jg1l1"]
+[ext_resource type="PackedScene" uid="uid://cw6skevtlriaf" path="res://Scenes/bandit.tscn" id="3_aygj6"]
+
+[node name="BigBanditTestScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("2_jg1l1")]
+position = Vector2(76, 85)
+
+[node name="BigBandit" parent="." instance=ExtResource("1_rr1a6")]
+position = Vector2(231, 82)
+
+[node name="Bandit" parent="." instance=ExtResource("3_aygj6")]
+position = Vector2(164, 89)

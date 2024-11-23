@@ -1,0 +1,94 @@
+[gd_scene load_steps=12 format=3 uid="uid://df2fb75cc578f"]
+
+[ext_resource type="Script" path="res://Scripts/big_bandit.gd" id="1_ut1sf"]
+[ext_resource type="Texture2D" uid="uid://dv0xxwrdqfixr" path="res://Assets/Big Bandit/bbandit_idle.png" id="2_is7tb"]
+[ext_resource type="LabelSettings" uid="uid://dh7u2762phcnl" path="res://Assets/ingame_font.tres" id="2_p1mpk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrhie"]
+atlas = ExtResource("2_is7tb")
+region = Rect2(0, 0, 26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0g0n0"]
+atlas = ExtResource("2_is7tb")
+region = Rect2(26, 0, 26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlskc"]
+atlas = ExtResource("2_is7tb")
+region = Rect2(52, 0, 26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb0ow"]
+atlas = ExtResource("2_is7tb")
+region = Rect2(78, 0, 26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b8y2"]
+atlas = ExtResource("2_is7tb")
+region = Rect2(104, 0, 26, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yg86"]
+atlas = ExtResource("2_is7tb")
+region = Rect2(130, 0, 26, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_46e4k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrhie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0g0n0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlskc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vb0ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4b8y2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yg86")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6arwu"]
+size = Vector2(15, 15)
+
+[node name="BigBandit" type="CharacterBody2D" node_paths=PackedStringArray("sight", "state_label", "sight_label")]
+script = ExtResource("1_ut1sf")
+sight = NodePath("Sight")
+state_label = NodePath("StateLabel")
+sight_label = NodePath("SightLabel")
+
+[node name="SightLabel" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -32.0
+offset_right = 21.0
+offset_bottom = -9.0
+label_settings = ExtResource("2_p1mpk")
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -23.0
+offset_right = 21.0
+label_settings = ExtResource("2_p1mpk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_46e4k")
+animation = &"idle"
+frame = 4
+frame_progress = 0.163759
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_6arwu")
+
+[node name="ActionTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Sight" type="RayCast2D" parent="."]
+
+[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

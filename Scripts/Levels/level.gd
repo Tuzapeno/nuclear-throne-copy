@@ -1,3 +1,4 @@
+class_name Level
 extends Node2D
 
 @export var grid_size: int = 200
@@ -69,35 +70,22 @@ func generate_level() -> void:
 	# Set tilemap and instantiate chests
 	for x in range(grid_size):
 		for y in range(grid_size):
-
 			if grid[x][y] == WALL:
 				var bitmask := get_bitmask(x, y)
 				var atlas_coord := get_atlas_coord_from_bitmask(bitmask)
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, atlas_coord)
-
 			elif grid[x][y] == FLOOR:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
 				if randf() < enemy_spawn_chance:
-					var bandit = Globals.bandit_scene.instantiate()
-					bandit.global_position = Vector2(x * Globals.tile_size, y * Globals.tile_size)
-					add_child(bandit)
+					var bandit = spawn_entity(Globals.bandit_scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
 					bandit.connect("died", _on_enemy_death)
 					level_enemy_count += 1
-			
 			elif grid[x][y] == WEAPON_CHEST:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
-				var weapon_chest = weapon_chest_scene.instantiate()
-				weapon_chest.global_position = Vector2(x * Globals.tile_size, y * Globals.tile_size)
-				add_child(weapon_chest)
-
+				spawn_entity(weapon_chest_scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
 			elif grid[x][y] == AMMO_CHEST:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
-				var ammo_chest = ammo_chest_scene.instantiate()
-				ammo_chest.global_position = Vector2(x * Globals.tile_size, y * Globals.tile_size)
-				add_child(ammo_chest)
-
-			else:
-				print("TYPE OF TILE NOT RECOGNIZED: ", grid[x][y])
+				spawn_entity(ammo_chest_scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
 
 	# Leave only one chest
 	var gun_chests = Utils.get_all_nodes(self, GunChest)
@@ -112,11 +100,6 @@ func generate_level() -> void:
 	camera.set_target(Globals.player)
 	add_child(camera)
 
-
-	
-
-				
-
 func get_bitmask(x: int, y: int) -> int:
 	var bitmask := 0
 	# Only check cardinal directions
@@ -130,7 +113,7 @@ func get_atlas_coord_from_bitmask(bitmask: int) -> Vector2i:
 	# Convert 4-bit bitmask to tileset coordinates
 	# This mapping assumes a 47-tile autotile layout
 	match bitmask:
-		0: return Vector2i(0, 0)  # Sem vizinhos
+		0: return Vector2i(2, 3)  # Sem vizinhos
 		1: return Vector2i(2, 0)  # North
 		2: return Vector2i(0, 1)  # East
 		3: return Vector2i(1, 1)  # Northeast
@@ -164,3 +147,18 @@ func spawn_portal_around_player() -> void:
 	var portal: Portal = portal_scene.instantiate()
 	portal.global_position = portal_position
 	add_sibling(portal)
+
+func destroy_tile(_position: Vector2i) -> void:
+	grid[_position.x][_position.y] = FLOOR
+	tm_layer.set_cell(_position, DESERT_TILESET_ID, Vector2i(2, 3))
+			
+func spawn_entity(scene: PackedScene, _global_position: Vector2) -> Object:
+	var entity = scene.instantiate()
+	entity.global_position = _global_position
+	add_child(entity)
+	return entity
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.keycode == KEY_P and event.pressed:
+			spawn_entity(Globals.big_bandit_scene, get_global_mouse_position())

@@ -7,6 +7,7 @@ const weapon_drop_scene_path: String = "res://Scenes/Weapons/Drops/"
 var starting_weapon_scene := preload("res://Scenes/Weapons/shotgun.tscn")
 
 var bandit_scene = preload("res://Scenes/bandit.tscn")
+var big_bandit_scene = preload("res://Scenes/big_bandit.tscn")
 
 var player: CharacterBody2D = null
 var camera: Camera2D = null
