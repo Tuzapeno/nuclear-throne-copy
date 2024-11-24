@@ -3,6 +3,9 @@ extends Node
 #TODO: this node will handle scene changes and not SceneManager, for the
 # purpose of avoiding using change_scene()
 
+# Load the custom images for the mouse cursor.
+var crosshair = load("res://Assets/Guns/crosshair.png")
+
 var death_screen_scene: PackedScene = preload("res://Scenes/death_screen.tscn")
 
 @export var canvas_layer: CanvasLayer
@@ -13,6 +16,9 @@ func _ready() -> void:
 	SignalBus.player_killed_by.connect(_on_player_killed_by)
 	SignalBus.player_created.connect(_on_player_created)
 	SignalBus.player_died.connect(_on_player_died)
+
+	Input.set_custom_mouse_cursor(crosshair)
+
 
 func _on_player_created() -> void:
 	AmmoManager.init_ammo()
