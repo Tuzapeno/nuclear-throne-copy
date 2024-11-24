@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://d0sch1okfgonb"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/level.gd" id="1_tn5o7"]
-[ext_resource type="Texture2D" uid="uid://c8e1e6can8j6p" path="res://Assets/Tilesets/desert_tile_test.png" id="2_aem6u"]
+[ext_resource type="Texture2D" uid="uid://igib4gdun27h" path="res://Assets/Tilesets/desert_tile_alternativet.png" id="2_8tmue"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2bju"]
-texture = ExtResource("2_aem6u")
+texture = ExtResource("2_8tmue")
 1:0/0 = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 8, -6, 8)
 2:0/0 = 0

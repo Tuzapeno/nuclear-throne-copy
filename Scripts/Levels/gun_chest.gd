@@ -5,7 +5,7 @@ var weapon_scene: PackedScene = null
 @onready var spawn: Marker2D = $SpawnPoint
 
 func get_random_weapon() -> PackedScene:
-	var weapon_chest = randi() % 3
+	var weapon_chest = randi_range(0, 4)
 	match weapon_chest:
 		0:
 			weapon_scene = preload(Globals.weapon_drop_scene_path + "pistol_drop.tscn")
@@ -13,6 +13,10 @@ func get_random_weapon() -> PackedScene:
 			weapon_scene = preload(Globals.weapon_drop_scene_path + "shotgun_drop.tscn")
 		2:
 			weapon_scene = preload(Globals.weapon_drop_scene_path + "machinegun_drop.tscn")
+		3:
+			weapon_scene = preload(Globals.weapon_drop_scene_path + "auto shotgun_drop.tscn")
+		4:
+			weapon_scene = preload(Globals.weapon_drop_scene_path + "lmg_drop.tscn")
 
 	return weapon_scene
 

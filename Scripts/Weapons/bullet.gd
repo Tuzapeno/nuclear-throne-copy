@@ -17,4 +17,15 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if body.has_method("get_damage"):
 		body.get_damage(1)
+
+		if body is Bandit:
+			var distance = direction * 5
+			var _position = global_position + distance
+			var space = get_world_2d().get_direct_space_state()
+			var query = PhysicsPointQueryParameters2D.new()
+			query.position = _position
+			var result = space.intersect_point(query, 1)
+
+			if result.is_empty():
+				body.knockback_vector = distance * 50
 	queue_free()

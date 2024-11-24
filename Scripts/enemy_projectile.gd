@@ -7,7 +7,7 @@ var direction := Vector2.RIGHT
 var enemyEntity: Node2D = null
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Bandit:
+	if body is Bandit or body is BigBandit:
 		return
 	if body.has_method("get_damage"):
 		var killed: bool = body.get_damage(damage)

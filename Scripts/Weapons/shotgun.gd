@@ -1,4 +1,5 @@
 extends ShellWeapon
+class_name Shotgun
 
 const n_shells := 7
 

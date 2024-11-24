@@ -35,6 +35,7 @@ var level_enemy_count = 0 :
 func _ready() -> void:
 	portal_spawn_timer.connect("timeout", _on_portal_spawn_timer_timeout)
 	generate_level()
+	Globals.level = self
 
 func _on_portal_spawn_timer_timeout() -> void:
 	spawn_portal_around_player()
@@ -52,18 +53,29 @@ func generate_level() -> void:
 	# Drunkard walk
 	var drunkman: DrunkardWalk = DrunkardWalk.new(Vector2i(grid_size / 2, grid_size / 2))
 	for i in range(drunkward_iterations):
-		var _position: Vector2i = drunkman.move(grid_size)
-		grid[_position.x][_position.y] = FLOOR
-		if randf() < 0.10:
-			grid[_position.x][_position.y] = WEAPON_CHEST
-		if randf() < 0.05:
-			grid[_position.x][_position.y] = AMMO_CHEST
+
+		if randf() < 0.02:
+			# Make a 3x3 floor area around the drunkman
+			for x in range(-1, 2):
+				for y in range(-1, 2):
+					var pos: Vector2i = drunkman.get_pos() + Vector2i(x, y)
+					if pos.x < 0 or pos.x >= grid_size or pos.y < 0 or pos.y >= grid_size:
+						continue
+					grid[pos.x][pos.y] = FLOOR
+		else:
+			var _position: Vector2i = drunkman.move(grid_size)
+			grid[_position.x][_position.y] = FLOOR
+
+			if randf() < 0.10:
+				grid[_position.x][_position.y] = WEAPON_CHEST
+			if randf() < 0.05:
+				grid[_position.x][_position.y] = AMMO_CHEST
 
 	# Add player
 	add_child(Globals.player)
 
 	# Set player position and adjust to the center of the tile
-	Globals.player.position = Vector2(drunkman.position.x * Globals.tile_size, drunkman.position.y * Globals.tile_size)
+	Globals.player.position = Vector2(drunkman.pos.x * Globals.tile_size, drunkman.pos.y * Globals.tile_size)
 	Globals.player.position += Vector2(Globals.half_tile, Globals.half_tile) # Adjust player position to the center of the tile
 	SignalBus.player_entered_level.emit()
 
@@ -149,6 +161,9 @@ func spawn_portal_around_player() -> void:
 	add_sibling(portal)
 
 func destroy_tile(_position: Vector2i) -> void:
+	# check out of bounds
+	if _position.x < 0 or _position.x >= grid_size or _position.y < 0 or _position.y >= grid_size:
+		return
 	grid[_position.x][_position.y] = FLOOR
 	tm_layer.set_cell(_position, DESERT_TILESET_ID, Vector2i(2, 3))
 
@@ -165,6 +180,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			spawn_entity(Globals.big_bandit_scene, get_global_mouse_position())
 		# Spawn ammo
 		if event.keycode == KEY_F5 and event.pressed:
-			var ammo_drop = AmmoManager.ammo_drop_scene.instantiate()
-			ammo_drop.global_position = get_global_mouse_position()
-			get_tree().root.add_child(ammo_drop)
+			spawn_entity(AmmoManager.ammo_drop_scene, get_global_mouse_position())
+		# Spawn gun chest
+		if event.keycode == KEY_F6 and event.pressed:
+			spawn_entity(weapon_chest_scene, get_global_mouse_position())

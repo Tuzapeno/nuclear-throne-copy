@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc7og3njxkad3"]
+
+[ext_resource type="PackedScene" uid="uid://bgyf2hr4uat1u" path="res://Scenes/Weapons/weapon.tscn" id="1_wmrs2"]
+[ext_resource type="Script" path="res://Scripts/Weapons/auto_shotgun.gd" id="2_gfv5b"]
+[ext_resource type="Resource" uid="uid://b3kxjr1m70ume" path="res://Resources/Weapons/auto_shotgun_resource.tres" id="3_dgdxc"]
+[ext_resource type="Texture2D" uid="uid://t4hxo43sgh0s" path="res://Assets/Guns/Weapons/auto_shotgun.png" id="4_g4sj2"]
+
+[node name="AutoShotgun" instance=ExtResource("1_wmrs2")]
+script = ExtResource("2_gfv5b")
+resource = ExtResource("3_dgdxc")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("4_g4sj2")

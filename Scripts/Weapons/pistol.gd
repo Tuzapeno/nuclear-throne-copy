@@ -5,4 +5,4 @@ func _process(delta: float) -> void:
 
 
 func fire() -> void:
-    create_small_bullet(small_bullet_scn)
+    create_small_bullet()

@@ -18,6 +18,8 @@ var camera: Camera2D = null
 var tile_size: int = 16
 var half_tile: int = tile_size / 2
 
+var level: Level = null
+
 func create_floating_text(text: String, _global_position: Vector2) -> void:
         var floating_text = floating_text_scene.instantiate()
         var animation = floating_text.anim_player.get_animation("flow_up")

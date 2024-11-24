@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://fw263kd8jkjg"]
+
+[ext_resource type="PackedScene" uid="uid://bjmkjen74gsh5" path="res://Scenes/Weapons/Drops/weapon_drop.tscn" id="1_tsgq1"]
+[ext_resource type="PackedScene" uid="uid://8lwqva3mt0no" path="res://Scenes/Weapons/LMG.tscn" id="2_qjsm5"]
+[ext_resource type="Texture2D" uid="uid://bn41exnv2jd6v" path="res://Assets/Guns/Weapons/LMG.png" id="3_wi1cw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74yc1"]
+size = Vector2(22, 8)
+
+[node name="LMGDrop" instance=ExtResource("1_tsgq1")]
+weapon_scene = ExtResource("2_qjsm5")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_wi1cw")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_74yc1")

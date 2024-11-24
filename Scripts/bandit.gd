@@ -26,11 +26,13 @@ var distance_walked: float = 0
 
 var health: float = 2
 var is_dying: bool = false
+var knockback_vector: Vector2 = Vector2.ZERO
+var base_velocity: Vector2 = Vector2.ZERO
 
 func _on_walk_timer_timeout():
 	var direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	distance_to_walk = randf_range(speed, speed*2)
-	velocity = direction * speed
+	base_velocity = direction * speed
 	moving = true
 
 func _on_shoot_timer_timeout():
@@ -46,6 +48,8 @@ func _ready():
 func _process(_delta):
 	move_and_slide()
 	handle_animation()
+
+	velocity = base_velocity + knockback_vector
 
 	if Globals.player != null:
 		distante_to_player = global_position.distance_to(Globals.player.global_position)
@@ -69,10 +73,13 @@ func _process(_delta):
 	else:
 		distance_walked += velocity.length() * _delta
 
+	if knockback_vector.length() > 0:
+		knockback_vector = knockback_vector.move_toward(Vector2.ZERO, 1000 * _delta)
+
 func handle_animation():
 	if animation_sprite.animation == "hit" and animation_sprite.is_playing():
 		return
-	elif velocity.length() > 0:
+	elif base_velocity.length() > 0:
 		animation_sprite.play("run")
 	else:
 		animation_sprite.play("idle")
@@ -84,7 +91,7 @@ func handle_animation():
 
 
 func stop_moving():
-	velocity = Vector2.ZERO
+	base_velocity = Vector2.ZERO
 	walk_timer.start(randi_range(2, 3))
 	moving = false
 	distance_walked = 0

@@ -8,9 +8,13 @@ const push_force: float = 220
 const rotation_speed: float = 25
 const push_distance: float = 70
 
+var explosion_scene: PackedScene = preload("res://Scenes/portal_explosion.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Globals.camera.apply_shake(30)
+	var explosion = explosion_scene.instantiate()
+	add_child(explosion)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

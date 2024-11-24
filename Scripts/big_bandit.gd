@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name BigBandit
 
 # A cada 2 segundos
 	# Se o player está na linha de visão (raycast não tiver nada entre o bandit e o player)
@@ -20,6 +20,7 @@ const WAIT_TIME = 2
 var current_state: STATE = STATE.IDLE :
 	set(state):
 		current_state = state
+		if dead: return
 		if state == STATE.IDLE:
 			is_idling = false
 			animation.play("idle")
@@ -27,6 +28,7 @@ var current_state: STATE = STATE.IDLE :
 			is_shooting = false
 			animation.play("shooting")
 		if state == STATE.DASHING:
+			traveled_distance = 0
 			animation.play("dashing")
 
 var player_in_sight: bool = false
@@ -36,6 +38,7 @@ var level: Node2D
 var is_idling: bool = false
 var is_shooting: bool = false
 var dead: bool = false
+var traveled_distance: float = 0
 
 func _on_action_timer_timeout() -> void:
 	if dead:
@@ -108,13 +111,16 @@ func shooting() -> void:
 func dashing(delta) -> void:
 	var collision = move_and_collide(direction * speed * delta)
 	var collider: Node2D = null
+	traveled_distance += speed * delta
 
 	if collision:
 		collider = collision.get_collider()
 
 	if collider:
 		if collider.name == "Player":
-			Globals.player.get_damage(10)
+			var killed: bool = Globals.player.get_damage(10)
+			if killed:
+				SignalBus.player_killed_by.emit(self)
 			dash_stop()
 
 		if collider.name == "TileMapLayer":
@@ -122,7 +128,7 @@ func dashing(delta) -> void:
 			if level.has_method("destroy_tile"):
 				level.destroy_tile(tile_pos)
 
-	if target_position.distance_to(global_position) < 10:
+	if traveled_distance > 400 or global_position.distance_to(target_position) < 10:
 		dash_stop()
 
 func dash_stop() -> void:
@@ -138,7 +144,8 @@ func get_damage(damage: float) -> void:
 		animation.stop()
 		animation.play("hit")
 	else:
-		animation.play("hit")
+		if current_state != STATE.DASHING: 
+			animation.play("hit")
 		
 	health -= damage
 	if health <= 0:
@@ -147,6 +154,7 @@ func get_damage(damage: float) -> void:
 func die() -> void:
 	if not dead:
 		current_state = STATE.DEAD
+		animation.stop()
 		animation.play("die")
 		dead = true
 		disable_entity()
