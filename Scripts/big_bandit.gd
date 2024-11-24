@@ -161,18 +161,18 @@ func disable_entity() -> void:
 	set_process_unhandled_key_input(false)
 	set_collision_layer_value(1, 0)
 	set_collision_mask_value(1, 0)
-	gun.queue_free()
+	gun.call_deferred("queue_free")
 
 
 func drop_item() -> void:
 	for i in range(2):
 		var ammo_drop = AmmoManager.ammo_drop_scene.instantiate()
 		ammo_drop.global_position = global_position
-		add_sibling(ammo_drop)
-		ammo_drop.z_index = z_index + 1
+		call_deferred("add_sibling", ammo_drop)
+		ammo_drop.z_index = z_index + 5
 
 	for i in range(2):
 		var health_drop = Globals.health_drop_scene.instantiate()
 		health_drop.global_position = global_position
-		add_sibling(health_drop)
-		health_drop.z_index = z_index + 1
+		call_deferred("add_sibling", health_drop)
+		health_drop.z_index = z_index + 5
