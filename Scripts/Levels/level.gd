@@ -21,9 +21,10 @@ const DESERT_TILESET_ID = 0
 
 static var enemy_spawn_chance: float = 0.000
 static var minimal_enemy_per_level: int = 5
-static var iterations: int = 0
+static var iterations: int = 1
+static var minimal_boss_per_level: int = 0
 
-
+var boss_per_level: int = 0
 var grid: Array = []
 var portal_position = Vector2.ZERO
 var level_enemy_count = 0 :
@@ -34,11 +35,23 @@ var level_enemy_count = 0 :
 			portal_spawn_timer.start(randf_range(1.5, 2))
 			portal_position = Globals.player.global_position
 
+func on_game_started() -> void:
+	iterations = 1
+	enemy_spawn_chance = 0.0002
+	minimal_enemy_per_level = 5
+	minimal_boss_per_level = 0
+
 func _ready() -> void:
+	SignalBus.game_started.connect(on_game_started)
+	SignalBus.level_changed.emit(iterations)
+
 	enemy_spawn_chance += 0.0002
 
-	if iterations % 3 == 0:
+	if iterations % 2 == 0:
 		minimal_enemy_per_level += 1
+
+	if iterations % 5 == 0:
+		minimal_boss_per_level += 1
 
 	iterations += 1
 
@@ -97,7 +110,7 @@ func generate_level() -> void:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, atlas_coord)
 			elif grid[x][y] == FLOOR:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
-				spawn_enemy_chance(x, y)
+				call_deferred("spawn_enemy_chance", x, y)
 			elif grid[x][y] == WEAPON_CHEST:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
 				spawn_entity(weapon_chest_scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
@@ -107,6 +120,9 @@ func generate_level() -> void:
 
 	if level_enemy_count < minimal_enemy_per_level:
 		spawn_enemy_random_position()
+
+	if boss_per_level < minimal_boss_per_level:
+		spawn_boss_random_position()
 
 	# Leave only one chest
 	var gun_chests = Utils.get_all_nodes(self, GunChest)
@@ -217,6 +233,12 @@ func spawn_enemy(x, y) -> void:
 	enemy.connect("died", _on_enemy_death)
 	level_enemy_count += 1
 
+func spawn_boss(x, y) -> void:
+	var boss = spawn_entity(Globals.big_bandit_scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
+	boss.connect("died", _on_enemy_death)
+	level_enemy_count += 1
+	boss_per_level += 1
+
 func spawn_enemy_random_position() -> void:
 	var avaialble_positions = tm_layer.get_used_cells()
 	var lambd = func(x: Vector2i) -> bool:
@@ -228,3 +250,15 @@ func spawn_enemy_random_position() -> void:
 	while level_enemy_count < minimal_enemy_per_level:
 		var random_position = floor_positions[randi() % floor_positions.size()]
 		spawn_enemy(random_position.x, random_position.y)
+
+func spawn_boss_random_position() -> void:
+	var avaialble_positions = tm_layer.get_used_cells()
+	var lambd = func(x: Vector2i) -> bool:
+		return grid[x.x][x.y] == FLOOR
+	var floor_positions = avaialble_positions.filter(lambd)
+	if floor_positions.size() == 0:
+		return
+
+	while boss_per_level < minimal_boss_per_level:
+		var random_position = floor_positions[randi() % floor_positions.size()]
+		spawn_boss(random_position.x, random_position.y)

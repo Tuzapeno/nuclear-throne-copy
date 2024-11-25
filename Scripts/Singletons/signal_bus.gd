@@ -7,3 +7,4 @@ signal player_killed_by(killed_by: Node2D)
 signal player_created(health, max_health)
 signal player_died
 signal player_entered_level()
+signal level_changed(level: int)

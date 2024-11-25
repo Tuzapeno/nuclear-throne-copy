@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bvk7xjjknndbx" path="res://Assets/Guns/shell_empty.png" id="5_hs5uo"]
 [ext_resource type="Texture2D" uid="uid://b80ag7f8kp3ig" path="res://Assets/Guns/shell_filled.png" id="6_o6t5k"]
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("hud", "health_bar", "health_label", "bullet_count", "bullet_bar", "shell_count", "shell_bar")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("hud", "health_bar", "health_label", "bullet_count", "bullet_bar", "shell_count", "shell_bar", "level_count")]
 script = ExtResource("1_ae333")
 hud = NodePath("HUD")
 health_bar = NodePath("HUD/HealthAmmo/HealthContainer/HealthBar")
@@ -19,6 +19,7 @@ bullet_count = NodePath("HUD/HealthAmmo/AmmoContainer/BulletCount")
 bullet_bar = NodePath("HUD/HealthAmmo/AmmoContainer/BulletProgressBar")
 shell_count = NodePath("HUD/HealthAmmo/AmmoContainer/ShellCount")
 shell_bar = NodePath("HUD/HealthAmmo/AmmoContainer/ShellProgressBar")
+level_count = NodePath("HUD/LevelCount")
 
 [node name="HUD" type="Control" parent="."]
 visible = false
@@ -96,3 +97,20 @@ texture_progress = ExtResource("6_o6t5k")
 layout_mode = 2
 text = "99"
 label_settings = ExtResource("3_lgvqa")
+
+[node name="LevelCount" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 226.0
+offset_top = -15.0
+offset_right = 266.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "TESTE"
+label_settings = ExtResource("4_rl1jh")

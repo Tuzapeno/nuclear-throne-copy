@@ -7,6 +7,8 @@ class_name BigBandit
 	# Senão
 		# dasha em direção ao player quebrando as paredes que entrarem em contato com ele
 
+signal died
+
 enum STATE { IDLE, SHOOTING, DASHING, DEAD }
 
 @export var speed: float = 100
@@ -153,6 +155,7 @@ func get_damage(damage: float) -> void:
 
 func die() -> void:
 	if not dead:
+		died.emit()
 		current_state = STATE.DEAD
 		animation.stop()
 		animation.play("die")

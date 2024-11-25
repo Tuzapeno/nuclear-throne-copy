@@ -8,5 +8,5 @@ my_name = "Auto Shotgun"
 type = 1
 ammo_type = 2
 fire_rate = 0.15
-fire_cost = 2
+fire_cost = 0
 kickback = 20

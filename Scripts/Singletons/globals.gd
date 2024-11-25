@@ -4,13 +4,14 @@ enum MapTile { WALL, FLOOR, WEAPON_CHEST, AMMO_CHEST }
 
 const weapon_drop_scene_path: String = "res://Scenes/Weapons/Drops/"
 
-var starting_weapon_scene := preload("res://Scenes/Weapons/shotgun.tscn")
+var starting_weapon_scene := preload("res://Scenes/Weapons/auto shotgun.tscn")
 
 var bandit_scene = preload("res://Scenes/bandit.tscn")
 var big_bandit_scene = preload("res://Scenes/big_bandit.tscn")
 var floating_text_scene = preload("res://Scenes/floating_text.tscn")
 var health_drop_scene = preload("res://Scenes/health_drop.tscn")
 var scorpion_scene = preload("res://Scenes/scorpion.tscn")
+var mutation_scene = preload("res://Scenes/mutation_screen.tscn")
 
 var player: CharacterBody2D = null
 var camera: Camera2D = null

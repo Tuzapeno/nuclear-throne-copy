@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bt0lj6fc7xm3w" path="res://Scenes/Control/hud.tscn" id="2_ohgek"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("canvas_layer")]
+process_mode = 3
 script = ExtResource("1_m7jpd")
 canvas_layer = NodePath("CanvasLayer")
 

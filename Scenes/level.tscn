@@ -55,8 +55,11 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_w2bju")
 
 [node name="Level" type="Node2D"]
+process_mode = 1
 y_sort_enabled = true
 script = ExtResource("1_tn5o7")
+grid_size = null
+drunkward_iterations = null
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 y_sort_enabled = true
