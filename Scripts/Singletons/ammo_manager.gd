@@ -95,3 +95,12 @@ func ammo_drop_chance() -> bool:
     #print("Chance: ", chance)
 
     return randf() < chance
+
+func health_drop_chance() -> bool:
+    if not Globals.player:
+        return false
+
+    var chance: float = (1 - (Globals.player.health / Globals.player.max_health)) * 0.25
+
+    return randf() < chance
+    

@@ -18,21 +18,30 @@ const AMMO_CHEST := Globals.MapTile.AMMO_CHEST
 const ATLAS_WIDTH = 12
 const DESERT_TILESET_ID = 0
 
-# TODO: Otimizar para que as paredes que estão encobertas por outras não chequem por colisõ es.
-# TODO: Paralelismo para não demorar na geração do mapa
-# TODO: Criar uma classe para cada drunkard walk diferente: deserto, junkyward etc.
+
+static var enemy_spawn_chance: float = 0.000
+static var minimal_enemy_per_level: int = 5
+static var iterations: int = 0
+
 
 var grid: Array = []
-var enemy_spawn_chance = 0.02
 var portal_position = Vector2.ZERO
 var level_enemy_count = 0 :
 	set(value):
+		print("enemy_count mudou para: ", value)
 		level_enemy_count = value
 		if level_enemy_count <= 0:
 			portal_spawn_timer.start(randf_range(1.5, 2))
 			portal_position = Globals.player.global_position
 
 func _ready() -> void:
+	enemy_spawn_chance += 0.0002
+
+	if iterations % 3 == 0:
+		minimal_enemy_per_level += 1
+
+	iterations += 1
+
 	portal_spawn_timer.connect("timeout", _on_portal_spawn_timer_timeout)
 	generate_level()
 	Globals.level = self
@@ -88,16 +97,16 @@ func generate_level() -> void:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, atlas_coord)
 			elif grid[x][y] == FLOOR:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
-				if randf() < enemy_spawn_chance:
-					var bandit = spawn_entity(Globals.bandit_scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
-					bandit.connect("died", _on_enemy_death)
-					level_enemy_count += 1
+				spawn_enemy_chance(x, y)
 			elif grid[x][y] == WEAPON_CHEST:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
 				spawn_entity(weapon_chest_scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
 			elif grid[x][y] == AMMO_CHEST:
 				tm_layer.set_cell(Vector2i(x, y), DESERT_TILESET_ID, Vector2i(2, 3))
 				spawn_entity(ammo_chest_scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
+
+	if level_enemy_count < minimal_enemy_per_level:
+		spawn_enemy_random_position()
 
 	# Leave only one chest
 	var gun_chests = Utils.get_all_nodes(self, GunChest)
@@ -187,3 +196,35 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Spawn Scorption
 		if event.keycode == KEY_F7 and event.pressed:
 			spawn_entity(Globals.scorpion_scene, get_global_mouse_position())
+
+
+func get_random_enemy() -> PackedScene:
+	# Bandit 60% chance and Scorpion 40% chance
+	var enemy_scenes: Array = [Globals.bandit_scene, Globals.scorpion_scene]
+	var chance = randf()
+	if chance < 0.6:
+		return Globals.bandit_scene
+	else:
+		return Globals.scorpion_scene
+
+func spawn_enemy_chance(x, y) -> void:
+	if randf() < enemy_spawn_chance:
+		spawn_enemy(x, y)
+
+func spawn_enemy(x, y) -> void:
+	var scene = get_random_enemy()
+	var enemy = spawn_entity(scene, Vector2(x * Globals.tile_size, y * Globals.tile_size))
+	enemy.connect("died", _on_enemy_death)
+	level_enemy_count += 1
+
+func spawn_enemy_random_position() -> void:
+	var avaialble_positions = tm_layer.get_used_cells()
+	var lambd = func(x: Vector2i) -> bool:
+		return grid[x.x][x.y] == FLOOR
+	var floor_positions = avaialble_positions.filter(lambd)
+	if floor_positions.size() == 0:
+		return
+
+	while level_enemy_count < minimal_enemy_per_level:
+		var random_position = floor_positions[randi() % floor_positions.size()]
+		spawn_enemy(random_position.x, random_position.y)

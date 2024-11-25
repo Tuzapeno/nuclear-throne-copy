@@ -11,8 +11,6 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 
 func this_signal(body: Node2D) -> void:
-	print("SCOPRION SINTGER COLIDIOU COM: ", body)
-
 	if body is Bandit or body is BigBandit or body is Scorpion:
 		return
 	if body.has_method("get_damage"):

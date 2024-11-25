@@ -47,7 +47,9 @@ func _ready():
 func _process(_delta):
 	move_and_slide()
 	handle_animation()
-	direction = (Globals.player.global_position - global_position).normalized()
+
+	if Globals.player != null:
+		direction = (Globals.player.global_position - global_position).normalized()
 
 	velocity = base_velocity + knockback_vector
 
@@ -90,6 +92,9 @@ func handle_animation():
 		else:
 			current_state = STATE.IDLE
 
+	if not Globals.player:
+		return
+
 	if Globals.player.global_position.x < global_position.x:
 		animation_sprite.flip_h = true
 	elif Globals.player.global_position.x > global_position.x:
@@ -131,7 +136,7 @@ func drop_item() -> void:
 		ammo_drop.global_position = global_position
 		add_sibling(ammo_drop)
 
-	if randf() < (1 - (Globals.player.health / Globals.player.max_health)) * 0.25:
+	if AmmoManager.health_drop_chance():
 		var health_drop = Globals.health_drop_scene.instantiate()
 		health_drop.global_position = global_position
 		add_sibling(health_drop)

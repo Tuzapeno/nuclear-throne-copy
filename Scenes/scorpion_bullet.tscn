@@ -67,7 +67,7 @@ animation = &"normal"
 shape = SubResource("RectangleShape2D_uixvq")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-scale = Vector2(1, 0.993631)
+scale = Vector2(1.10714, 1.05672)
 texture = ExtResource("4_3avks")
 
 [connection signal="body_entered" from="." to="." method="this_signal"]
