@@ -15,7 +15,9 @@ extends CanvasLayer
 @export var shell_count: Label
 @export var shell_bar: TextureProgressBar
 
+# UI
 @export var level_count: Label
+@export var points: RichTextLabel
 
 func _on_ammo_changed(type: int, value: int) -> void:
 	update_ammo(type, value)
@@ -26,11 +28,21 @@ func _on_health_changed(value: int, max_value: int) -> void:
 func _on_level_changed(level: int) -> void:
 	level_count.text = "LEVEL: " + str(level)
 
+func _on_points_changed(value: int) -> void:
+	Globals.points += value
+	var prefix = "[center][tornado radius=4 freq=2]"
+	var content = "POINTS: " + str(Globals.points)
+	var sufix = "[/tornado][/center]"
+	points.text = prefix + content + sufix
+	if Globals.player:
+		Globals.create_floating_text("+" + str(value), Globals.player.global_position, "points")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.ammo_changed.connect(_on_ammo_changed)
 	SignalBus.health_changed.connect(_on_health_changed)
 	SignalBus.level_changed.connect(_on_level_changed)
+	SignalBus.points_changed.connect(_on_points_changed)
 
 func update_health(value: int, max_value: int) -> void:
 	health_label.text = str(value) + "/" + str(max_value)

@@ -48,10 +48,10 @@ func _process(_delta):
 	move_and_slide()
 	handle_animation()
 
+	velocity = base_velocity + knockback_vector
+	
 	if Globals.player != null:
 		direction = (Globals.player.global_position - global_position).normalized()
-
-	velocity = base_velocity + knockback_vector
 
 	if Globals.player != null:
 		distante_to_player = global_position.distance_to(Globals.player.global_position)
@@ -124,7 +124,7 @@ func get_damage(value: float) -> bool:
 	return false
 
 func die() -> void:
-	died.emit()
+	died.emit(250)
 	animation_sprite.play("die")
 	drop_item()
 	disable_entity()

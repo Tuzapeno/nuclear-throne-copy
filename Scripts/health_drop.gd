@@ -5,4 +5,4 @@ func pickup_action() -> void:
 		return
 
 	Globals.player.heal(2)
-	Globals.create_floating_text("HEALTH 2", Globals.player.global_position)
+	Globals.create_floating_text("HEALTH 2", Globals.player.global_position, "health")

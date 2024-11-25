@@ -1,4 +1,4 @@
 extends Node2D
 
 @export var anim_player: AnimationPlayer
-@export var label: Label
+@export var label: RichTextLabel

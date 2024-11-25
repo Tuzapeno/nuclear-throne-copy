@@ -9,9 +9,10 @@ extends CharacterBody2D
 @onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite: Sprite2D = $Sprite2D
 
-enum state {FREE, PORTAL}
+enum state {FREE, PORTAL, DEAD}
 var current_state: state = state.FREE
 var max_health: int = 8
+var dead_for_real: bool = false
 
 var health: int = max_health :
     set(value):
@@ -19,7 +20,8 @@ var health: int = max_health :
         SignalBus.health_changed.emit(health, max_health)
         if health <= 0:
             SignalBus.player_died.emit()
-            queue_free()
+            current_state = state.DEAD
+            
 
 var weapon_primary: Weapon = null :
     set(weapon):
@@ -78,6 +80,22 @@ func handle_movement() -> void:
 
 # Handle player animations
 func handle_animations() -> void:
+
+    if current_state == state.DEAD and not dead_for_real:
+        animsprite2D.play("dead")
+        dead_for_real = true
+        disable_entity()
+        return
+
+
+    if animsprite2D.animation == "hit" and animsprite2D.is_playing():
+        return
+    elif velocity.length() > 0:
+        animsprite2D.play("walk")
+    else:
+        animsprite2D.play("idle")
+
+
     if velocity.length() > 0:
         animsprite2D.play("walk")
     else:
@@ -163,6 +181,12 @@ func show_weapons() -> void:
         print("Extra Weapon: ", weapon_extra.my_name)
 
 func get_damage(damage: int) -> bool:
+    if animsprite2D.animation == "hit" and animsprite2D.is_playing():
+        animsprite2D.stop()
+        animsprite2D.play("hit")
+    else:
+        animsprite2D.play("hit")
+
     health -= damage
     if health <= 0:
         return true
@@ -180,3 +204,15 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 
 func heal(amount: int) -> void:
     health = min(health + amount, max_health)
+
+func disable_entity() -> void:
+    set_process(false)
+    set_physics_process(false)
+    set_process_input(false)
+    set_process_internal(false)
+    set_process_unhandled_input(false)
+    set_process_unhandled_key_input(false)
+    set_collision_layer_value(1, 0)
+    set_collision_mask_value(1, 0)
+    if weapon_primary: weapon_primary.queue_free()
+    if weapon_extra: weapon_extra.queue_free()

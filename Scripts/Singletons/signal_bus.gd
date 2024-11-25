@@ -8,3 +8,4 @@ signal player_created(health, max_health)
 signal player_died
 signal player_entered_level()
 signal level_changed(level: int)
+signal points_changed(points: int)

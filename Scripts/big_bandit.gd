@@ -155,7 +155,7 @@ func get_damage(damage: float) -> void:
 
 func die() -> void:
 	if not dead:
-		died.emit()
+		died.emit(1000)
 		current_state = STATE.DEAD
 		animation.stop()
 		animation.play("die")

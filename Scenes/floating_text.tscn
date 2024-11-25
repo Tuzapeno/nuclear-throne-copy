@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cj436nt3mgba6"]
 
-[ext_resource type="LabelSettings" uid="uid://dh7u2762phcnl" path="res://Assets/ingame_font.tres" id="1_f7eqp"]
 [ext_resource type="Script" path="res://Scripts/floating_text.gd" id="1_uajtr"]
+[ext_resource type="FontFile" uid="uid://b3fbcb271ly0a" path="res://Assets/PrStart.ttf" id="2_gk83s"]
 
 [sub_resource type="Animation" id="Animation_cejp6"]
 length = 0.001
@@ -82,16 +82,21 @@ script = ExtResource("1_uajtr")
 anim_player = NodePath("AnimationPlayer")
 label = NodePath("Label")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="RichTextLabel" parent="."]
+clip_contents = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 48.0
-offset_bottom = 8.0
+offset_right = 114.0
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_gk83s")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
 text = "AMBROS"
-label_settings = ExtResource("1_f7eqp")
+scroll_active = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -113,7 +113,7 @@ func get_damage(value: float) -> bool:
 	return false
 
 func die() -> void:
-	died.emit()
+	died.emit(100)
 	animation_sprite.play("die")
 	drop_item()
 	disable_entity()

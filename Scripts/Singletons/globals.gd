@@ -21,14 +21,32 @@ var half_tile: int = tile_size / 2
 
 var level: Level = null
 
-func create_floating_text(text: String, _global_position: Vector2) -> void:
+var points: int = 0
+
+func create_floating_text(text: String, _global_position: Vector2, type: String="") -> void:
+
+        var prefix = ""
+        var sufix = ""
+
+        if type == "points":
+                prefix = "[tornado radius=4 freq=2]"
+                sufix = "[/tornado]"
+
+        if type == "ammo":
+                prefix = "[color=fcb800]"
+                sufix = "[/color]"
+
+        if type == "health":
+                prefix = "[color=red]"
+                sufix = "[/color]"
+
         var floating_text = floating_text_scene.instantiate()
         var animation = floating_text.anim_player.get_animation("flow_up")
         var track_id = animation.find_track(".:position", 0)
 
-        animation.track_set_key_value(track_id, 0, _global_position + Vector2(0, -20))
-        animation.track_set_key_value(track_id, 1, _global_position + Vector2(0, -40))
-        floating_text.label.text = text
+        animation.track_set_key_value(track_id, 0, _global_position + Vector2(0, randf_range(-5, -20)))
+        animation.track_set_key_value(track_id, 1, _global_position + Vector2(0, randf_range(-20, -40)))
+        floating_text.label.text = prefix + text + sufix
         floating_text.z_index = 100
         Globals.player.add_sibling(floating_text)
         

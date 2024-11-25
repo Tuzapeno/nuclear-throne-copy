@@ -19,7 +19,7 @@ func _ready() -> void:
 	SignalBus.player_created.connect(_on_player_created)
 	SignalBus.player_died.connect(_on_player_died)
 	Input.set_custom_mouse_cursor(crosshair)
-
+	SignalBus.points_changed.emit(0)
 
 
 

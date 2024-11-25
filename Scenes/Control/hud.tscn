@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt0lj6fc7xm3w"]
+[gd_scene load_steps=11 format=3 uid="uid://bt0lj6fc7xm3w"]
 
 [ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="1_ae333"]
 [ext_resource type="Texture2D" uid="uid://bfpddlhuviqar" path="res://Assets/Guns/bullet_empty.png" id="2_qjtlw"]
@@ -9,8 +9,9 @@
 [ext_resource type="LabelSettings" uid="uid://cmcusnewv2u23" path="res://Assets/hud_font.tres" id="4_rl1jh"]
 [ext_resource type="Texture2D" uid="uid://bvk7xjjknndbx" path="res://Assets/Guns/shell_empty.png" id="5_hs5uo"]
 [ext_resource type="Texture2D" uid="uid://b80ag7f8kp3ig" path="res://Assets/Guns/shell_filled.png" id="6_o6t5k"]
+[ext_resource type="FontFile" uid="uid://b3fbcb271ly0a" path="res://Assets/PrStart.ttf" id="10_xk1m7"]
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("hud", "health_bar", "health_label", "bullet_count", "bullet_bar", "shell_count", "shell_bar", "level_count")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("hud", "health_bar", "health_label", "bullet_count", "bullet_bar", "shell_count", "shell_bar", "level_count", "points")]
 script = ExtResource("1_ae333")
 hud = NodePath("HUD")
 health_bar = NodePath("HUD/HealthAmmo/HealthContainer/HealthBar")
@@ -20,9 +21,9 @@ bullet_bar = NodePath("HUD/HealthAmmo/AmmoContainer/BulletProgressBar")
 shell_count = NodePath("HUD/HealthAmmo/AmmoContainer/ShellCount")
 shell_bar = NodePath("HUD/HealthAmmo/AmmoContainer/ShellProgressBar")
 level_count = NodePath("HUD/LevelCount")
+points = NodePath("HUD/Points")
 
 [node name="HUD" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -105,12 +106,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 226.0
-offset_top = -15.0
-offset_right = 266.0
-offset_bottom = -7.0
+offset_left = 210.0
+offset_top = -14.0
+offset_right = 306.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-text = "TESTE"
+text = "LEVEL: 100"
 label_settings = ExtResource("4_rl1jh")
+
+[node name="Points" type="RichTextLabel" parent="HUD"]
+clip_contents = false
+layout_mode = 0
+offset_left = 83.0
+offset_top = 218.0
+offset_right = 224.0
+offset_bottom = 255.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("10_xk1m7")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false

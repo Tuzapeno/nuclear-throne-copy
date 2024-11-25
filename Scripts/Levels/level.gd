@@ -62,8 +62,9 @@ func _ready() -> void:
 func _on_portal_spawn_timer_timeout() -> void:
 	spawn_portal_around_player()
 
-func _on_enemy_death():
+func _on_enemy_death(points: int):
 	level_enemy_count -= 1
+	SignalBus.points_changed.emit(points)
 
 func generate_level() -> void:
 	# Initialize grid

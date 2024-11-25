@@ -41,12 +41,12 @@ func add_ammo(type: int, amount: int) -> void:
 func add_ammo_pickup(type: int, chest: bool = false) -> void:
     if chest:
         add_ammo(type, PICKUP_VALUE[type] * 2)
-        Globals.create_floating_text(NAMES[type] + " " + str(PICKUP_VALUE[type] * 2), Globals.player.global_position)
+        Globals.create_floating_text(NAMES[type] + " " + str(PICKUP_VALUE[type] * 2), Globals.player.global_position, "ammo")
     else:
         add_ammo(type, PICKUP_VALUE[type])
-        Globals.create_floating_text(NAMES[type] + " " + str(PICKUP_VALUE[type]), Globals.player.global_position)
-   
-    
+        Globals.create_floating_text(NAMES[type] + " " + str(PICKUP_VALUE[type]), Globals.player.global_position, "ammo")
+
+
 
 func spend_ammo(type: int, amount: int) -> void:
     add_ammo(type, -amount)
@@ -54,7 +54,7 @@ func spend_ammo(type: int, amount: int) -> void:
 func add_ammo_all(amount: int) -> void:
     for type in MAX_AMMO.keys():
         add_ammo(type, amount)
-        Globals.create_floating_text(str(type) + " " + str(amount), Globals.player.global_position)
+        Globals.create_floating_text(str(type) + " " + str(amount), Globals.player.global_position, "ammo")
 
 func init_ammo() -> void:
     for type in MAX_AMMO.keys():
@@ -103,4 +103,3 @@ func health_drop_chance() -> bool:
     var chance: float = (1 - (Globals.player.health / Globals.player.max_health)) * 0.25
 
     return randf() < chance
-    

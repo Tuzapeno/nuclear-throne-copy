@@ -1,9 +1,31 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3aj8ax6x1vqi"]
+[gd_scene load_steps=25 format=3 uid="uid://c3aj8ax6x1vqi"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_armlr"]
+[ext_resource type="Texture2D" uid="uid://b621pr22to524" path="res://Assets/Fish/fish_dead.png" id="2_sqpjb"]
 [ext_resource type="Texture2D" uid="uid://cvbji1g5m7w87" path="res://Assets/Fish/fish_spritesheet_idle.png" id="2_yci6p"]
+[ext_resource type="Texture2D" uid="uid://drp8bg4p3272q" path="res://Assets/Fish/fish_hit.png" id="3_qjfva"]
 [ext_resource type="Texture2D" uid="uid://dgfmp2lrysnba" path="res://Assets/Fish/fish_spritesheet_walk.png" id="3_qrwpj"]
 [ext_resource type="Texture2D" uid="uid://d3ykiqi64d8ww" path="res://Assets/Fish/fish_base_sprite.png" id="4_lc4hs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auvuq"]
+atlas = ExtResource("2_sqpjb")
+region = Rect2(0, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7g6i"]
+atlas = ExtResource("2_sqpjb")
+region = Rect2(28, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xcee"]
+atlas = ExtResource("2_sqpjb")
+region = Rect2(56, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsep6"]
+atlas = ExtResource("3_qjfva")
+region = Rect2(0, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_riskf"]
+atlas = ExtResource("3_qjfva")
+region = Rect2(28, 0, 28, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yhv6"]
 atlas = ExtResource("2_yci6p")
@@ -47,6 +69,31 @@ region = Rect2(140, 0, 28, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s1frk"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auvuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7g6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xcee")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsep6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_riskf")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3yhv6")
@@ -104,9 +151,9 @@ pickup_area = NodePath("PickupArea")
 y_sort_enabled = true
 position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_s1frk")
-animation = &"walk"
-frame = 3
-frame_progress = 0.2797
+animation = &"dead"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
