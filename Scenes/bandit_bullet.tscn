@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bij606gb2dr8s"]
 
 [ext_resource type="PackedScene" uid="uid://dwb7cspps60id" path="res://Scenes/enemy_projectile.tscn" id="1_kgu58"]
-[ext_resource type="Texture2D" uid="uid://bn81j73vawm3o" path="res://Assets/Bandit/bandit_bullet.png" id="2_0c6vi"]
+[ext_resource type="Texture2D" uid="uid://bn81j73vawm3o" path="res://Assets/Enemies/Bandit/bandit_bullet.png" id="2_0c6vi"]
 [ext_resource type="Script" path="res://Scripts/bandit_bullet.gd" id="2_3tn6g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7bkf"]

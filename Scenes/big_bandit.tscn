@@ -1,13 +1,13 @@
 [gd_scene load_steps=35 format=3 uid="uid://df2fb75cc578f"]
 
 [ext_resource type="Script" path="res://Scripts/big_bandit.gd" id="1_ut1sf"]
-[ext_resource type="Texture2D" uid="uid://dv0xxwrdqfixr" path="res://Assets/Big Bandit/bbandit_idle.png" id="2_is7tb"]
-[ext_resource type="Texture2D" uid="uid://dfv43m6t5xjyr" path="res://Assets/Big Bandit/bbandit_dash.png" id="3_lk023"]
-[ext_resource type="Texture2D" uid="uid://bu3fhai3bu8bc" path="res://Assets/Big Bandit/bbandit_dash_stop.png" id="3_s0m40"]
+[ext_resource type="Texture2D" uid="uid://dv0xxwrdqfixr" path="res://Assets/Enemies/Big Bandit/bbandit_idle.png" id="2_is7tb"]
+[ext_resource type="Texture2D" uid="uid://dfv43m6t5xjyr" path="res://Assets/Enemies/Big Bandit/bbandit_dash.png" id="3_lk023"]
+[ext_resource type="Texture2D" uid="uid://bu3fhai3bu8bc" path="res://Assets/Enemies/Big Bandit/bbandit_dash_stop.png" id="3_s0m40"]
 [ext_resource type="PackedScene" uid="uid://cpmhyw100pebj" path="res://Scenes/big_bandit_gun.tscn" id="4_nkr8x"]
-[ext_resource type="Texture2D" uid="uid://c01s67re8oscw" path="res://Assets/Big Bandit/bbandit_die.png" id="5_6h5qa"]
-[ext_resource type="Texture2D" uid="uid://dvpqrrrplkhvq" path="res://Assets/Big Bandit/bbandit_firing.png" id="5_bmwvs"]
-[ext_resource type="Texture2D" uid="uid://ck44b3fvysrxm" path="res://Assets/Big Bandit/bbandit_hit.png" id="5_ige86"]
+[ext_resource type="Texture2D" uid="uid://c01s67re8oscw" path="res://Assets/Enemies/Big Bandit/bbandit_die.png" id="5_6h5qa"]
+[ext_resource type="Texture2D" uid="uid://dvpqrrrplkhvq" path="res://Assets/Enemies/Big Bandit/bbandit_firing.png" id="5_bmwvs"]
+[ext_resource type="Texture2D" uid="uid://ck44b3fvysrxm" path="res://Assets/Enemies/Big Bandit/bbandit_hit.png" id="5_ige86"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wvp8"]
 atlas = ExtResource("3_s0m40")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvvj1jwflp77c"
-path="res://.godot/imported/bandit_hit.png-3db701c74ba026609bf4b6cff1063273.ctex"
+uid="uid://bu3fhai3bu8bc"
+path="res://.godot/imported/bbandit_dash_stop.png-d8fd590aad020bb5a44c30331575016c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Bandit/bandit_hit.png"
-dest_files=["res://.godot/imported/bandit_hit.png-3db701c74ba026609bf4b6cff1063273.ctex"]
+source_file="res://Assets/Enemies/Big Bandit/bbandit_dash_stop.png"
+dest_files=["res://.godot/imported/bbandit_dash_stop.png-d8fd590aad020bb5a44c30331575016c.ctex"]
 
 [params]
 

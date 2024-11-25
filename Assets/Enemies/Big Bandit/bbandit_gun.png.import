@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c01s67re8oscw"
-path="res://.godot/imported/bbandit_die.png-42a58f3900377136d8a12cc3e1cede6f.ctex"
+uid="uid://cfrmvnpkuw8cl"
+path="res://.godot/imported/bbandit_gun.png-1d464f086a3541b7ee67c35bf8d2abfd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Big Bandit/bbandit_die.png"
-dest_files=["res://.godot/imported/bbandit_die.png-42a58f3900377136d8a12cc3e1cede6f.ctex"]
+source_file="res://Assets/Enemies/Big Bandit/bbandit_gun.png"
+dest_files=["res://.godot/imported/bbandit_gun.png-1d464f086a3541b7ee67c35bf8d2abfd.ctex"]
 
 [params]
 

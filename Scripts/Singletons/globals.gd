@@ -10,7 +10,7 @@ var bandit_scene = preload("res://Scenes/bandit.tscn")
 var big_bandit_scene = preload("res://Scenes/big_bandit.tscn")
 var floating_text_scene = preload("res://Scenes/floating_text.tscn")
 var health_drop_scene = preload("res://Scenes/health_drop.tscn")
-
+var scorpion_scene = preload("res://Scenes/scorpion.tscn")
 
 var player: CharacterBody2D = null
 var camera: Camera2D = null

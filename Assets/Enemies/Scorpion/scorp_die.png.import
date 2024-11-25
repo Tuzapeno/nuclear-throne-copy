@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu3fhai3bu8bc"
-path="res://.godot/imported/bbandit_dash_stop.png-78ae0b350d34bd38b16bfabb6c932c7b.ctex"
+uid="uid://c60lxdaep3jwo"
+path="res://.godot/imported/scorp_die.png-46cb4af237e99d8d1c27d6e8c3f9b546.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Big Bandit/bbandit_dash_stop.png"
-dest_files=["res://.godot/imported/bbandit_dash_stop.png-78ae0b350d34bd38b16bfabb6c932c7b.ctex"]
+source_file="res://Assets/Enemies/Scorpion/scorp_die.png"
+dest_files=["res://.godot/imported/scorp_die.png-46cb4af237e99d8d1c27d6e8c3f9b546.ctex"]
 
 [params]
 

@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://cq34mwpwk4dum"]
+
+[ext_resource type="Script" path="res://Scripts/scorpion_bullet.gd" id="1_t1jt3"]
+[ext_resource type="Texture2D" uid="uid://cepacx5s0jxg2" path="res://Assets/Enemies/Scorpion/scorp_bullet.png" id="1_utaor"]
+[ext_resource type="Texture2D" uid="uid://8orlnhlwfo4n" path="res://Assets/Enemies/Scorpion/scorp_bullet_vanish.png" id="2_1j082"]
+[ext_resource type="Texture2D" uid="uid://b5vobnmkgw5hc" path="res://Resources/Weapons/light_texture.png" id="4_3avks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yso82"]
+atlas = ExtResource("1_utaor")
+region = Rect2(0, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj1xa"]
+atlas = ExtResource("1_utaor")
+region = Rect2(17, 0, 17, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88ikm"]
+atlas = ExtResource("2_1j082")
+region = Rect2(0, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ek2b"]
+atlas = ExtResource("2_1j082")
+region = Rect2(25, 0, 25, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndem5"]
+atlas = ExtResource("2_1j082")
+region = Rect2(50, 0, 25, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a8jb0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yso82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj1xa")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88ikm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ek2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndem5")
+}],
+"loop": false,
+"name": &"vanish",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uixvq"]
+size = Vector2(16, 8)
+
+[node name="ScorpionBullet" type="Area2D"]
+script = ExtResource("1_t1jt3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a8jb0")
+animation = &"normal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uixvq")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(1, 0.993631)
+texture = ExtResource("4_3avks")
+
+[connection signal="body_entered" from="." to="." method="this_signal"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv0xxwrdqfixr"
-path="res://.godot/imported/bbandit_idle.png-313aa0f5da7d66671281e8a92db111d0.ctex"
+uid="uid://dt55mtdiugew1"
+path="res://.godot/imported/scorp_idle.png-a5b86f77f6f40e3023a52fac856cb0d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Big Bandit/bbandit_idle.png"
-dest_files=["res://.godot/imported/bbandit_idle.png-313aa0f5da7d66671281e8a92db111d0.ctex"]
+source_file="res://Assets/Enemies/Scorpion/scorp_idle.png"
+dest_files=["res://.godot/imported/scorp_idle.png-a5b86f77f6f40e3023a52fac856cb0d4.ctex"]
 
 [params]
 

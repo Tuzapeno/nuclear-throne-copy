@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkso60r68p4cv"
-path="res://.godot/imported/bandit_run.png-563b0b65b095c30d0edd44743752007e.ctex"
+uid="uid://8orlnhlwfo4n"
+path="res://.godot/imported/scorp_bullet_vanish.png-5c73b18326dd54ad1a9876be324bad98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Bandit/bandit_run.png"
-dest_files=["res://.godot/imported/bandit_run.png-563b0b65b095c30d0edd44743752007e.ctex"]
+source_file="res://Assets/Enemies/Scorpion/scorp_bullet_vanish.png"
+dest_files=["res://.godot/imported/scorp_bullet_vanish.png-5c73b18326dd54ad1a9876be324bad98.ctex"]
 
 [params]
 

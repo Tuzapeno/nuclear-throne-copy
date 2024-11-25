@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bul60qm4avuyx"
-path="res://.godot/imported/bandit_idle.png-9e06eb60a523e9fa67b06f4ef41d480a.ctex"
+uid="uid://b5vobnmkgw5hc"
+path="res://.godot/imported/light_texture.png-75c0f7feabe0e3faadced113ea4f8fa3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Bandit/bandit_idle.png"
-dest_files=["res://.godot/imported/bandit_idle.png-9e06eb60a523e9fa67b06f4ef41d480a.ctex"]
+source_file="res://Resources/Weapons/light_texture.png"
+dest_files=["res://.godot/imported/light_texture.png-75c0f7feabe0e3faadced113ea4f8fa3.ctex"]
 
 [params]
 

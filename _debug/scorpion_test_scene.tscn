@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ef4on3feauig"]
+
+[ext_resource type="PackedScene" uid="uid://kjjavn7ia6c0" path="res://Scenes/scorpion.tscn" id="1_s2m73"]
+[ext_resource type="PackedScene" uid="uid://c3aj8ax6x1vqi" path="res://Scenes/player.tscn" id="2_miaxw"]
+
+[node name="Scorpion Test Scene" type="Node"]
+
+[node name="Scorpion" parent="." instance=ExtResource("1_s2m73")]
+position = Vector2(222, 103)
+
+[node name="Player" parent="." instance=ExtResource("2_miaxw")]
+position = Vector2(66, 104)

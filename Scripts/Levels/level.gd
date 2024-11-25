@@ -184,3 +184,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Spawn gun chest
 		if event.keycode == KEY_F6 and event.pressed:
 			spawn_entity(weapon_chest_scene, get_global_mouse_position())
+		# Spawn Scorption
+		if event.keycode == KEY_F7 and event.pressed:
+			spawn_entity(Globals.scorpion_scene, get_global_mouse_position())
