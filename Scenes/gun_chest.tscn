@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://ciqmqt0biawgx"]
+
+[ext_resource type="PackedScene" uid="uid://c540s7vy5j8g4" path="res://Scenes/chest.tscn" id="1_d628n"]
+[ext_resource type="Script" path="res://Scripts/Levels/gun_chest.gd" id="2_gw502"]
+[ext_resource type="Texture2D" uid="uid://c7qs6g0fhjqc8" path="res://Assets/Chests/gun_chest_open.png" id="2_lws6s"]
+[ext_resource type="Texture2D" uid="uid://du8py8flub6cp" path="res://Assets/Chests/chest_gun_closed.png" id="3_lfu1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc1f1"]
+size = Vector2(16, 10)
+
+[node name="GunChest" instance=ExtResource("1_d628n")]
+script = ExtResource("2_gw502")
+open_sprite = ExtResource("2_lws6s")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3_lfu1m")
+centered = false
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(8, 10)
+shape = SubResource("RectangleShape2D_dc1f1")
+
+[node name="SpawnPoint" type="Marker2D" parent="." index="2" groups=["gun_chest"]]
+position = Vector2(8, 8)

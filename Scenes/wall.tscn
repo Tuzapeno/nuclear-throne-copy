@@ -3,14 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://c1777yiaacs5w" path="res://Assets/desert_tile.png" id="1_glemo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ldce2"]
-size = Vector2(32, 23)
+size = Vector2(16, 12)
 
 [node name="Wall" type="StaticBody2D"]
+y_sort_enabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_glemo")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16, 20.5)
+position = Vector2(8, 10)
 shape = SubResource("RectangleShape2D_ldce2")

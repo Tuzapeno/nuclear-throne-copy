@@ -12,13 +12,13 @@ var can_pickup: bool = false
 
 func _ready() -> void:
 	weapon = weapon_scene.instantiate()
-	print("Weapon created at ready: ", weapon)
-	label.text = weapon.my_name + " (E)"
+	label.text = weapon.get_weapon_name() + " (E)"
 	label.hide()
+	label.z_index = 100
 
 func _process(_delta: float) -> void:
 	var bodies = get_overlapping_bodies()
-	
+
 	if len(bodies) == 0:
 		can_pickup = false
 		label.hide()
@@ -32,14 +32,13 @@ func _process(_delta: float) -> void:
 				can_pickup = false
 				label.hide()
 
-func _input(_event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("use") and can_pickup:
 		pick_up()
-		
+
 
 func pick_up() -> void:
 	assert(Globals.player != null, "Attempting to pick up weapon but player is null with weapon: " + weapon.name)
-	print("Picking up weapon ", weapon.name)
 	can_pickup = false
 	Globals.player.pickup_weapon(weapon)
 	queue_free()

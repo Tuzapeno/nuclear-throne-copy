@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://deeprcg4nk56c"]
+
+[ext_resource type="Texture2D" uid="uid://cr4pfro5xv6om" path="res://Assets/Guns/Ammo/shell_shot.png" id="1_imloe"]
+[ext_resource type="Script" path="res://Scripts/Weapons/shell.gd" id="1_oqiem"]
+[ext_resource type="Texture2D" uid="uid://d1u07vj33s87a" path="res://Assets/Guns/Ammo/shell_destroy_animation.png" id="3_bbrj6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a5ht"]
+atlas = ExtResource("1_imloe")
+region = Rect2(0, 0, 22, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nw1u"]
+atlas = ExtResource("3_bbrj6")
+region = Rect2(0, 0, 22, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wlfe"]
+atlas = ExtResource("3_bbrj6")
+region = Rect2(22, 0, 22, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36jh0"]
+atlas = ExtResource("3_bbrj6")
+region = Rect2(44, 0, 22, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqvae"]
+atlas = ExtResource("3_bbrj6")
+region = Rect2(66, 0, 22, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ebjb"]
+atlas = ExtResource("3_bbrj6")
+region = Rect2(88, 0, 22, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5s8uw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a5ht")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nw1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wlfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36jh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqvae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ebjb")
+}],
+"loop": false,
+"name": &"destroy",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4q2m"]
+size = Vector2(18, 8)
+
+[node name="Shell" type="Area2D" node_paths=PackedStringArray("raycast", "destroy_timer", "sprite")]
+script = ExtResource("1_oqiem")
+raycast = NodePath("RayCast2D")
+destroy_timer = NodePath("Destroy")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5s8uw")
+animation = &"destroy"
+frame = 4
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i4q2m")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(15, 0)
+
+[node name="Destroy" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Destroy" to="." method="_on_destroy_timeout"]

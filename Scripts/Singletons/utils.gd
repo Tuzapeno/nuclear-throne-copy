@@ -27,3 +27,10 @@ func clamp_vector(vector, min_value, max_value) -> Vector2:
 		clamp(vector.x, min_value, max_value),
 		clamp(vector.y, min_value, max_value)
 	)
+
+func get_all_nodes(parent: Node, target_type: Variant) -> Array:
+	var nodes = []
+	for child in parent.get_children():
+		if is_instance_of(child, target_type):
+			nodes.append(child)
+	return nodes

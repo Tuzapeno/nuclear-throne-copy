@@ -1,15 +1,9 @@
 class_name Weapon
 extends Node2D
 
-# TODO: Use RESOURCES for storing weapon data.
+enum TYPE { SINGLE, AUTO, BURST }
 
-enum TYPE { SEMI_AUTO, FULL_AUTO, BURST }
-
-@export var my_name: String = "Weapon"
-@export var type: int = TYPE.SEMI_AUTO
-@export var ammo_type: int = AmmoManager.BULLET
-@export var fire_rate: float = 1.0
-@export var fire_cost: int = 1
+@export var resource: Resource = null
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -20,15 +14,13 @@ var facing_right: bool = true
 var base_z_index = z_index
 
 func fire() -> void:
-    AmmoManager.spend_ammo(ammo_type, fire_cost)
-    trigger()
+    pass
 
 func can_fire() -> bool:
     if not can_shoot:
         return false
 
-    if not AmmoManager.has_ammo(ammo_type, fire_cost):
-        print(my_name + " is out of ammo!")
+    if not AmmoManager.has_ammo(resource.ammo_type, resource.fire_cost):
         return false
 
     return true
@@ -53,13 +45,22 @@ func _process(delta: float) -> void:
     else:
         sprite.flip_v = not facing_right
 
-    
+
 
 # TODO: add functions so instead of player modifying the weapon,
 # the player only calls the weapon functions
 func trigger() -> void:
-    shoot_cooldown = fire_rate
+    if not can_fire():
+        return
+
+    var dir = (get_tip_position() - global_position).normalized()
+    Globals.camera.shake_offset(-dir.x * resource.kickback, -dir.y * resource.kickback)
+
+    shoot_cooldown = resource.fire_rate
     can_shoot = false
+    AmmoManager.spend_ammo(resource.ammo_type, resource.fire_cost)
+
+    fire()
 
 func unset_offset() -> void:
     sprite.offset = Vector2()
@@ -78,3 +79,15 @@ func make_extra() -> void:
     z_index = base_z_index - 1  # Render behind the player
 
 
+func get_tip_position() -> Vector2:
+    return global_position + (sprite.texture.get_width() * Vector2(1, 0)).rotated(sprite.rotation)
+    #eturn global_position
+
+func get_type() -> TYPE:
+    return resource.type
+
+func get_weapon_name() -> String:
+    return resource.my_name
+
+func get_ammo_type() -> int:
+    return resource.ammo_type

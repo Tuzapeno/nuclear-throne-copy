@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dh7u2762phcnl"]
+
+[ext_resource type="FontFile" uid="uid://b3fbcb271ly0a" path="res://Assets/PrStart.ttf" id="1_ypk4n"]
+
+[resource]
+font = ExtResource("1_ypk4n")
+font_size = 8
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)

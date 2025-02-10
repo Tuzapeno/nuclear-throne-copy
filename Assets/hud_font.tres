@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cmcusnewv2u23"]
+
+[ext_resource type="FontFile" uid="uid://b3fbcb271ly0a" path="res://Assets/PrStart.ttf" id="1_t4eok"]
+
+[resource]
+font = ExtResource("1_t4eok")
+font_size = 8
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)

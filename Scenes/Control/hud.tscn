@@ -1,28 +1,132 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt0lj6fc7xm3w"]
+[gd_scene load_steps=11 format=3 uid="uid://bt0lj6fc7xm3w"]
 
-[ext_resource type="Texture2D" uid="uid://dij0qmcqqei21" path="res://Assets/Guns/Ammo/bullet_icon_empty.png" id="1_6im55"]
 [ext_resource type="Script" path="res://Scripts/UI/hud.gd" id="1_ae333"]
-[ext_resource type="Texture2D" uid="uid://ccsc7mpfq5etr" path="res://Assets/Guns/Ammo/bullet_icon_fill.png" id="2_x6lwo"]
+[ext_resource type="Texture2D" uid="uid://bfpddlhuviqar" path="res://Assets/Guns/bullet_empty.png" id="2_qjtlw"]
+[ext_resource type="Texture2D" uid="uid://cmwhb18mtgwo7" path="res://Assets/Hud/health_bar.png" id="2_tilcn"]
+[ext_resource type="Texture2D" uid="uid://ctmo5tifm3qu7" path="res://Assets/Hud/health_bar_fill.png" id="3_7an87"]
+[ext_resource type="Texture2D" uid="uid://2ow37m2urq24" path="res://Assets/Guns/bullet_filled.png" id="3_13has"]
 [ext_resource type="LabelSettings" uid="uid://bvgrvw27pk0o1" path="res://Assets/ammo_font.tres" id="3_lgvqa"]
+[ext_resource type="LabelSettings" uid="uid://cmcusnewv2u23" path="res://Assets/hud_font.tres" id="4_rl1jh"]
+[ext_resource type="Texture2D" uid="uid://bvk7xjjknndbx" path="res://Assets/Guns/shell_empty.png" id="5_hs5uo"]
+[ext_resource type="Texture2D" uid="uid://b80ag7f8kp3ig" path="res://Assets/Guns/shell_filled.png" id="6_o6t5k"]
+[ext_resource type="FontFile" uid="uid://b3fbcb271ly0a" path="res://Assets/PrStart.ttf" id="10_xk1m7"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("hud", "health_bar", "health_label", "bullet_count", "bullet_bar", "shell_count", "shell_bar", "level_count", "points")]
 script = ExtResource("1_ae333")
+hud = NodePath("HUD")
+health_bar = NodePath("HUD/HealthAmmo/HealthContainer/HealthBar")
+health_label = NodePath("HUD/HealthAmmo/HealthContainer/HealthBar/HealthLabel")
+bullet_count = NodePath("HUD/HealthAmmo/AmmoContainer/BulletCount")
+bullet_bar = NodePath("HUD/HealthAmmo/AmmoContainer/BulletProgressBar")
+shell_count = NodePath("HUD/HealthAmmo/AmmoContainer/ShellCount")
+shell_bar = NodePath("HUD/HealthAmmo/AmmoContainer/ShellProgressBar")
+level_count = NodePath("HUD/LevelCount")
+points = NodePath("HUD/Points")
 
-[node name="AmmoContainer" type="HBoxContainer" parent="."]
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BulletProgressBar" type="TextureProgressBar" parent="AmmoContainer"]
+[node name="HealthAmmo" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 20.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HealthContainer" type="HBoxContainer" parent="HUD/HealthAmmo"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="HealthBar" type="TextureProgressBar" parent="HUD/HealthAmmo/HealthContainer"]
+layout_mode = 2
+max_value = 8.0
+value = 8.0
+texture_under = ExtResource("2_tilcn")
+texture_progress = ExtResource("3_7an87")
+
+[node name="HealthLabel" type="Label" parent="HUD/HealthAmmo/HealthContainer/HealthBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -4.0
+offset_right = 12.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "8/8"
+label_settings = ExtResource("4_rl1jh")
+
+[node name="AmmoContainer" type="HBoxContainer" parent="HUD/HealthAmmo"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="BulletProgressBar" type="TextureProgressBar" parent="HUD/HealthAmmo/AmmoContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 max_value = 255.0
-step = 25.0
+step = 50.0
 fill_mode = 3
-texture_under = ExtResource("1_6im55")
-texture_progress = ExtResource("2_x6lwo")
+texture_under = ExtResource("2_qjtlw")
+texture_progress = ExtResource("3_13has")
 
-[node name="BulletCount" type="Label" parent="AmmoContainer"]
+[node name="BulletCount" type="Label" parent="HUD/HealthAmmo/AmmoContainer"]
 layout_mode = 2
 text = "99"
 label_settings = ExtResource("3_lgvqa")
+
+[node name="ShellProgressBar" type="TextureProgressBar" parent="HUD/HealthAmmo/AmmoContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 55.0
+step = 5.0
+fill_mode = 3
+texture_under = ExtResource("5_hs5uo")
+texture_progress = ExtResource("6_o6t5k")
+
+[node name="ShellCount" type="Label" parent="HUD/HealthAmmo/AmmoContainer"]
+layout_mode = 2
+text = "99"
+label_settings = ExtResource("3_lgvqa")
+
+[node name="LevelCount" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 210.0
+offset_top = -14.0
+offset_right = 306.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "LEVEL: 100"
+label_settings = ExtResource("4_rl1jh")
+
+[node name="Points" type="RichTextLabel" parent="HUD"]
+clip_contents = false
+layout_mode = 0
+offset_left = 83.0
+offset_top = 218.0
+offset_right = 224.0
+offset_bottom = 255.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/normal_font = ExtResource("10_xk1m7")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+shortcut_keys_enabled = false
+drag_and_drop_selection_enabled = false

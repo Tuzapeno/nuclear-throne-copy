@@ -1,0 +1,13 @@
+[gd_scene load_steps=5 format=3 uid="uid://8lwqva3mt0no"]
+
+[ext_resource type="PackedScene" uid="uid://bgyf2hr4uat1u" path="res://Scenes/Weapons/weapon.tscn" id="1_ripbc"]
+[ext_resource type="Texture2D" uid="uid://bn41exnv2jd6v" path="res://Assets/Guns/Weapons/LMG.png" id="2_a5kys"]
+[ext_resource type="Resource" uid="uid://d4hleasusgh6s" path="res://Resources/Weapons/lmg_resource.tres" id="2_fx42n"]
+[ext_resource type="Script" path="res://Scenes/Weapons/lmg.gd" id="2_u7l6q"]
+
+[node name="LMG" instance=ExtResource("1_ripbc")]
+script = ExtResource("2_u7l6q")
+resource = ExtResource("2_fx42n")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_a5kys")

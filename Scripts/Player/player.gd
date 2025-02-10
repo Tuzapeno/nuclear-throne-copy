@@ -1,13 +1,27 @@
+class_name Player
 extends CharacterBody2D
 
 # Variables
 @export var speed: float = 150.0  # Player speed
+@export var pickup_area: Area2D
 
 # Nodes
 @onready var animsprite2D: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var camera: Camera2D = $Camera2D
 
+enum state {FREE, PORTAL, DEAD}
+var current_state: state = state.FREE
+var max_health: int = 8
+var dead_for_real: bool = false
+
+var health: int = max_health :
+    set(value):
+        health = value
+        SignalBus.health_changed.emit(health, max_health)
+        if health <= 0:
+            SignalBus.player_died.emit()
+            current_state = state.DEAD
+            
 
 var weapon_primary: Weapon = null :
     set(weapon):
@@ -21,28 +35,35 @@ var weapon_extra: Weapon = null :
         weapon_extra.make_extra()
 
 
+
 var is_first_spawn: bool = true
 
-func _init() -> void:
-    print("Estou sendo iniciado!!!")
-    Globals.player = self
+func _on_player_entered_level() -> void:
+    current_state = state.FREE
+    animsprite2D.rotation = 0
 
+func _init() -> void:
+    print("Player initialized")
+    Globals.player = self
+    SignalBus.health_changed.emit(health, max_health)
+    SignalBus.player_entered_level.connect(_on_player_entered_level)
 
 func _ready() -> void:
+    SignalBus.player_created.emit()
     if is_first_spawn:
         is_first_spawn = false
         var weapon := Globals.starting_weapon_scene.instantiate()
-
-        print("SCENE: ", Globals.starting_weapon_scene)
-        print("WEAPON: ", weapon)
-        print(is_instance_valid(weapon))
         pickup_weapon(weapon)
-
 
 # Physics process: Handle movement and physics
 func _physics_process(_delta: float) -> void:
-    handle_movement()
+    match current_state:
+        state.FREE:
+            animsprite2D.rotation = 0
+        state.PORTAL:
+            animsprite2D.rotation += 25
     move_and_slide()
+    handle_movement()
 
 # Process: Handle animations, facing direction, and weapon logic
 func _process(_delta: float) -> void:
@@ -59,6 +80,22 @@ func handle_movement() -> void:
 
 # Handle player animations
 func handle_animations() -> void:
+
+    if current_state == state.DEAD and not dead_for_real:
+        animsprite2D.play("dead")
+        dead_for_real = true
+        disable_entity()
+        return
+
+
+    if animsprite2D.animation == "hit" and animsprite2D.is_playing():
+        return
+    elif velocity.length() > 0:
+        animsprite2D.play("walk")
+    else:
+        animsprite2D.play("idle")
+
+
     if velocity.length() > 0:
         animsprite2D.play("walk")
     else:
@@ -90,22 +127,15 @@ func handle_weapon() -> void:
     if Input.is_action_just_pressed("swap_weapons"):
         swap_weapons()
 
-    if Input.is_action_just_pressed("use"):
-        # Debug print of current weapons
-        if weapon_primary != null:
-            print("Weapon: ", weapon_primary.my_name)
-        if weapon_extra != null:
-            print("Extra Weapon: ", weapon_extra.my_name)
-
-
+    # TODO: Move this to weapon script
     # Handle weapon firing based on weapon type
-    match weapon_primary.type:
-        Weapon.TYPE.SEMI_AUTO:
+    match weapon_primary.get_type():
+        Weapon.TYPE.SINGLE:
             if Input.is_action_just_pressed("fire"):
-                weapon_primary.fire()
-        Weapon.TYPE.FULL_AUTO:
+                weapon_primary.trigger()
+        Weapon.TYPE.AUTO:
             if Input.is_action_pressed("fire"):
-                weapon_primary.fire()
+                weapon_primary.trigger()
 
 func pickup_weapon(weapon: Weapon) -> void:
 
@@ -114,7 +144,7 @@ func pickup_weapon(weapon: Weapon) -> void:
 
     # Add a little y offset to look like the weapon is in the player hand
     # TODO: need to move this elsewhere
-    weapon.position.y += 3
+    weapon.position.y -= 1
 
     if weapon_primary == null:
         weapon_primary = weapon
@@ -126,7 +156,7 @@ func pickup_weapon(weapon: Weapon) -> void:
 
 # Drop the primary weapon and set the new one
 func drop_primary_weapon() -> void:
-    var drop_scene: PackedScene = load(Globals.weapon_drop_scene_path + weapon_primary.my_name.to_lower() + "_drop.tscn")
+    var drop_scene: PackedScene = load(Globals.weapon_drop_scene_path + weapon_primary.get_weapon_name().to_lower() + "_drop.tscn")
     var drop: WeaponDrop = drop_scene.instantiate()
     drop.position = Globals.player.global_position
     remove_child(weapon_primary)
@@ -141,3 +171,48 @@ func swap_weapons() -> void:
     var temp = weapon_primary
     weapon_primary = weapon_extra
     weapon_extra = temp
+
+
+func show_weapons() -> void:
+    # Debug print of current weapons
+    if weapon_primary != null:
+        print("Weapon: ", weapon_primary.my_name)
+    if weapon_extra != null:
+        print("Extra Weapon: ", weapon_extra.my_name)
+
+func get_damage(damage: int) -> bool:
+    if animsprite2D.animation == "hit" and animsprite2D.is_playing():
+        animsprite2D.stop()
+        animsprite2D.play("hit")
+    else:
+        animsprite2D.play("hit")
+
+    health -= damage
+    if health <= 0:
+        return true
+    return false
+
+func get_primary_weapon() -> Weapon:
+    return weapon_primary
+
+func get_extra_weapon() -> Weapon:
+    return weapon_extra
+
+func _on_pickup_area_area_entered(area: Area2D) -> void:
+    if area is ItemDrop:
+        area.pull()
+
+func heal(amount: int) -> void:
+    health = min(health + amount, max_health)
+
+func disable_entity() -> void:
+    set_process(false)
+    set_physics_process(false)
+    set_process_input(false)
+    set_process_internal(false)
+    set_process_unhandled_input(false)
+    set_process_unhandled_key_input(false)
+    set_collision_layer_value(1, 0)
+    set_collision_mask_value(1, 0)
+    if weapon_primary: weapon_primary.queue_free()
+    if weapon_extra: weapon_extra.queue_free()

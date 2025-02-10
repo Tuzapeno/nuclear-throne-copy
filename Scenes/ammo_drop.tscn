@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwjcihixhftb8"]
+
+[ext_resource type="PackedScene" uid="uid://bu4y5tdmb4v4y" path="res://Scenes/item_drop.tscn" id="1_qgudu"]
+[ext_resource type="Texture2D" uid="uid://dahhph8soh5w0" path="res://Assets/Guns/Ammo/ammo_pickup.png" id="2_1icc6"]
+[ext_resource type="Script" path="res://Scripts/ammo_drop.gd" id="2_ptgfr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4i5nw"]
+size = Vector2(8, 8)
+
+[node name="AmmoDrop" instance=ExtResource("1_qgudu")]
+script = ExtResource("2_ptgfr")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_1icc6")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_4i5nw")

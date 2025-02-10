@@ -4,13 +4,6 @@ extends Node
 
 var current_scene: String = "MainMenu"
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.keycode == KEY_U and event.pressed:
-			change_level()
-
-
-
 func change_scene(scene: PackedScene, scene_name: String = "no name") -> void:
 
 	# Remove old scene

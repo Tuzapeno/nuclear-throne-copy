@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjmkjen74gsh5"]
+[gd_scene load_steps=3 format=3 uid="uid://bjmkjen74gsh5"]
 
-[ext_resource type="Script" path="res://Scripts/Weapons/weapon_drop.gd" id="1_btmks"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Abstract Classes/weapon_drop.gd" id="1_btmks"]
+[ext_resource type="LabelSettings" uid="uid://dh7u2762phcnl" path="res://Assets/ingame_font.tres" id="2_m53p7"]
 
 [node name="WeaponDrop" type="Area2D"]
 script = ExtResource("1_btmks")
@@ -21,3 +22,4 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
+label_settings = ExtResource("2_m53p7")

@@ -1,10 +1,31 @@
-[gd_scene load_steps=18 format=3 uid="uid://c3aj8ax6x1vqi"]
+[gd_scene load_steps=25 format=3 uid="uid://c3aj8ax6x1vqi"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_armlr"]
+[ext_resource type="Texture2D" uid="uid://b621pr22to524" path="res://Assets/Fish/fish_dead.png" id="2_sqpjb"]
 [ext_resource type="Texture2D" uid="uid://cvbji1g5m7w87" path="res://Assets/Fish/fish_spritesheet_idle.png" id="2_yci6p"]
+[ext_resource type="Texture2D" uid="uid://drp8bg4p3272q" path="res://Assets/Fish/fish_hit.png" id="3_qjfva"]
 [ext_resource type="Texture2D" uid="uid://dgfmp2lrysnba" path="res://Assets/Fish/fish_spritesheet_walk.png" id="3_qrwpj"]
 [ext_resource type="Texture2D" uid="uid://d3ykiqi64d8ww" path="res://Assets/Fish/fish_base_sprite.png" id="4_lc4hs"]
-[ext_resource type="Script" path="res://Scripts/Player/camera_controller.gd" id="5_pnnhn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auvuq"]
+atlas = ExtResource("2_sqpjb")
+region = Rect2(0, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7g6i"]
+atlas = ExtResource("2_sqpjb")
+region = Rect2(28, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xcee"]
+atlas = ExtResource("2_sqpjb")
+region = Rect2(56, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsep6"]
+atlas = ExtResource("3_qjfva")
+region = Rect2(0, 0, 28, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_riskf"]
+atlas = ExtResource("3_qjfva")
+region = Rect2(28, 0, 28, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3yhv6"]
 atlas = ExtResource("2_yci6p")
@@ -50,6 +71,31 @@ region = Rect2(140, 0, 28, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_auvuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7g6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xcee")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsep6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_riskf")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3yhv6")
 }, {
 "duration": 1.0,
@@ -90,23 +136,39 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a01bv"]
-size = Vector2(15, 17)
+size = Vector2(12, 6.75)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_w24b8"]
+radius = 31.0161
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("pickup_area")]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_armlr")
+pickup_area = NodePath("PickupArea")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_s1frk")
-animation = &"walk"
-frame = 1
-frame_progress = 0.993104
+animation = &"dead"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_a01bv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("4_lc4hs")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource("5_pnnhn")
+[node name="PickupArea" type="Area2D" parent="."]
+position = Vector2(0, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_w24b8")
+
+[connection signal="area_entered" from="PickupArea" to="." method="_on_pickup_area_area_entered"]

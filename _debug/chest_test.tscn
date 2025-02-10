@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs7huy577o83f"]
+
+[ext_resource type="PackedScene" uid="uid://c3aj8ax6x1vqi" path="res://Scenes/player.tscn" id="1_shh2r"]
+[ext_resource type="PackedScene" uid="uid://ciqmqt0biawgx" path="res://Scenes/gun_chest.tscn" id="2_jmfdv"]
+[ext_resource type="PackedScene" uid="uid://csgd5vamd2yma" path="res://Scenes/ammo_chest.tscn" id="3_4j60m"]
+
+[node name="ChestTest" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_shh2r")]
+position = Vector2(110, 77)
+
+[node name="GunChest" parent="." instance=ExtResource("2_jmfdv")]
+position = Vector2(188, 67)
+open_sprite = null
+
+[node name="AmmoChest" parent="." instance=ExtResource("3_4j60m")]
+position = Vector2(148, 37)
