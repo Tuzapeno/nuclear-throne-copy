@@ -1,4 +1,4 @@
 # Nuclear Clone
 
-Just a clone of Nuclear Throne made for the sake of learning.
+This is just a side project made to learn how to use Godot, it is a simple copy of the first level and some enemies from the game Nuclear Throne.
 
